@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>부드라미조</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- 팀장 -->
     <p>안녕하세요</p>
+    <h1 class="info__text"></h1>
 
-    
-</body>
+    <script>
+      // 글자 한글자씩 나오게 하기
+      const content = '안녕하세요. 김미영입니다. 깃 연습중입니다.';
+      const text = document.querySelector('.info__text');
+      let i = 0;
+
+      function typing() {
+        if (i < content.length) {
+          let txt = content.charAt(i);
+          text.innerHTML += txt;
+          i++;
+        }
+      }
+      setInterval(typing, 100);
+    </script>
+  </body>
 </html>
