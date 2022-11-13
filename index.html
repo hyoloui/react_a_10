@@ -10,22 +10,7 @@
     <!-- 팀장 -->
     <h1>안녕하세요</h1>
     <p>미영님, 도원님초대 완료</p>
-    <h1 class="info__text"></h1>
 
-    <script>
-      // 글자 한글자씩 나오게 하기
-      const content = '안녕하세요. 김미영입니다. 깃 연습중입니다.';
-      const text = document.querySelector('.info__text');
-      let i = 0;
-
-      function typing() {
-        if (i < content.length) {
-          let txt = content.charAt(i);
-          text.innerHTML += txt;
-          i++;
-        }
-      }
-      setInterval(typing, 100);
     </script>
   </body>
 </html>
