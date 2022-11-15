@@ -6,22 +6,23 @@ const list = document.getElementById('list'); // ul
 
 // 버튼 클릭하면 클릭하는 느낌나게
 
-
 function handleMouseUp(event) {
   event.target.classList.add('btclick');
 }
 
 function handleMouseDown(event) {
-    event.target.classList.remove('btclick');
+  event.target.classList.remove('btclick');
 }
-  
-bts.forEach((bt) => {
-  bt.addEventListener('mousedown', handleMouseDown);
-});
 
-bts.forEach((bt) => {
-  bt.addEventListener('mouseup', handleMouseUp);
-});
+// function handleCreateButton(text) {
+//   completeButton.className = 'btclick bt1';
+//   completeButton.innerText = text;
+// } 튜터님께 줄일 수 있는 방법 물어보기
+
+  // 제출버튼 움직임
+  subbt.addEventListener('mousedown', handleMouseDown);
+  subbt.addEventListener('mouseup', handleMouseUp);
+
 
 // 엔터로도 리스트 추가 가능
 text.addEventListener('keypress', (e) => {
@@ -36,24 +37,45 @@ const addTodo = () => {
   if (text.value == '') {
     alert('할 일을 입력해주세요.');
   } else {
+    // li 생성 변수
     const temp = document.createElement('li');
+    // button 생성 변수
     const completeButton = document.createElement('button');
+    const changeButton = document.createElement('button');
+    const deletButton = document.createElement('button');
+
+    // span 생성 변수
+    const createSpan = document.createElement('span');
+
+    // 버튼에 text와 class 넣기
     completeButton.className = 'btclick bt1';
     completeButton.innerText = '완료';
-  
+
+    changeButton.className = 'btclick bt1';
+    changeButton.innerText = '수정';
+
+    deletButton.className = 'btclick bt1';
+    deletButton.innerText = '삭제';
+
+    createSpan.innerText = text.value;
+
+    //  버튼 움직임
     completeButton.addEventListener('mousedown', handleMouseDown);
     completeButton.addEventListener('mouseup', handleMouseUp);
-  
 
+    changeButton.addEventListener('mousedown', handleMouseDown);
+    changeButton.addEventListener('mouseup', handleMouseUp);
+
+    deletButton.addEventListener('mousedown', handleMouseDown);
+    deletButton.addEventListener('mouseup', handleMouseUp);
+
+    // 추가 완료
     temp.appendChild(completeButton);
+    temp.appendChild(createSpan);
+    temp.appendChild(changeButton);
+    temp.appendChild(deletButton);
 
-  //   temp.innerHTML = `
-  // <button class="btclick bt1">완료</button>
-  // <span>${text.value}</span>
-  // <button class="btclick bt1">수정</button>
-  // <button class="btclick bt1">삭제</button>
-  // `;
     list.appendChild(temp);
-    text.value = '';
+    text.value = ''; //리스트 생성 후 input 초기화
   }
 };

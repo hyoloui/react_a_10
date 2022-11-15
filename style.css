@@ -47,6 +47,10 @@ button {
   height: 31px;
 }
 
+.bt1 {
+  margin-left: 5px;
+}
+
 .btclick {
   box-shadow: 2px 2px 5px 1px #adafb3;
 }
