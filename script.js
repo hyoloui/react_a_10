@@ -38,14 +38,19 @@ const addTodo = () => {
 // 완료버튼 클릭하면 완료된 목록으로 이동
 function doneTodo(event) {
   const endTodo = event.target.parentNode;
+  const endTodoSpan = endTodo.querySelector('span');
   // doneTodo -> 클릭했을 때 동작, 이벤트 발생하는 곳은 완료버튼.
   // donelist에 완료 -> 해제라는 버튼이름으로 변경
-  endTodo.querySelector('.cpbt').innerText = '해제'
+  endTodo.querySelector('.cpbt').innerText = '해제';
+  endTodoSpan.style.textDecoration = 'line-through'; // text중간줄긋기
+  endTodoSpan.style.color = 'gainsboro'; // 글씨색상 변경
+  endTodo.querySelector('.chbt').style.display = 'none';
+
   doneList.appendChild(endTodo);
   // id donelist에 자식요소로 추가한다. (무엇을)
-  // event가 일어난 target의 부모요소에. 
+  // event가 일어난 target의 부모요소에.
   // 여기서 event.target은 cpbt이므로 cpbt의 부모인 li를 뜻한다.
-
+  
 }
 
 
