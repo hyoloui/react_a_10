@@ -21,8 +21,6 @@ html,body {
   align-items: center;
 }
 
-
-
 .input {
   width: 400px;
   height: 49px;
@@ -38,21 +36,14 @@ button {
   border-style: none;
   background: #3ed4be;
   color: white;
-  
+  margin-left: 5px;
+  box-shadow: 2px 2px 5px 1px #adafb3;
 }
 
 .bt {
   font-size: 15px;
   padding: 0 20px;
   height: 31px;
-}
-
-.bt1 {
-  margin-left: 5px;
-}
-
-.btclick {
-  box-shadow: 2px 2px 5px 1px #adafb3;
 }
 
 .text {
@@ -65,17 +56,17 @@ input:focus {
   outline: none;
 }
 
-.list {
+ul {
   text-align: left;
   width: 400px;
   margin: 0 auto;
-  list-style: none;
   padding: 30px 0;
 }
 
 li {
   text-align: center;
   margin-bottom: 10px;
+  list-style: none;
 }
 
 span {
@@ -83,6 +74,10 @@ span {
   width: 200px;
   text-align: left;
   padding-left: 30px;
+}
+
+button:active {
+  box-shadow: none;
 }
 
 

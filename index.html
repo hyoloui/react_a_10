@@ -23,14 +23,21 @@
       <div class="inputContainer">
         <div class="input">
           <input type="text" id="text" class="text" value="" />
-          <button id="subbt" class="bt btclick bt1" type='submit' onClick='addTodo()'>제출</button>
+          <button id="subbt" class="bt" type='submit' onClick='addTodo()'>제출</button>
         </div>
       </div>
 
       <!-- 리스트 추가 -->
       <ul id="list" class="list">
-        
+        <!-- temp.innerhtml 들어갈 자리 -->
       </ul>
+      <div class="done">
+        <hr>
+        <h1>완료된 목록</h1>
+        <ul id="donelist" class="donlist">
+          <!-- li 옮기는 곳 -->
+        </ul>
+      </div>
     </div>
 
     <script src="script.js"></script>
