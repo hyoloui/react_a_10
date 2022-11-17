@@ -7,7 +7,7 @@ const doneList = document.getElementById('donelist'); // 완료리스트
 const cpbt = document.getElementsByClassName('cpbt'); // 완료버튼
 
 // 엔터로도 리스트 추가 가능
-text.addEventListener('keypress', (e) => {
+text.addEventListener('keypress', (e) => { // e <- 이벤트를 발생 시 콜백하뭇에서 e를 쓸 수 있음. 정의를 안해도..
   if (e.key === 'Enter') {
     addTodo();
   }
@@ -30,18 +30,22 @@ const addTodo = () => {
     `;
 
     list.appendChild(temp);
-    text.value = ''; //리스트 생성 후 input
+    text.value = ''; //리스트 생성 후 input 초기화
   }
 };
 
+
 // 완료버튼 클릭하면 완료된 목록으로 이동
 function doneTodo(event) {
-  doneList.appendChild(event.target.parentNode);
+  const endTodo = event.target.parentNode;
+  // doneTodo -> 클릭했을 때 동작, 이벤트 발생하는 곳은 완료버튼.
+  // donelist에 완료 -> 해제라는 버튼이름으로 변경
+  endTodo.querySelector('.cpbt').innerText = '해제'
+  doneList.appendChild(endTodo);
   // id donelist에 자식요소로 추가한다. (무엇을)
   // event가 일어난 target의 부모요소에. 
   // 여기서 event.target은 cpbt이므로 cpbt의 부모인 li를 뜻한다.
-  cpbt.innerText = '해제';
-  
+
 }
 
 
