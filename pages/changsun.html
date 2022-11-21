@@ -1,14 +1,153 @@
-<h1>강창순입니다</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link rel="stylesheet" href="../css/style.css">
 
-<ul>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-</ul>
+  <title>로그인, 회원가입</title>
+</head>
+
+<body>
+  <script src="../js/main.js"></script>   
+
+
+<div class="wrap">
+    
+  <div class="logWrap">
+    <div class="loginBtn click">
+      로그인
+    </div>
+    <div class="joinBtn">
+      회원가입
+    </div>
+  </div>
+
+  <div class="loginWrap">
+    <div class="infoWrap">
+      <div><input type="email" class="info infoEmail" placeholder="📧 | email" id="email"></div>
+      <div><input type="password" class="info infoPassword" placeholder="🔒 | password" id="pw"></div>
+    </div>
+
+    <div class="btnWrap">
+      <div><button type="submit" class="btn" id="login">Login</button></div>
+      <div><button type="submit" class="btn" id="###">Google Login</button></div>
+    </div>
+  </div>
+
+  <div class="memberWrap display">
+    <div class="joinWrap">
+      <div><input type="email" class="join joinEmail" placeholder="📧 | 아이디(이메일 형식)" id="email-new"></div>
+      <div><input type="password" class="join joinPassword" placeholder="🔒 | 비밀번호" id="pw-new"></div>
+      <div><input type="password" class="join joinPasswordCheck" placeholder="🔑 | 비밀번호 확인"></div>
+      <div><input type="text" class="join joinName" placeholder="👤 | 닉네임" id="name-new"></div>
+    </div>
+
+    <div class="btnWrap">
+      <div><button type="submit" class="btn" id="register">팬픽 함께하기</button></div>
+    </div>
+  </div>
+  
+</div>
+
+<script>
+  // 로그인, 회원가입 클릭시 진하게
+    btnLogin = document.getElementsByClassName("loginBtn")[0];
+    btnJoin = document.getElementsByClassName("joinBtn")[0];
+    loginWrap = document.getElementsByClassName("loginWrap")[0];
+    memberWrap = document.getElementsByClassName("memberWrap")[0];
+
+    // 줄여보기
+    // function switchToggleSign(arg1,arg2,arg3,arg4) {
+    //   arg1.classList.add("click")
+    //   arg2.classList.remove("click")
+    //   arg3.classList.add("display")
+    //   arg4.classList.remove("display")
+    // }
+
+    // 로그인 클릭시
+    btnLogin.addEventListener("click", function(){
+        btnLogin.classList.add("click")
+        btnJoin.classList.remove("click")
+        memberWrap.classList.add("display")
+        loginWrap.classList.remove("display")
+    });
+
+    // 회원가입 클릭시
+    btnJoin.addEventListener("click", function(){
+        btnJoin.classList.add("click")
+        btnLogin.classList.remove("click")
+        loginWrap.classList.add("display")
+        memberWrap.classList.remove("display")
+    });
+</script>
+
+  <script>
+
+    const db = firebase.firestore(); //database 문법 소환, data아래 실행
+    const storage = firebase.storage(); //storage 문법 소환, image를 넣기 위해서도 사용함.
+
+    let remainder = localStorage.getItem('user')
+
+    //유저 정보확인 //object자료에서 ''따옴표 삭제함
+    if(localStorage.getItem('user') != null){
+      document.querySelector('#userName').html(JSON.parse(remainder).displayName)
+      firebase.auth().onAuthStateChanged((user)=>{
+        if (user) {
+          console.log(user)
+          localStorage.setItem('user', JSON.stringify(user))
+        }
+      })
+    } 
+
+    //유저의 데이터를 로컬에 저장한다. -> 무조건 글자만 입력가능하다.     
+     firebase.auth().onAuthStateChanged((user)=>{
+        if(user) {
+          console.log(user.uid)
+          console.log(user.displayName)
+          localStorage.setItem('user', JSON.stringify(user))     
+        }
+     }) //유저의 로그인상태 확인가능함.
+
+     
+     document.querySelector('#logout').addEventListener('click', function(){
+          firebase.auth().signOut();
+          localStorage.removeItem('user')
+          alert("떠나다니 아쉽네요.");
+        })
+
+        document.querySelector('#login').addEventListener('click', function(){
+
+          let email = document.querySelector('#email').val();
+          let password = document.querySelector('#pw').val();
+
+        firebase.auth().signInWithEmailAndPassword(email, password).then((result)=>{
+            console.log(result.user)
+            alert("다시 돌아오셨군요.");
+          })
+        })
+
+        document.querySelector('#register').addEventListener('click', function(){
+
+          let email = document.querySelector('#email-new').val(); //사용자가 입력한 이메일 등록
+          let password = document.querySelector('#pw-new').val(); //사용자가 입력한 비밀번호 등록
+          let name = document.querySelector('#name-new').val(); //사용자가 입력한 이름 등록
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
+      let userinfo = {name : 이름, email : 이메일}  
+
+    db.collection('user').doc(result.user.uid).set(userinfo)
+        
+        console.log(result);
+        console.log(result.user);
+        result.user.updateProfile({displayName : 이름})
+        alert("너 가입된거야.");
+      });
+    })
+
+  </script>
+
+</body>
+</html>
