@@ -29,6 +29,3 @@ document.addEventListener("DOMContentLoaded", handleLocation);
 
 // 전역 함수 리스트
 window.route = route;
-
-// 전역 함수 리스트
-window.route = route;
