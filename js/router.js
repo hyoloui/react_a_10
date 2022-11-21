@@ -12,6 +12,8 @@ const routes = {
   miyoung: '/pages/miyoung.html',
   seunghyo: '/pages/seunghyo.html',
   hongu: '/pages/hongu.html',
+  mypage: '/pages/mypage.html',
+  mywriting: '/pages/mywriting.html',
 };
 
 export const handleLocation = async () => {

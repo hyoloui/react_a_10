@@ -129,7 +129,6 @@ h4 {
 }
 
 .whatitname_right {
-  
   margin: 0 25px;
   display: flex;
 }
@@ -197,9 +196,10 @@ i {
   margin: 10px;
   height: 75px;
 }
-.card_content > h4,.card_content > p {
+.card_content > h4,
+.card_content > p {
   text-align: center;
-  margin: 3px
+  margin: 3px;
 }
 
 .card_like {
@@ -236,11 +236,126 @@ i {
   display: none;
 }
 
-span, i {
+span,
+i {
   cursor: pointer;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+.myPage-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.myPage-img img {
+  width: 250px;
+  height: 250px;
+}
+
+.myPage-img {
+  margin-top: 30px;
+}
+
+.myPage-profiles {
+  width: 500px;
+}
+
+.myPage-profiles ul {
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.flex input {
+  width: 350px;
+  height: 21px;
+}
+
+.flex textarea {
+  width: 350px;
+  height: 100px;
+  resize: none;
+}
+
+.flex li {
+  list-style: none;
+}
+
+.flex-greet {
+  width: 358px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flex-greet a {
+  margin: 4px;
+  padding: 8px 5px 5px 5px;
+  border-radius: 30px;
+  background-color: black;
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.myPage-save {
+  width: 500px;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+  margin-bottom: 30px;
+}
+
+.myPage-save input {
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  padding: 8px 15px 5px 15px;
+  background-color: black;
+  color: white;
+  font-weight: 700;
+}
+
+.profile-menu-login {
+  width: 130px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  filter: drop-shadow(rgb(0 0 0 / 10%) 0px 0px 8px);
+  z-index: 5;
+  right: 0;
+}
+
+.profile-menu-login a {
+  padding: 10px;
+}
+
+.profile-menu-login a:hover {
+  background-color: rgb(236, 236, 236);
+  color: blueviolet;
+}
+
+.displayblock {
+  display: block;
+}
+
+.menu_display {
+  display: none;
+  position: relative;
 }
