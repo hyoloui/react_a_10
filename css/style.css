@@ -1,0 +1,246 @@
+html,
+body {
+  margin: 0 auto;
+  background-color: rgb(249, 249, 249);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  margin: 30px 70px;
+  display: flex;
+  width: 1400px;
+  min-width: 1400px;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid lightgray;
+}
+
+.sidebar_container {
+  width: 18%;
+  border-right: 1px solid gray;
+}
+
+.search_category {
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
+  border-bottom: 1px solid gray;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search_input {
+  border: none;
+  height: 34px;
+  width: 193px;
+  padding: 3px 10px;
+  font-size: 15px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.fa-magnifying-glass {
+  font-size: 23px;
+  margin: 7px;
+}
+
+.categorys > span {
+  font-size: 20px;
+}
+
+.category_container {
+  margin: 5px 15px;
+}
+
+.categorys > h4 {
+  position: relative;
+  margin: 27px 0 10px 0;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+.fa-angle-right {
+  font-size: 15px;
+  margin: 0 15px;
+  position: absolute;
+  top: 3px;
+}
+
+.mypick_content {
+  display: flex;
+  margin: 0 0 10px 6px;
+  letter-spacing: 2px;
+  justify-content: space-between;
+}
+
+.category_bookmark {
+  font-size: 13px;
+  margin-right: 10px;
+  flex-basis: 13px;
+}
+
+.category_name {
+  width: 150px;
+}
+
+.category_vote,
+.category_request {
+  font-size: 13px;
+}
+
+.main_container {
+  width: 82%;
+  padding: 5px 20px;
+}
+
+.nav_container {
+  border-bottom: 1px solid gray;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav_logo img {
+  height: 70px;
+  object-fit: cover;
+}
+.nav_profile img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  margin: 3px 5px 0 0;
+  object-fit: cover;
+}
+
+.whatitname_container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 10px;
+  align-items: center;
+}
+
+.whatitname_right {
+  
+  margin: 0 25px;
+  display: flex;
+}
+
+.whatitname_left span {
+  margin: 0 10px;
+}
+
+.fa-heart,
+.fa-clock {
+  margin-right: 5px;
+}
+
+.whatitname_right button {
+  padding: 6px 25px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 30px;
+}
+
+.contents_search {
+  border: 1px solid gray;
+  margin: 0 10px;
+  position: relative;
+  width: 170px;
+}
+
+.whatitname_right i {
+  position: absolute;
+  top: -2px;
+  left: 133px;
+}
+
+i {
+  color: rgb(61, 61, 61);
+}
+
+.contents_search_input {
+  border: none;
+  height: 25px;
+  width: 120px;
+  padding: 3px 10px;
+  font-size: 15px;
+}
+
+.main_contents {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.content_card_container {
+  border: 1px solid gray;
+  width: 250px;
+  height: 300px;
+  margin: 0 10px 10px 0;
+}
+
+.card_img img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.card_content {
+  margin: 10px;
+  height: 75px;
+}
+.card_content > h4,.card_content > p {
+  text-align: center;
+  margin: 3px
+}
+
+.card_like {
+  font-size: 14px;
+  text-align: right;
+  border-bottom: 1px solid gray;
+  padding-bottom: 10px;
+}
+
+.card_bottom {
+  display: flex;
+  margin: 0;
+  height: 43px;
+  align-items: center;
+}
+
+.card_profile > img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 100px;
+  margin: 2px 5px 0 5px;
+}
+
+.card_name {
+  width: 140px;
+}
+.card_bottom span {
+  font-size: 13px;
+  color: gray;
+}
+
+.dp_none {
+  display: none;
+}
+
+span, i {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
