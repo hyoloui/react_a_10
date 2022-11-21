@@ -11,8 +11,27 @@
 </head>
 
 <body>
-  <script src="../js/main.js"></script>   
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"> //firebase 시작하기 위한 JS항목들</script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmNo14xR8uzH2t97RvYA6KTziXxrkRKGI",
+      authDomain: "fan-pick.firebaseapp.com",
+      projectId: "fan-pick",
+      storageBucket: "fan-pick.appspot.com",
+      messagingSenderId: "291256890304",
+      appId: "1:291256890304:web:7e910c417ce1d55742ce25",
+      measurementId: "G-C5F0GBGDPS",
+  };
+    
+// Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+
+  </script>
 
 <div class="wrap">
     
@@ -41,12 +60,13 @@
     <div class="joinWrap">
       <div><input type="email" class="join joinEmail" placeholder="📧 | 아이디(이메일 형식)" id="email-new"></div>
       <div><input type="password" class="join joinPassword" placeholder="🔒 | 비밀번호" id="pw-new"></div>
-      <div><input type="password" class="join joinPasswordCheck" placeholder="🔑 | 비밀번호 확인"></div>
+      <div><input type="password" class="join joinPasswordCheck" placeholder="🔑 | 비밀번호 확인" id="pwCheck"></div>
       <div><input type="text" class="join joinName" placeholder="👤 | 닉네임" id="name-new"></div>
     </div>
 
     <div class="btnWrap">
-      <div><button type="submit" class="btn" id="register">팬픽 함께하기</button></div>
+      <div><button type="submit" class="btn" id="register" onclick="join()">팬픽 함께하기</button></div>
+      
     </div>
   </div>
   
@@ -90,18 +110,6 @@
     const storage = firebase.storage(); //storage 문법 소환, image를 넣기 위해서도 사용함.
 
     let remainder = localStorage.getItem('user')
-
-    //유저 정보확인 //object자료에서 ''따옴표 삭제함
-    if(localStorage.getItem('user') != null){
-      document.querySelector('#userName').html(JSON.parse(remainder).displayName)
-      firebase.auth().onAuthStateChanged((user)=>{
-        if (user) {
-          console.log(user)
-          localStorage.setItem('user', JSON.stringify(user))
-        }
-      })
-    } 
-
     //유저의 데이터를 로컬에 저장한다. -> 무조건 글자만 입력가능하다.     
      firebase.auth().onAuthStateChanged((user)=>{
         if(user) {
@@ -112,40 +120,40 @@
      }) //유저의 로그인상태 확인가능함.
 
      
-     document.querySelector('#logout').addEventListener('click', function(){
-          firebase.auth().signOut();
-          localStorage.removeItem('user')
-          alert("떠나다니 아쉽네요.");
-        })
+    // document.querySelector('#logout').addEventListener('click', function(){
+    //      firebase.auth().signOut();
+    //      localStorage.removeItem('user')
+    //      alert("떠나다니 아쉽네요.");
+    //    })
 
         document.querySelector('#login').addEventListener('click', function(){
 
-          let email = document.querySelector('#email').val();
-          let password = document.querySelector('#pw').val();
+          let email = document.querySelector('#email').value;
+          let password = document.querySelector('#pw').value;
 
         firebase.auth().signInWithEmailAndPassword(email, password).then((result)=>{
             console.log(result.user)
-            alert("다시 돌아오셨군요.");
+            alert("다시 돌아오셔서 기쁩니다.");
           })
         })
-
         document.querySelector('#register').addEventListener('click', function(){
 
-          let email = document.querySelector('#email-new').val(); //사용자가 입력한 이메일 등록
-          let password = document.querySelector('#pw-new').val(); //사용자가 입력한 비밀번호 등록
-          let name = document.querySelector('#name-new').val(); //사용자가 입력한 이름 등록
+          let email = document.querySelector('#email-new').value; //사용자가 입력한 이메일 등록
+          let password = document.querySelector('#pw-new').value; //사용자가 입력한 비밀번호 등록
+          let name = document.querySelector('#name-new').value; //사용자가 입력한 이름 등록
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
-      let userinfo = {name : 이름, email : 이메일}  
+      let userinfo = {name : name, email : email}  
 
     db.collection('user').doc(result.user.uid).set(userinfo)
         
         console.log(result);
         console.log(result.user);
-        result.user.updateProfile({displayName : 이름})
-        alert("너 가입된거야.");
+        result.user.updateProfile({displayName : name})
+        alert("우리와 함께하게 되어 기쁩니다.");
       });
     })
+
 
   </script>
 
