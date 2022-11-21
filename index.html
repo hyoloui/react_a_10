@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,9 +8,16 @@
   </head>
   <body>
     <!-- 팀장 -->
-    <h1>안녕하세요</h1>
-    <p>미영님, 도원님초대 완료</p>
+    <div id="root">
+      <div id="main-nav">
+        <a href="#" onclick="route(event)">home</a>
+        <a href="#Page1" onclick="route(event)">Page1</a>
+        <a href="#Page2" onclick="route(event)">Page2</a>
+      </div>
+      <div id="main-page"></div>
 
-    </script>
+      <script src="js/main.js" type="module"></script>
+    </div>
+
   </body>
 </html>
