@@ -1,5 +1,6 @@
-const route = (event) => {
+export const route = (event) => {
   event.preventDefault();
+  console.log('event.target.hash', event.target.hash)
   window.location.hash = event.target.hash;
 };
 
@@ -13,7 +14,7 @@ const routes = {
   hongu: '/pages/hongu.html',
 };
 
-const handleLocation = async () => {
+export const handleLocation = async () => {
   let path = window.location.hash.replace('#', ''); //#about -> about
 
   // "http://example.com/"가 아니라 도메인 뒤에 / 없이 "http://example.com" 으로 나오는 경우
