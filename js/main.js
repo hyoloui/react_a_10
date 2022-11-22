@@ -31,3 +31,4 @@ document.addEventListener("DOMContentLoaded", () => {
 window.route = route;
 window.handleLogin = handleLogin;
 window.handleJoin = handleJoin;
+window.handleConst = handleConst;
