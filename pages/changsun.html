@@ -1,54 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
-    <link rel="stylesheet" href="../css/sign.css">
-
-  <title>로그인, 회원가입</title>
-</head>
-
-<body>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"> //firebase 시작하기 위한 JS항목들</script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCmNo14xR8uzH2t97RvYA6KTziXxrkRKGI",
-      authDomain: "fan-pick.firebaseapp.com",
-      projectId: "fan-pick",
-      storageBucket: "fan-pick.appspot.com",
-      messagingSenderId: "291256890304",
-      appId: "1:291256890304:web:7e910c417ce1d55742ce25",
-      measurementId: "G-C5F0GBGDPS",
-  };
-    
-// Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-  </script>
-
-
-  <!-- 기존 js 불러오기 (ver.9) <script src="../js/main.js"></script> -->
-  
-
-
 <div class="wrap">
   
   <div class="logWrap">
-    <div class="loginBtn click">
+    <div onclick="handleLogin()" class="loginBtn click" id="loginBtn">
       로그인
     </div>
-    <div class="joinBtn">
+    <div onclick="handleJoin()" class="joinBtn" id="joinBtn">
       회원가입
     </div>
   </div>
 
-  <div class="loginWrap">
+  <div class="loginWrap" id="loginWrap">
     <div class="infoWrap">
       <div><input type="email" class="info infoEmail" placeholder="📧 | email" id="email"></div>
       <div><input type="password" class="info infoPassword" placeholder="🔒 | password" id="pw"></div>
@@ -60,7 +21,7 @@
     </div>
   </div>
 
-  <div class="memberWrap display">
+  <div class="memberWrap display" id="memberWrap">
     <div class="joinWrap">
       <div><input type="email" class="join joinEmail" placeholder="📧 | 아이디(이메일 형식)" id="email-new"></div>
       <div><input type="password" class="join joinPassword" placeholder="🔒 | 비밀번호" id="pw-new"></div>
@@ -154,6 +115,3 @@
     })
 
   </script>
-
-</body>
-</html>

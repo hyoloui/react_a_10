@@ -1,5 +1,6 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route } from "./router.js";
+import { handleLogin, handleJoin } from "./sign.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation());
@@ -29,6 +30,5 @@ document.addEventListener("DOMContentLoaded", handleLocation);
 
 // 전역 함수 리스트
 window.route = route;
-
-// 전역 함수 리스트
-window.route = route;
+window.handleLogin = handleLogin;
+window.handleJoin = handleJoin;
