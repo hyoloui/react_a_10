@@ -1,7 +1,7 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route } from "./router.js";
 import { handleLogin, handleJoin } from "./sign.js";
-import { handleAuth} from "./auth";
+
 
 
 
@@ -36,4 +36,4 @@ document.addEventListener("DOMContentLoaded", handleLocation);
 window.route = route;
 window.handleLogin = handleLogin;
 window.handleJoin = handleJoin;
-window.handleAuth = handleAuth;
+
