@@ -1,12 +1,18 @@
-import { authService } from "./firebase.js";
-import { handleLocation, route } from "./router.js";
-import { handleLogin, handleJoin, handleConst, registerNow } from "./sign.js";
+import { authService } from './firebase.js';
+import { handleLocation, route } from './router.js';
+import {
+  handleLogin,
+  handleJoin,
+  handleConst,
+  registerNow,
+  login,
+} from './sign.js';
 
 // hash url 변경 시 처리
-window.addEventListener("hashchange", handleLocation());
+window.addEventListener('hashchange', handleLocation());
 
 // 첫 랜딩 또는 새로고침 시 처리
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   // 로그인 상태 모니터링
   authService.onAuthStateChanged((user) => {
     // Firebase 연결되면 화면 표시
@@ -14,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     handleLocation();
     if (user) {
       // 로그인 상태인 경우 index.html 로 해시체인지
-      console.log("로그인 상태");
+      console.log('로그인 상태');
     } else {
       // 로그아웃 상태인 경우
-      console.log("로그아웃 상태");
+      console.log('로그아웃 상태');
     }
   });
 });
@@ -28,3 +34,4 @@ window.handleLogin = handleLogin;
 window.handleJoin = handleJoin;
 window.handleConst = handleConst;
 window.registerNow = registerNow;
+window.login = login;
