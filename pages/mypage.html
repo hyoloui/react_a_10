@@ -1,12 +1,15 @@
 <!--미영 작업-->
-<div class="myPage-container">
-  <div class="myPage-img">
-    <img src="../assets/mypageimg.png" alt="" />
-  </div>
+<form id="profileForm" onsubmit="changeProfile(event)">
+  <label id="imgLabel" for="imgInput">
+    <div class="myPage-container">
+      <div class="myPage-img">
+        <img src="../assets/mypageimg.png" id='profileView'>
+        <input onchange="onFileChange(event)" id="imgInput" type="file" accept="images/*" />
+      </div>
+  </label>
+</form>
 
-  <div>
-    
-  </div>
+
 
   <div class="myPage-profiles">
     <div>
@@ -49,8 +52,6 @@
     </div>
   </div>
   <div class="myPage-save">
-    <form action="">
-      <input id="profileBtn" type="submit" value="저장하기"> 
-    </form>
+    <input id="profileBtn" type="submit" value="저장하기" onclick='changeProfile(event)'> 
   </div>
 </div>
