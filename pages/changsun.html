@@ -22,16 +22,18 @@
   </div>
 
   <div class="memberWrap display" id="memberWrap">
-    <div class="joinWrap">
+
+    <form onsubmit="registerNow(event)" class="joinWrap">
       <div><input type="email" class="join joinEmail" placeholder="📧 | 아이디(이메일 형식)" id="email-new"></div>
       <div><input type="password" class="join joinPassword" placeholder="🔒 | 비밀번호" id="pw-new"></div>
       <div><input type="password" class="join joinPasswordCheck" placeholder="🔑 | 비밀번호 확인" id="pw-check"></div>
       <div><input type="text" class="join joinName" placeholder="👤 | 닉네임" id="name-new"></div>
-    </div>
+    
+      <div class="btnWrap">
+        <div><input type="submit" class="btn" id="registerOO" value="팬픽 함께하기"></input></div>
+      </div>
+    </form>
 
-    <div class="btnWrap">
-      <div><button type="submit" class="btn" id="register">팬픽 함께하기</button></div>
-    </div>
   </div>
 
 </div>
