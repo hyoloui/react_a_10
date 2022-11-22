@@ -1,5 +1,6 @@
 import {authService} from './firebase.js';
-import {handleLocation, route} from './router.js';
+import { handleLocation, route } from './router.js';
+import {changeProfile} from './miyoung.js'
 
 // hash url 변경 시 처리
 window.addEventListener('hashchange', handleLocation());
@@ -33,43 +34,6 @@ window.route = route;
 // 전역 함수 리스트
 window.route = route;
 
-/////////////////<!--미영 작업-->//////////////
-const topProfile = document.querySelector('#nav_profile');
-const menuDisplay = document.querySelector('#menu_display');
-const navProfileImg = document.querySelector('#nav_profile_img');
-
-// nav 프로필이미지 클릭 시 메뉴 뿅
-topProfile.addEventListener('click', function () {
-  menuDisplay.style.display = 'block';
-});
-
-// 다른 영역 클릭 시 메뉴 없어짐
-document.addEventListener('click', function (event) {
-  console.log(event.target);
-  if (event.target != navProfileImg) {
-    menuDisplay.style.display = 'none';
-  }
-});
-////////////////////////////////////////////
-
-$('#logout').click(function () {
-  firebase.auth().signOut();
-  localStorage.removeItem('user');
-  alert('떠나다니 아쉽네요.');
-});
 
 
-// 첫번째방법
-document.querySelector('#logout').addEventListener('click', function () {
-    firebase.auth().signOut();
-    localStorage.removeItem('user');
-    alert('떠나다니 아쉽네요.');
-})
 
-// 두번째방법
-const logOut = document.querySelector('#logout');
-logOut.addEventListener('click', function () {
-  firebase.auth().signOut();
-  localStorage.removeItem('user');
-  alert('떠나다니 아쉽네요.');
-});
