@@ -8,11 +8,7 @@
     <div class="whatitname_right">
         <button>팬pick 작성</button>
         <div class="contents_search">
-            <input
-                type="text"
-                aria-label="Search"
-                class="contents_search_input"
-            />
+            <input type="text" aria-label="Search" class="contents_search_input" />
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
     </div>
@@ -22,13 +18,11 @@
     <!--카드1개-->
     <div class="content_card_container">
         <!--카드이미지-->
-        <div class="card_img">
-            <img
-                src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
-                alt=""
-            />
+        <div class="card_img" onclick="modalOn()">
+            <img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+                alt="" />
             <!--글제목,내용 간단히-->
-            <div class="card_content">
+            <div class="card_content" onclick="modalOn()">
                 <h4>부드라미 도와줘요</h4>
                 <p>abcdefghijklmnopqrstuvwxyz</p>
             </div>
@@ -38,10 +32,8 @@
             </div>
             <div class="card_bottom">
                 <div class="card_profile">
-                    <img
-                        src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
-                        alt=""
-                    />
+                    <img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+                        alt="" />
                 </div>
                 <div class="card_name"><span>아이유너무예뻐</span></div>
                 <div class="card_date"><span>2022.11.18</span></div>
@@ -49,33 +41,75 @@
         </div>
     </div>
 
-    <div class="content_card_container">
-        <div class="card_img">
-            <img
-                src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
-                alt=""
-            />
-            <div class="card_content">
-                <h4>부드라미 도와줘요</h4>
-                <p>abcdefghijklmnopqrstuvwxyz</p>
-            </div>
-            <div class="card_like">
-                <span>162</span> <i class="fa-solid fa-heart"></i>
-            </div>
-            <div class="card_bottom">
-                <div class="card_profile">
-                    <img
-                        src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
-                        alt=""
-                    />
+
+
+
+    <body>
+        <!-- 글보기 모달창 -->
+        <div id="modal" class="modal-overlay">
+            <div class="modal-window">
+                <div class=headline1>
+                    <div class="img_box"></div>
+                    <div>작성자</div>
+                    <button id="close-area" class="close-area" onclick="modalOff()">X</button>
                 </div>
-                <div class="card_name"><span>아이유너무예뻐</span></div>
-                <div class="card_date"><span>2022.11.18</span></div>
+
+                <div class="headline2">
+                    <h2 class="title">제목</h2>
+                </div>
+
+                <div class="headline3">
+                    <button class="edit_btn">수정</button>
+                    <button class="remove_btn">삭제</button>
+                </div>
+
+                <div class="contents_area">
+                    <p class="content">글내용</p>
+                </div>
+
+                <div class="comments_area">
+                    <p class="comment">댓글쓰기</p>
+                    <div id="form-commentInfo">
+
+                        <input id="comment-input" placeholder="comment">
+                        <button id="submit">저장</button>
+                        <div class="img_box"></div>
+                    </div>
+                    <div id=comments>
+
+
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <!-- <div class="content_card_container">
+
+
+
+        <div class="content_card_container">
+            <div class="card_img">
+                <img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+                    alt="" />
+                <div class="card_content">
+                    <h4>부드라미 도와줘요</h4>
+                    <p>abcdefghijklmnopqrstuvwxyz</p>
+                </div>
+                <div class="card_like">
+                    <span>162</span> <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="card_bottom">
+                    <div class="card_profile">
+                        <img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+                            alt="" />
+                    </div>
+                    <div class="card_name"><span>아이유너무예뻐</span></div>
+                    <div class="card_date"><span>2022.11.18</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="content_card_container">
         <div class="card_img">
             <img
                 src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
@@ -225,5 +259,5 @@
             </div>
         </div>
     </div> -->
-    <p>홈 화면 입니다</p>
+        <p>홈 화면 입니다</p>
 </article>

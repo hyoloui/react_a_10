@@ -29,3 +29,41 @@ document.addEventListener("DOMContentLoaded", handleLocation);
 
 // 전역 함수 리스트
 window.route = route;
+
+// 전역 함수 리스트
+window.route = route;
+
+
+// 모달창 
+
+
+// 특정 버튼을 누르면 모달창이 켜지게 하기
+function modalOn() {
+    const modal_on = document.getElementById("modal") // 나중에 또쓰려고 선언하는거
+    modal.style.display = "flex"
+}
+window.modalOn = modalOn
+
+
+// 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
+function modalOff() {
+    const modal_close = document.getElementById("close-area")
+    modal.style.display = "none"
+}
+window.modalOff = modalOff
+
+//모달창이 켜진 상태에서 ESC 버튼을 누르면 모달창이 꺼지게 하기
+window.addEventListener("keyup", e => {
+    if (modal.style.display === "flex" && e.key === "Escape") {
+        modal.style.display = "none"
+    }
+})
+
+//모달창 바깥 영역을 클릭하면 모달창이 꺼지게 하기
+window.addEventListener("click", e => {
+    const evTarget = e.target
+    if (evTarget.classList.contains("modal-overlay")) {
+        modal.style.display = "none"
+    }
+})
+
