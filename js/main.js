@@ -1,6 +1,6 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route } from "./router.js";
-import { handleLogin, handleJoin } from "./sign.js";
+import { handleLogin, handleJoin, handleConst } from "./sign.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation());
@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // user === authService.currentUser 와 같은
         handleLocation();
         if (user) {
-            // 로그인 상태인 경우
+            // 로그인 상태인 경우 index.html 로 해시체인지
+            window.location.hash="#"
             console.log("로그인 상태");
         } else {
             // 로그아웃 상태인 경우
@@ -22,13 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// hash url 변경 시 처리
-window.addEventListener("hashchange", handleLocation);
-
-// 첫 랜딩 또는 새로고침 시 처리
-document.addEventListener("DOMContentLoaded", handleLocation);
-
 // 전역 함수 리스트
 window.route = route;
 window.handleLogin = handleLogin;
 window.handleJoin = handleJoin;
+window.handleConst - handleConst;

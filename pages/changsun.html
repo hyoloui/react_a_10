@@ -1,10 +1,10 @@
 <div class="wrap">
   
   <div class="logWrap">
-    <div onclick="handleLogin()" class="loginBtn click" id="loginBtn">
+    <div onclick="handleLogin()" id="loginBtn" class="loginBtn click">
       로그인
     </div>
-    <div onclick="handleJoin()" class="joinBtn" id="joinBtn">
+    <div onclick="handleJoin()" id="joinBtn" class="joinBtn">
       회원가입
     </div>
   </div>
@@ -35,83 +35,3 @@
   </div>
 
 </div>
-
-<script>
-  // 로그인, 회원가입 클릭시 진하게
-    btnLogin = document.getElementsByClassName("loginBtn")[0];
-    btnJoin = document.getElementsByClassName("joinBtn")[0];
-    loginWrap = document.getElementsByClassName("loginWrap")[0];
-    memberWrap = document.getElementsByClassName("memberWrap")[0];
-
-    // 로그인 클릭시
-    btnLogin.addEventListener("click", function(){
-        btnLogin.classList.add("click")
-        btnJoin.classList.remove("click")
-        memberWrap.classList.add("display")
-        loginWrap.classList.remove("display")
-    });
-
-    // 회원가입 클릭시
-    btnJoin.addEventListener("click", function(){
-        btnJoin.classList.add("click")
-        btnLogin.classList.remove("click")
-        loginWrap.classList.add("display")
-        memberWrap.classList.remove("display")
-    });
-</script>
-
-  <script>
-
-    const db = firebase.firestore(); //database 문법 소환, data아래 실행
-    const storage = firebase.storage(); //storage 문법 소환, image를 넣기 위해서도 사용함.
-
-    let remainder = localStorage.getItem('user')
-
-
-
-    //유저의 데이터를 로컬에 저장한다. -> 무조건 글자만 입력가능하다.     
-     firebase.auth().onAuthStateChanged((user)=>{
-        if(user) {
-          console.log(user.uid)
-          console.log(user.displayName)
-          localStorage.setItem('user', JSON.stringify(user))     
-        }
-     }) //유저의 로그인상태 확인가능함.
-
-     
-    //  document.querySelector('#logout').addEventListener('click', function(){
-    //       firebase.auth().signOut();
-    //       localStorage.removeItem('user')
-    //       alert("떠나다니 아쉽네요.");
-    //     })
-
-        document.querySelector('#login').addEventListener('click', function(){
-
-          let email = document.querySelector('#email').value;
-          let password = document.querySelector('#pw').value;
-
-        firebase.auth().signInWithEmailAndPassword(email, password).then((result)=>{
-            console.log(result.user)
-            alert("다시 돌아오셨군요!");
-          })
-        })
-
-        document.querySelector('#register').addEventListener('click', function(){
-
-          let email = document.querySelector('#email-new').value; //사용자가 입력한 이메일 등록
-          let password = document.querySelector('#pw-new').value; //사용자가 입력한 비밀번호 등록
-          let name = document.querySelector('#name-new').value; //사용자가 입력한 이름 등록
-
-    firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
-      let userinfo = {name : name, email : email}  
-
-    db.collection('user').doc(result.user.uid).set(userinfo)
-        
-        console.log(result);
-        console.log(result.user);
-        result.user.updateProfile({displayName : name})
-        alert("함께 해주신다니 기쁘네요!");
-      });
-    })
-
-  </script>
