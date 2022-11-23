@@ -12,38 +12,38 @@ import { dbService, authService } from "./firebase.js"
 
 // const dbService = getStorage(app); // app은 Firebase 프로젝트 연결 객체
 
-// // Create API
-// // comments 라는 이름의 collection에 객체 형태의 Document를 신규 등록
-// addDoc(collection(dbService, "fan-pick"), {
-//     text: comment.value,
-//     createdAt: Date.now(),
-//     creatorId: uid,
-//     profileImg: photoURL,
-//     nickname: displayName,
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Create API
+// comments 라는 이름의 collection에 객체 형태의 Document를 신규 등록
+export const save_fanpick = async (event) => {
+    event.preventDefault();
+    const title = document.querySelector(".title2");
+    const content = document.querySelector(".content2");
+    // const { uid, photoURL, displayName } = authService.currentUser;
+    try {
+      await addDoc(collection(dbService, "fan-pick"), {
+        제목: title.value,
+        내용: content.value,
+        시간: Date.now(),
+        // creatorId: uid,
+        // profileImg: photoURL,
+        // nickname: displayName,
+      });
+      title.value = "";
+      content.value = "";
+      getList();
+      modalOff2();
+    } catch (error) {
+      alert(error);
+      console.log("error in addDoc:", error);
+    }
+  };
 
 
 // Read API
-// comments 라는 collection안에서 데이터 불러올 때 doc 객체 내에 createdAt 값을 내림차순으로 가져오는 쿼리 정의
-let cmtObjList = [];
 // id 받아적기
 let selectId = "";
 export async function getList(){
+    const cmtObjList = [];
     // query 를 db에서 받아와 q로 선언
     const q = query(
         collection(dbService, "fan-pick"),
@@ -60,12 +60,9 @@ export async function getList(){
         cmtObjList.push(fanPickList);
         console.log(doc.id)
     });
-    // 뉴피드 선언
     const newsFeed = document.getElementById("newsFeed");
-    const feedModal = document.getElementById("openModal");
-    // 로그인 한 uid 가져오기
+    // newsFeed.innerHTML = ""; // 이부분 지우면 append가 안됨
     // const currentUid = authService.currentUser.uid;
-    // newsFeed.innerHTML = ""; // 초기화
 
     cmtObjList.forEach((fanPickList) => {
         // const isOwner = currentUid === cmtObj.creatorId;
@@ -102,10 +99,10 @@ export async function getList(){
         div.innerHTML = temp_html;
 
         newsFeed.appendChild(div);
+        console.log(cmtObjList)
+        console.log(newsFeed)
     });
 
-    console.log(cmtObjList)
-    console.log(newsFeed)
 }
 
 // 특정 버튼을 누르면 모달창이 켜지게 하기
@@ -126,8 +123,8 @@ export async function modalOn() {
     });
     console.log(card)
 
-    const feedModal = document.getElementById("openModal");
-    const openModal =
+    const feedModal = document.getElementById("modal_area");
+    const openModal = 
         `<div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="headline1">
@@ -185,7 +182,6 @@ export async function modalOn() {
     const div = document.createElement("div");
     div.classList.add("modal_inner");
     div.innerHTML = openModal;
-
     feedModal.appendChild(div);
 }
 
@@ -202,6 +198,7 @@ export function sendId(showId) {
     console.log(selectId);
 }
 
+// 팬픽 작성 모달창
 export function modalOn2(){
     const modal_open = document.querySelector("#create_modal")
     modal_open.style.display = "flex"

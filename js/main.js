@@ -1,6 +1,14 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route } from "./router.js";
-import { getList , modalOn , modalOff , sendId, modalOn2, modalOff2} from "./crud.js";
+import { 
+  save_fanpick,
+  getList ,
+  sendId,
+  modalOn ,
+  modalOn2,
+  modalOff ,
+  modalOff2 ,
+} from "./crud.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
@@ -26,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 전역 함수 리스트
 window.route = route;
-window.push = getList;
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 window.onclick = onclick;
 window.ontoggle = ontoggle;
@@ -42,10 +49,12 @@ window.onsubmit = onsubmit;
 // window.onEditing = onEditing;
 // window.delete_comment = delete_comment;
 
-
+// CRUD
+window.save_fanpick = save_fanpick;
+window.getList = getList;
+window.sendId = sendId;
 // 모달창 
 window.modalOn = modalOn;
 window.modalOn2 = modalOn2;
 window.modalOff = modalOff;
 window.modalOff2 = modalOff2;
-window.sendId = sendId;
