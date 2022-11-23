@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  GithubAuthProvider,
+  // 깃헙 소셜로그인 GithubAuthProvider,
   signOut,
   updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
@@ -141,5 +141,26 @@ export const login = (event) => {
       } else if (errorMessage.includes("wrong-password")) {
         alert("비밀번호가 잘못 되었습니다.");
       }
+    });
+};
+
+//구글 로그인 활성화
+export const socialLogin = (event) => {
+  // 구조분해
+  const { id } = event.target;
+  console.log(id);
+  let provider;
+  if (id === "loginGoogle") {
+    provider = new GoogleAuthProvider();
+  }
+  signInWithPopup(authService, provider)
+    .then((result) => {
+      const user = result.user;
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      console.log("error:", error);
+      const errorCode = error.code;
+      const errorMessage = error.message;
     });
 };

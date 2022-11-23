@@ -6,6 +6,7 @@ import {
   handleConst,
   registerNow,
   login,
+  socialLogin,
 } from "./sign.js";
 
 // 첫 랜딩 또는 새로고침 시 처리
@@ -33,3 +34,4 @@ window.handleJoin = handleJoin;
 window.handleConst = handleConst;
 window.registerNow = registerNow;
 window.login = login;
+window.socialLogin = socialLogin;
