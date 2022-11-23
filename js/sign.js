@@ -135,20 +135,3 @@ export const login = () => {
     });
 };
 
-// export const login = event;
-// signInWithEmailAndPassword(authService, emailVal, pwVal)
-//   .then((userCredential) => {
-//     // Signed in
-//     const user = userCredential.user;
-//     window.location.hash = '#fanLog';
-//   })
-//   .catch((error) => {
-//     const errorMessage = error.message;
-//     console.log('errorMessage:', errorMessage);
-//     if (errorMessage.includes('user-not-found')) {
-//       alert('가입되지 않은 회원입니다.');
-//       return;
-//     } else if (errorMessage.includes('wrong-password')) {
-//       alert('비밀번호가 잘못 되었습니다.');
-//     }
-//   });
