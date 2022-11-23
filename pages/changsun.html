@@ -1,4 +1,5 @@
 <div class="wrap">
+  <!--로그인/회원가입 변경 버튼-->
   <div class="logWrap">
     <div onclick="handleLogin()" id="loginBtn" class="loginBtn click">
       로그인
@@ -6,8 +7,9 @@
     <div onclick="handleJoin()" id="joinBtn" class="joinBtn">회원가입</div>
   </div>
 
+  <!--로그인 버튼 활성화시 보이는 화면-->
   <div class="loginWrap" id="loginWrap">
-    <form onsubmit="window.login(event)" class="loginWrap">
+    <form onsubmit="login(event)" class="loginWrap">
       <div class="infoWrap">
         <div>
           <input
@@ -28,14 +30,17 @@
       </div>
 
       <div class="btnWrap">
-        <div><button type="submit" class="btn" id="login">Login</button></div>
         <div>
-          <button type="submit" class="btn" id="###">Google Login</button>
+          <button type="submit" class="btn" id="loginId">Login</button>
         </div>
       </div>
     </form>
+    <div>
+      <button class="btn" id="loginGoogle">Google Login</button>
+    </div>
   </div>
 
+  <!--회원가입 버튼 활성화시 보이는 화면-->
   <div class="memberWrap display" id="memberWrap">
     <form onsubmit="registerNow(event)" class="joinWrap">
       <div>
