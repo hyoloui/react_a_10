@@ -1,3 +1,5 @@
+// import { getList } from "./crud.js"
+
 export const route = (event) => {
   event.preventDefault();
   console.log('event.target.hash', event.target.hash)
@@ -26,11 +28,15 @@ export const handleLocation = async () => {
   const html = await fetch(route).then((data) => data.text());
 
   document.getElementById('main-page').innerHTML = html;
+  // if (path === "/"){
+  //   getList();
+  // }
 };
 
 
-// hash url 변경 시 처리
-window.addEventListener('hashchange', handleLocation);
 
-// 첫 랜딩 또는 새로고침 시 처리
-document.addEventListener('DOMContentLoaded', handleLocation);
+// // hash url 변경 시 처리
+// window.addEventListener('hashchange', handleLocation);
+
+// // 첫 랜딩 또는 새로고침 시 처리
+// document.addEventListener('DOMContentLoaded', handleLocation);
