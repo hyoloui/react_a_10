@@ -355,7 +355,7 @@ a {
   font-size: 34px;
 }
 
-.close-area {
+#close-area {
   width: 30px;
   height: 30px;
   display: flex;
