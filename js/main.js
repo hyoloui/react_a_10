@@ -1,6 +1,6 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route } from "./router.js";
-import { getList , modalOn , modalOff , sendId } from "./crud.js";
+import { getList , modalOn , modalOff , sendId, modalOn2, modalOff2} from "./crud.js";
 
 // hash url 변경 시 처리
 window.addEventListener("hashchange", handleLocation);
@@ -44,6 +44,8 @@ window.onsubmit = onsubmit;
 
 
 // 모달창 
-window.modalOn = modalOn
-window.modalOff = modalOff
+window.modalOn = modalOn;
+window.modalOn2 = modalOn2;
+window.modalOff = modalOff;
+window.modalOff2 = modalOff2;
 window.sendId = sendId;

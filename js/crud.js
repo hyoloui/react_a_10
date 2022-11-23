@@ -129,42 +129,58 @@ export async function modalOn() {
     const feedModal = document.getElementById("openModal");
     const openModal =
         `<div id="modal" class="modal-overlay">
-            <div class="modal-window">
-                <div class=headline1>
-                    <div class="img_box"></div>
-                    <div> </div>
-                    <button id="close-area" class="close-area" onclick="modalOff()">X</button>
+        <div class="modal-window">
+            <div class="headline1">
+                <div class="profile_wrap">
+                <div class="profile_img_box"></div>
+                <div class="profile_name">작성자</div>
                 </div>
-    
-                <div class="headline2">
-                    <h2 class="title">${card[0].제목}</h2>
-                </div>
-    
-                <div class="headline3">
-                    <button class="edit_btn">수정</button>
-                    <button class="remove_btn">삭제</button>
-                </div>
-    
-                <div class="contents_area">
-                    <p class="content">${card[0].내용}</p>
-                </div>
-    
-                <div class="comments_area">
-                    <p class="comment">댓글쓰기</p>
-                    <div id="form-commentInfo">
-    
-                        <input id="comment-input" placeholder="comment">
-                        <button id="submit">저장</button>
-                        <div class="img_box"></div>
-                    </div>
-                    <div id=comments>
-    
-    
-                    </div>
-                </div>
-    
+                <button id="close-area" class="close-area" onclick="modalOff()">
+                <i class="fa-regular fa-x xBtn"></i>
+                </button>
             </div>
-        </div>`;
+
+        <div class="headline2">
+            <p class="title">${card[0].제목}</p>
+        </div>
+
+        <div class="headline3">
+            <button class="btn">수정</button>
+            <button class="btn ml10">삭제</button>
+        </div>
+
+        <div class="contents_area">
+            <div class="content_pic">
+            <img
+                src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+                alt=""
+            />
+            </div>
+            <p class="content">${card[0].내용}</p>
+        </div>
+
+        <div class="comments_area">
+            <p class="comment">댓글쓰기</p>
+            <div class="form-commentInfo">
+                <textarea class="comment-input" placeholder="comment"></textarea>
+                <button class="submit">저장</button>
+            <!-- <div class="profile_img_box"></div> -->
+            </div>
+            <div class="comments_wrap">
+                <div class="comments_btn_wrap">
+                    <button class="btn">수정</button>
+                    <button class="btn ml10">삭제</button>
+                </div>
+                <div class="comments_content2">댓글내용</div>
+                <div class="comments_profile_wrap">
+                    <div class="profile_img_box"></div>
+                    <div class="profile_name">작성자</div>
+                    <div class="date">날짜</div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>`;
 
     const div = document.createElement("div");
     div.classList.add("modal_inner");
@@ -184,6 +200,15 @@ export function sendId(showId) {
     selectId = "";
     selectId = showId;
     console.log(selectId);
+}
+
+export function modalOn2(){
+    const modal_open = document.querySelector("#create_modal")
+    modal_open.style.display = "flex"
+}
+export function modalOff2(){
+    const modal_close = document.querySelector("#create_modal")
+    modal_close.style.display = "none"
 }
 
 
