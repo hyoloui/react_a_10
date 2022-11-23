@@ -22,14 +22,32 @@ import { dbService, authService } from "./firebase.js"
 //     nickname: displayName,
 // });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Read API
 // comments 라는 collection안에서 데이터 불러올 때 doc 객체 내에 createdAt 값을 내림차순으로 가져오는 쿼리 정의
-let cmtObjList = []
+let cmtObjList = [];
+// id 받아적기
+let selectId = "";
 export async function getList(){
     // query 를 db에서 받아와 q로 선언
     const q = query(
         collection(dbService, "fan-pick"),
-        // orderBy("createdAt", "desc")
+        // orderBy("제목", "desc")
     );
     // query 조건에 맞는 documents 데이터를 배열로 받아오기
     const querySnapshot = await getDocs(q);
@@ -40,24 +58,26 @@ export async function getList(){
             ...doc.data(),
         };
         cmtObjList.push(fanPickList);
+        console.log(doc.id)
     });
-    // 카드 리스트 선언
+    // 뉴피드 선언
     const newsFeed = document.getElementById("newsFeed");
+    const feedModal = document.getElementById("openModal");
     // 로그인 한 uid 가져오기
     // const currentUid = authService.currentUser.uid;
     // newsFeed.innerHTML = ""; // 초기화
 
-    cmtObjList.forEach((card) => {
+    cmtObjList.forEach((fanPickList) => {
         // const isOwner = currentUid === cmtObj.creatorId;
-        const temp_html = `<div class="content_card_container">
+        const temp_html = `<div class="content_card_container" id="${fanPickList.id}" onclick="sendId(this.id)">
         <!--카드이미지-->
         <div class="card_img">
             <img onclick="modalOn()" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
                 alt="" />
             <!--글제목,내용 간단히-->
-            <div class="card_content" onclick="modalOn()">
-                <h4 id="title">${card.제목}</h4>
-                <p id="content">${card.내용}</p>
+            <div class="card_content">
+                <h4 id="title" onclick="modalOn()">${fanPickList.제목}</h4>
+                <p id="content" onclick="modalOn()">${fanPickList.내용}</p>
             </div>
             <!--좋아요-->
             <div class="card_like">
@@ -70,96 +90,147 @@ export async function getList(){
                 </div>
                 <div class="card_name"><span> </span></div>
                 <div class="card_date"><span>
-                ${Date(card.작성시간)
+                ${Date(fanPickList.작성시간)
                     .toString()
                     .slice(0, 25)}</span></div>
             </div>
         </div>
-    </div>
-    <div id="modal" class="modal-overlay">
+    </div>`
+        
+        const div = document.createElement("div");
+        div.classList.add("mycards");
+        div.innerHTML = temp_html;
+
+        newsFeed.appendChild(div);
+    });
+
+    console.log(cmtObjList)
+    console.log(newsFeed)
+}
+
+// 특정 버튼을 누르면 모달창이 켜지게 하기
+export async function modalOn() {
+    const card = [];
+    const q = query(collection(dbService, "fan-pick"));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+        if (doc.id === selectId){
+            const commentObj = {
+                id: selectId,
+                ...doc.data(),
+            };
+            card.push(commentObj);
+        }
+    });
+    console.log(card)
+
+    const feedModal = document.getElementById("openModal");
+    const openModal =
+        `<div id="modal" class="modal-overlay">
             <div class="modal-window">
                 <div class=headline1>
                     <div class="img_box"></div>
                     <div> </div>
                     <button id="close-area" class="close-area" onclick="modalOff()">X</button>
                 </div>
-
+    
                 <div class="headline2">
-                    <h2 class="title">${card.제목}</h2>
+                    <h2 class="title">${card[0].제목}</h2>
                 </div>
-
+    
                 <div class="headline3">
                     <button class="edit_btn">수정</button>
                     <button class="remove_btn">삭제</button>
                 </div>
-
+    
                 <div class="contents_area">
-                    <p class="content">${card.내용}</p>
+                    <p class="content">${card[0].내용}</p>
                 </div>
-
+    
                 <div class="comments_area">
                     <p class="comment">댓글쓰기</p>
                     <div id="form-commentInfo">
-
+    
                         <input id="comment-input" placeholder="comment">
                         <button id="submit">저장</button>
                         <div class="img_box"></div>
                     </div>
                     <div id=comments>
-
-
+    
+    
                     </div>
                 </div>
-
+    
             </div>
         </div>`;
-        const div = document.createElement("div");
-        div.classList.add("mycards");
-        div.innerHTML = temp_html;
-        newsFeed.appendChild(div);
-    });
 
+    const div = document.createElement("div");
+    div.classList.add("modal_inner");
+    div.innerHTML = openModal;
 
-
-    console.log(cmtObjList)
-    console.log(newsFeed)
-    // console.log(currentUid.data)
+    feedModal.appendChild(div);
 }
-// window.querySelector = querySelector;
-// document.querySelector("#title").push(`$cmtcmtObjList[0].제목`)
+
+// 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
+export function modalOff() {
+    const modal_close = document.querySelector(".modal_inner")
+    modal_close.remove();
+}
+
+// 받아적은 id 하나만 가져오기
+export function sendId(showId) {
+    selectId = "";
+    selectId = showId;
+    console.log(selectId);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export async function getModal(){
+    
+// }
 
 // // Update API
 // // comments collection 내에서 해당 id값을 가진 doc을 찾아서 doc.text를 업데이트
 // const commentRef = doc(dbService, "comments", id);
 // updateDoc(commentRef, { text: newComment });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // Delete API
 // // comments collection 내에서 해당 id값을 가진 doc을 찾아서 삭제
 // deleteDoc(doc(dbService, "comments", id));
 
-
-// 특정 버튼을 누르면 모달창이 켜지게 하기
-export function modalOn() {
-    const modal_on = document.getElementById("modal") // 나중에 또쓰려고 선언하는거
-    modal_on.style.display = "flex"
-}
-// 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
-export function modalOff() {
-    const modal_close = document.getElementById("modal")
-    modal_close.style.display = "none"
-}
-// //모달창이 켜진 상태에서 ESC 버튼을 누르면 모달창이 꺼지게 하기
-// window.addEventListener("keyup", e => {
-//     const modal = document.getElementById("#modal")
-//     if (modal.style.display === "flex" && e.key === "Escape") {
-//         modal.style.display = "none"
-//     }
-// })
-// window.addEventListener("click", e => {
-//     const evTarget = e.target
-//     const modal = document.getElementById("#modal")
-//     if (evTarget.classList.contains("modal-overlay")) {
-//         modal.style.display = "none"
-//     }
-// })
 

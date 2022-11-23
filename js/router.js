@@ -1,4 +1,4 @@
-// import { getList } from "./crud.js"
+import { getList } from "./crud.js"
 
 export const route = (event) => {
   event.preventDefault();
@@ -28,9 +28,10 @@ export const handleLocation = async () => {
   const html = await fetch(route).then((data) => data.text());
 
   document.getElementById('main-page').innerHTML = html;
-  // if (path === "/"){
-  //   getList();
-  // }
+  // home 으로
+  if (path === "/"){
+    getList();
+  }
 };
 
 
