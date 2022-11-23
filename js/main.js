@@ -9,19 +9,19 @@ window.addEventListener("hashchange", handleLocation);
 document.addEventListener("DOMContentLoaded", () => {
     // 뉴스피드 불러오기
     // getList();
-    // 로그인 상태 모니터링
-    authService.onAuthStateChanged((user) => {
-        // Firebase 연결되면 화면 표시
-        // user === authService.currentUser 와 같은
-        handleLocation();
-        if (user) {
-            // 로그인 상태인 경우
-            console.log("로그인 상태");
-        } else {
-            // 로그아웃 상태인 경우
-            console.log("로그아웃 상태");
-        }
-    });
+  // 로그인 상태 모니터링
+  authService.onAuthStateChanged((user) => {
+    // Firebase 연결되면 화면 표시
+    // user === authService.currentUser 와 같은
+    handleLocation();
+    if (user) {
+      // 로그인 상태인 경우
+      console.log("로그인 상태");
+    } else {
+      // 로그아웃 상태인 경우
+      console.log("로그아웃 상태");
+    }
+  });
 });
 
 // 전역 함수 리스트
