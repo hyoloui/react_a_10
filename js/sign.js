@@ -79,11 +79,14 @@ export const registerNow = async (event) => {
       // Signed in
       console.log('회원가입 성공!');
       alert('축하합니다. 회원이 되셨습니다.');
-
+      console.log('displayName:', document.getElementById('name-new').value);
+      //회원가입 되면 자동으로 로그인처리를 해버림. 로그인처리가 되면 main.js화면의 window.location.replace('')가 먼저 읽혀서 79번줄에서 실행 되버림. 그래서 이 코드가 먹히지 않음. 
       // 닉네임을 받아서 추가시켜줌
       updateProfile(authService.currentUser, {
         displayName: document.getElementById('name-new').value,
-      });
+      }).then(function () {
+        window.location.replace('');
+      }); // then() => 성공을 하면.
     })
     .catch((error) => {
       const errorMessage = error.message;

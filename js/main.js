@@ -1,6 +1,6 @@
 import {authService} from './firebase.js';
 import {handleLocation, route, goToProfile} from './router.js';
-import {changeProfile, onFileChange} from './miyoung.js';
+import {changeProfile, onFileChange, logout} from './miyoung.js';
 import {
   handleLogin,
   handleJoin,
@@ -14,34 +14,81 @@ window.addEventListener('hashchange', handleLocation());
 
 // 첫 랜딩 또는 새로고침 시 처리
 document.addEventListener('DOMContentLoaded', function () {
-  // 로그인 상태 모니터링
+  // DOMContentLoaded -> html,css,js파일을 다 다운로드 받았으면
+
   authService.onAuthStateChanged((user) => {
-    // Firebase 연결되면 화면 표시
-    // user === authService.currentUser 와 같은
-    handleLocation();
-    const hash = window.location.hash;
+    // 파이어베이스랑 연결, 유저가 있으면 로그인 상태
+    //aitjservoce 유저정보가 담긴 객체 // onAuthStateChanged (이벤트리스너), 로그인상태인지 로그아웃상태인지 모니터링해주는것임
+
+    handleLocation(); // 현재url에 해당하는 화면을 띄우는 역할을 함.
+    const hash = window.location.hash; //어떤 화면을 보일지 확인할 수 있는 인덱스
+    
     if (user) {
-      // 로그인 상태이므로 항상 팬명록 화면으로 이동
-      if (hash === '') {
-        // 로그인 상태에서는 로그인 화면으로 되돌아갈 수 없게 설정
-        window.location.replace('#');
+      // 유저라는 객체가 확인이 되면
+      console.log('로그인상태')
+      const topProfile = document.querySelector('#nav_profile');
+      const menuDisplay = document.querySelector('#menu_display');
+      const navProfileImg = document.querySelector('#nav_profile_img');
+      topProfile.addEventListener('click', function () {
+        menuDisplay.style.display = 'block';
+      });
+      document.getElementById('nav_profile_img').src =
+        authService.currentUser.photoURL ?? '../assets/mypageimg.png';
+      // 다른 영역 클릭 시 메뉴 없어짐
+      document.addEventListener('click', function (event) {
+        if (event.target != navProfileImg) {
+          menuDisplay.style.display = 'none';
+        }
+      });
+
+      if (hash === '#changsun') {
+        // 해시값이 창순인지 확인(로그인화면), 만약 로그인화면이라면
+        window.location.replace(''); // home 화면으로 돌아가도록 함
       }
     } else {
-      // 로그아웃 상태이므로 로그인 화면으로 강제 이동
-      if (hash !== '') {
-        window.location.replace('');
+      // 유저라는 객체가 없다면 로그아웃 상태임.
+      console.log('로그아웃상태')
+      document.getElementById('nav_profile_img').src = '../assets/mypageimg.png';
+      if (hash == '#mypage') {
+        // 로그아웃 상태에서 로그인화면이 아니라면
+        window.location.replace('/'); // 로그인 화면으로 강제 이동
       }
+      const topProfile = document.querySelector('#nav_profile');
+      const menuDisplay = document.querySelector('#menu_display');
+      const navProfileImg = document.querySelector('#nav_profile_img');
+      const logoutMenu = document.getElementById('profile-menu-logout');
+      const menuDisplayLogOut = document.getElementById('menu_display-logout');
+      menuDisplay.style.display = 'none';
+      topProfile.addEventListener('click', function () {
+        console.log('menuDisplayLogOut', menuDisplayLogOut);
+        menuDisplayLogOut.style.display = 'block';
+      });
+
+      // 다른 영역 클릭 시 메뉴 없어짐
+      document.addEventListener('click', function (event) {
+        
+        if (event.target != navProfileImg) {
+          console.log('다른영역');
+          menuDisplayLogOut.style.display = 'none';
+        }
+      });
+
     }
   });
 });
 
-// 전역 함수 리스트
+// // onclick, onchange, onsubmit 이벤트 핸들러 리스트
+// 모듈로 된 js 파일은 전역으로 쓸 수 없음. 지역적으로만 사용이 가능한데
+// window라는 전역객체를 이용하여 강제로 window의 메서드 로서 다른데서 불러왔던 함수들을 할당시켜주는 역할을 한다.
+// window는 날라다니는 애라 아무데서나 사용할 수 있다는 것이당.
+// 근데 이렇게 끌고와서 window의 메서드로 사용하려면 맨 위 import를 해와야 한당.
+
 window.route = route;
 // window.onToggle = onToggle;
 // window.handleAuth = handleAuth;
 window.goToProfile = goToProfile;
 // window.socialLogin = socialLogin;
-// window.logout = logout;
+window.logout = logout;
 window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
 // window.save_comment = save_comment;
@@ -53,4 +100,5 @@ window.handleJoin = handleJoin;
 window.handleConst = handleConst;
 window.registerNow = registerNow;
 window.login = login;
-// window.getProfileImg = getProfileImg;
+
+

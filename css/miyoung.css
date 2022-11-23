@@ -85,7 +85,8 @@
   font-weight: 700;
 }
 
-.profile-menu-login {
+.profile-menu-login, 
+.profile-menu-logout {
   width: 130px;
   font-size: 20px;
   display: flex;
@@ -97,11 +98,17 @@
   right: 0;
 }
 
-.profile-menu-login a {
+.profile-menu-login a,
+.profile-menu-logout a {
   padding: 10px;
 }
 
 .profile-menu-login a:hover {
+  background-color: rgb(236, 236, 236);
+  color: blueviolet;
+}
+
+.profile-menu-logout a:hover {
   background-color: rgb(236, 236, 236);
   color: blueviolet;
 }
@@ -117,4 +124,9 @@
 
 #imgInput {
   display: none;
+}
+
+.menu_display-logout {
+  display: none;
+  position: relative;
 }
