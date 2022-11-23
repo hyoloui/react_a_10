@@ -1,39 +1,42 @@
 <!--미영 작업-->
-<form id="profileForm" onsubmit="changeProfile(event)">
-  <label id="imgLabel" for="imgInput">
-    <div class="myPage-container">
-      <div class="myPage-img">
+
+<div class="myPage-container">
+  <form id="profileForm" onsubmit="changeProfile(event)">   
+    <div class="myPage-img">
+      <label id="imgLabel" for="imgInput">
         <img src="../assets/mypageimg.png" id='profileView'>
-        <input onchange="onFileChange(event)" id="imgInput" type="file" accept="images/*" />
-      </div>
-  </label>
-</form>
-
-
-
+        <input onchange="onFileChange(event)" id="imgInput" type="file" accept="images/*" />     
+      </label>
+    </div>
   <div class="myPage-profiles">
+  
     <div>
       <ul>
-        <div class='flex'>
+        <div class='flex' id='profileNickname'>
           <li>닉네임</li>
           <input type="text"/ style='width: 170px; margin-right: 179px'>
         </div>
+
         <div class='flex'>
           <li>이메일</li>
           <input type="email" />
         </div>
+
         <div class='flex'>
           <li style='color: red;'>비밀번호 변경</li>
           <input type="password" />
         </div>
+
         <div class='flex'>
           <li style='color: red;'>비밀번호 확인</li>
           <input type="password" />
         </div>
+
         <div class='flex'>
           <li>인사말</li>
           <textarea></textarea>
         </div>
+
         <div class='flex'>
           <li>My Pick</li>
           <div class='flex-greet'>
@@ -45,13 +48,19 @@
             <a href="#miyoung" style='color: white');'>김미영</a>
             <a href="#miyoung" style='color: white');'>김미영</a>
             <a href="#miyoung" style='color: white');'>김미영</a>
-          </div>
-          
+          </div>        
         </div>
       </ul>
     </div>
   </div>
-  <div class="myPage-save">
-    <input id="profileBtn" type="submit" value="저장하기" onclick='changeProfile(event)'> 
-  </div>
+    <div class="myPage-save">
+      <input id="profileBtn" type="submit" value="저장하기"> 
+    </div>
+  </form>
 </div>
+
+
+
+
+
+  

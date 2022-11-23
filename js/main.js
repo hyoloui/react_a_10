@@ -1,6 +1,13 @@
 import {authService} from './firebase.js';
-import {handleLocation, route} from './router.js';
+import {handleLocation, route, goToProfile} from './router.js';
 import {changeProfile, onFileChange} from './miyoung.js';
+import {
+  handleLogin,
+  handleJoin,
+  handleConst,
+  registerNow,
+  login,
+} from './sign.js';
 
 // hash url 변경 시 처리
 window.addEventListener('hashchange', handleLocation());
@@ -32,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.route = route;
 // window.onToggle = onToggle;
 // window.handleAuth = handleAuth;
-// window.goToProfile = goToProfile;
+window.goToProfile = goToProfile;
 // window.socialLogin = socialLogin;
 // window.logout = logout;
 window.onFileChange = onFileChange;
@@ -41,3 +48,9 @@ window.changeProfile = changeProfile;
 // window.update_comment = update_comment;
 // window.onEditing = onEditing;
 // window.delete_comment = delete_comment;
+window.handleLogin = handleLogin;
+window.handleJoin = handleJoin;
+window.handleConst = handleConst;
+window.registerNow = registerNow;
+window.login = login;
+// window.getProfileImg = getProfileImg;
