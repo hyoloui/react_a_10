@@ -1,6 +1,11 @@
-import {authService} from './firebase.js';
-import {handleLocation, route, goToProfile} from './router.js';
-import {changeProfile, onFileChange, logout} from './miyoung.js';
+import { authService } from './firebase.js';
+import { handleLocation, route, goToProfile } from './router.js';
+import {
+  changeProfile,
+  onFileChange,
+  logout,
+  save_comment,
+} from './miyoung.js';
 import {
   handleLogin,
   handleJoin,
@@ -22,10 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     handleLocation(); // 현재url에 해당하는 화면을 띄우는 역할을 함.
     const hash = window.location.hash; //어떤 화면을 보일지 확인할 수 있는 인덱스
-    
+
     if (user) {
       // 유저라는 객체가 확인이 되면
-      console.log('로그인상태')
+      console.log('로그인상태');
       const topProfile = document.querySelector('#nav_profile');
       const menuDisplay = document.querySelector('#menu_display');
       const navProfileImg = document.querySelector('#nav_profile_img');
@@ -47,8 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     } else {
       // 유저라는 객체가 없다면 로그아웃 상태임.
-      console.log('로그아웃상태')
-      document.getElementById('nav_profile_img').src = '../assets/mypageimg.png';
+      console.log('로그아웃상태');
+      document.getElementById('nav_profile_img').src =
+        '../assets/mypageimg.png';
       if (hash == '#mypage') {
         // 로그아웃 상태에서 로그인화면이 아니라면
         window.location.replace('/'); // 로그인 화면으로 강제 이동
@@ -66,13 +72,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // 다른 영역 클릭 시 메뉴 없어짐
       document.addEventListener('click', function (event) {
-        
         if (event.target != navProfileImg) {
           console.log('다른영역');
           menuDisplayLogOut.style.display = 'none';
         }
       });
-
     }
   });
 });
@@ -91,14 +95,12 @@ window.goToProfile = goToProfile;
 window.logout = logout;
 window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
-// window.save_comment = save_comment;
-// window.update_comment = update_comment;
-// window.onEditing = onEditing;
-// window.delete_comment = delete_comment;
 window.handleLogin = handleLogin;
 window.handleJoin = handleJoin;
 window.handleConst = handleConst;
 window.registerNow = registerNow;
 window.login = login;
-
-
+window.save_comment = save_comment;
+// window.update_comment = update_comment;
+// window.onEditing = onEditing;
+// window.delete_comment = delete_comment;

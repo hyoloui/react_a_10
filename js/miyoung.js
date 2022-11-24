@@ -1,10 +1,11 @@
-import {authService, storageService} from './firebase.js';
+import { authService, storageService, dbService } from './firebase.js';
 import {
   ref,
   uploadString,
   getDownloadURL,
 } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js';
-import {  // 보이지 않는 firesotre.js 안에 이런 함수들이 있다.
+import {
+  // 보이지 않는 firesotre.js 안에 이런 함수들이 있다.
   doc,
   addDoc,
   updateDoc,
@@ -18,9 +19,7 @@ import {
   updateProfile,
   signOut,
 } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
-import {v4 as uuidv4} from 'https://jspm.dev/uuid';
-
-
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 export const changeProfile = async (event) => {
   event.preventDefault();
@@ -31,7 +30,7 @@ export const changeProfile = async (event) => {
   );
 
   const newNickname = document.getElementById('profileNickname').value;
-  // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.  
+  // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.
   const imgDataUrl = localStorage.getItem('imgDataUrl');
   let downloadUrl;
   if (imgDataUrl) {
@@ -41,17 +40,14 @@ export const changeProfile = async (event) => {
   await updateProfile(authService.currentUser, {
     displayName: newNickname ? newNickname : null,
     photoURL: downloadUrl ? downloadUrl : null,
-  }).then(() => {
-      alert('프로필 수정 완료');
-      location.reload();
+  })
+    .then((result) => {
+      console.log(result);
     })
     .catch((error) => {
-      alert('프로필 수정 실패');
       console.log('error:', error);
     });
 };
-
-
 
 export const onFileChange = (event) => {
   const theFile = event.target.files[0]; // file 객체
@@ -64,7 +60,6 @@ export const onFileChange = (event) => {
     document.getElementById('profileView').src = imgDataUrl;
   };
 };
-
 
 //로그아웃 기능. singout을 import 해왔어야 했다.
 export const logout = (event) => {
@@ -82,5 +77,40 @@ export const logout = (event) => {
     });
 };
 
+export const save_comment = async (event) => {
+  event.preventDefault();
+  const comment = document.getElementById('comment');
+  const { uid, photoURL, displayName } = authService.currentUser;
+  try {
+    await addDoc(collection(dbService, 'poster'), {
+      text: comment.value,
+      createdAt: Date.now(),
+      creatorId: uid,
+      profileImg: photoURL,
+      nickname: displayName,
+    });
+    alert('프로필 등록 완료');
+    location.reload();
+    comment.value = '';
+    getCommentList();
+  } catch (error) {
+    alert('프로필 등록 실패');
+    console.log('error in addDoc:', error);
+  }
+};
 
-
+export const getCommentList = async () => {
+  let cmtObjList = [];
+  const q = query(
+    collection(dbService, 'poster'),
+    orderBy('createdAt', 'desc')
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const commentObj = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    cmtObjList.push(commentObj);
+  });
+};
