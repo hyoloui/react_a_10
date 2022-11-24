@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="https://kit.fontawesome.com/61b9064e71.js" crossorigin="anonymous"></script>
-    <title>부드라미조</title>
-  </head>
-  <body>
-    <div class="container">
-      <aside class="sidebar_container">
-        <!--검색창-->
-        <div class="search_category">
-          <input type="text" class="search_input" aria-label="Search"> <!--검색창 input-->
-          <i class="fa-solid fa-magnifying-glass"></i><!--검색아이콘-->
-        </div>
-        <!--카테고리-->
-        <div class="category_container">
-          <!-- mypick -->
-          <div class="category_mypick categorys">
-            <h4>My Pick<i class="fa-solid fa-angle-right"></i></h4>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/honggu.css" />
+  <script src="https://kit.fontawesome.com/61b9064e71.js" crossorigin="anonymous"></script>
+  <title>부드라미조.</title>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar_container">
+      <!--검색창-->
+      <div class="search_category">
+        <input type="text" class="search_input" aria-label="Search">
+        <!--검색창 input-->
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <!--검색아이콘-->
+      </div>
+      <!--카테고리-->
+      <div class="category_container">
+        <!-- mypick -->
+        <div class="category_mypick categorys">
+          <h4>My Pick<i class="fa-solid fa-angle-right"></i></h4>
 
 
-            <div class="mypick_content">
-              <div class="category_bookmark"><i class="fa-solid fa-star id='darkStar"></i></div>
-              <div class="category_name"><a href="#seunghyo">이승효</a></div>
-              
-              <div class="category_vote"><span>(139)</span></div>
-            </div>
+          <div class="mypick_content">
+            <div class="category_bookmark"><i class="fa-solid fa-star id='darkStar"></i></div>
+            <div class="category_name"><a href="#seunghyo">이승효</a></div>
 
-
-            <div class="mypick_content">
-              <div class="category_bookmark"><i class="fa-solid fa-star"></i></div>
-              <div class="category_name"><a href="#hongu">임홍구</a></div>
-              <div class="category_vote"><span>(139)</span></div>
-            </div>
-          
+            <div class="category_vote"><span>(139)</span></div>
           </div>
-          <!-- hot 셀럽 -->
-          <div class="category_celeb categorys">
-            <h4>Hot 셀럽<i class="fa-solid fa-angle-right"></i></h4>
-            <div class="mypick_content">
-              <div class="category_bookmark"><i class="fa-regular fa-star" onclick='changeStar()'></i></div>
-              <div class="category_name"><a href="#miyoung">김미영</a></div>
-              <div class="category_vote"><span>(139)</span></div>
-            </div>
-            <div class="mypick_content">
-              <div class="category_bookmark"><i class="fa-regular fa-star" id='lightStar'></i></div>
-              <div class="category_name"><a href="#dowon">김도원</a></div>
-              <div class="category_vote"><span>(139)</span></div>
-            </div>
-            <div class="mypick_content">
-              <div class="category_bookmark"><i class="fa-regular fa-star" id='lightStar'></i></div>
-              <div class="category_name"><a href="#changsun">강창순</a></div>
-              <div class="category_vote"><span>(139)</span></div>
-            </div>
+
+
+          <div class="mypick_content">
+            <div class="category_bookmark"><i class="fa-solid fa-star"></i></div>
+            <div class="category_name"><a href="#hongu">임홍구</a></div>
+            <div class="category_vote"><span>(139)</span></div>
+          </div>
+
+        </div>
+        <!-- hot 셀럽 -->
+        <div class="category_celeb categorys">
+          <h4>Hot 셀럽<i class="fa-solid fa-angle-right"></i></h4>
+          <div class="mypick_content">
+            <div class="category_bookmark"><i class="fa-regular fa-star" onclick='changeStar()'></i></div>
+            <div class="category_name"><a href="#miyoung">김미영</a></div>
+            <div class="category_vote"><span>(139)</span></div>
+          </div>
+          <div class="mypick_content">
+            <div class="category_bookmark"><i class="fa-regular fa-star" id='lightStar'></i></div>
+            <div class="category_name"><a href="#dowon">김도원</a></div>
+            <div class="category_vote"><span>(139)</span></div>
+          </div>
+          <div class="mypick_content">
+            <div class="category_bookmark"><i class="fa-regular fa-star" id='lightStar'></i></div>
+            <div class="category_name"><a href="#changsun">강창순</a></div>
+            <div class="category_vote"><span>(139)</span></div>
+          </div>
           <!-- 카테고리 요청 -->
           <div class="category_celeb categorys">
             <h4>카테고리 요청<i class="fa-solid fa-angle-right"></i></h4>
@@ -72,30 +77,35 @@
               <div class="category_request"><span>(심사중)</span></div>
             </div>
             <div class="mypick_content">
-            <span><i class="fas fa-plus"></i>&nbsp;카테고리 추가</span>
+              <span><i class="fas fa-plus"></i>&nbsp;카테고리 추가</span>
             </div>
-        </div>
-      </aside>
-      <!-- 오른쪽 메인-->
-      <section class="main_container">
-        <!--네브바-->
-        <nav class="nav_container">
-          <div class="nav_logo">
-            <a aria-label="href" href="/"><img src="https://ifh.cc/g/VggxwQ.png" alt=""></a>
           </div>
-          <div class="nav_profile">
-            <img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize" alt="">
-          </div>
-        </nav>
-
-        <!--최신순, 좋아요 / 글쓰기, 검색버튼 들어갈곳-->
-        <div id="main-page">
-          
+    </aside>
+    <!-- 오른쪽 메인-->
+    <section class="main_container">
+      <!--네브바-->
+      <nav class="nav_container">
+        <div class="nav_logo">
+          <a aria-label="href" href="/"><img src="https://ifh.cc/g/VggxwQ.png" alt=""></a>
         </div>
+        <div class="nav_profile">
+          <img
+            src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+            alt="">
+        </div>
+      </nav>
 
-      </section>
-    </div>
+      <!--최신순, 좋아요 / 글쓰기, 검색버튼 들어갈곳-->
+      <div id="main-page">
 
-    <script src="./js/main.js" type="module"></script> <!--import export 쓰면서 서로 다른 js파일들을 main.js에 연결할거라서 type=module 이라는것을 적용해야한다.-->
-  </body>
+      </div>
+
+    </section>
+  </div>
+
+
+  <script src="./js/main.js" type="module"></script>
+  <!--import export 쓰면서 서로 다른 js파일들을 main.js에 연결할거라서 type=module 이라는것을 적용해야한다.-->
+</body>
+
 </html>
