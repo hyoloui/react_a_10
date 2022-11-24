@@ -44,7 +44,7 @@ export const registerNow = async (event) => {
   const emailVal = email.value;
   const pw = document.getElementById("pw-new");
   const pwVal = pw.value;
-  const pwCheck = document.getElementById('pw-check');
+  const pwCheck = document.getElementById("pw-check");
   const pwCheckVal = pwCheck.value;
 
   // 유효성 검사 진행
@@ -76,70 +76,41 @@ export const registerNow = async (event) => {
   // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
 
   // 회원가입 버튼 클릭의 경우
-<<<<<<< HEAD
-  await createUserWithEmailAndPassword(authService, emailVal, pwVal)
-    .then(() => {
-      // Signed in
-      console.log("회원가입 성공!");
-      alert("축하합니다. 회원이 되셨습니다.");
-      console.log("displayName:", document.getElementById("name-new").value);
-      //회원가입 되면 자동으로 로그인처리를 해버림. 로그인처리가 되면 main.js화면의 window.location.replace('')가 먼저 읽혀서 79번줄에서 실행 되버림. 그래서 이 코드가 먹히지 않음.
-      // 닉네임을 받아서 추가시켜줌
-      updateProfile(authService.currentUser, {
-        displayName: document.getElementById("name-new").value,
-      }).then(function () {
-        window.location.replace("");
-      }); // then() => 성공을 하면.
-    })
-    .catch((error) => {
-      const errorMessage = error.message;
-      console.log("errorMessage:", errorMessage);
-      if (errorMessage.includes("email-already-in-use")) {
-        alert("이미 가입된 이메일입니다.");
-      }
-    });
-=======
   if (pwVal === pwCheckVal) {
     await createUserWithEmailAndPassword(authService, emailVal, pwVal)
       .then(() => {
         // Signed in
-        console.log('회원가입 성공!');
-        alert('축하합니다. 회원이 되셨습니다.');
+        console.log("회원가입 성공!");
+        alert("축하합니다. 회원이 되셨습니다.");
 
         // 닉네임을 받아서 추가시켜줌
         updateProfile(authService.currentUser, {
-          displayName: document.getElementById('name-new').value,
+          displayName: document.getElementById("name-new").value,
         }).then(function () {
-          window.location.replace('');
+          window.location.replace("");
         });
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log('errorMessage:', errorMessage);
-        if (errorMessage.includes('email-already-in-use')) {
-          alert('이미 가입된 이메일입니다.');
+        console.log("errorMessage:", errorMessage);
+        if (errorMessage.includes("email-already-in-use")) {
+          alert("이미 가입된 이메일입니다.");
         }
       });
   } else {
-    alert('비밀번호를 확인해주세요');
+    alert("비밀번호를 확인해주세요");
   }
->>>>>>> afcce814d9374b62b5831ac52cee1967b4651afc
 };
 
 // update pofile -> 닉네임 바꾸기
 // async
 
 // 로그인 함수
-<<<<<<< HEAD
-export const login = () => {
-  const email = document.getElementById("email");
-=======
 export const login = (event) => {
   event.preventDefault();
-  console.log('로그인을 눌렀어요');
+  console.log("로그인을 눌렀어요");
 
-  const email = document.getElementById('email');
->>>>>>> afcce814d9374b62b5831ac52cee1967b4651afc
+  const email = document.getElementById("email");
   const emailVal = email.value;
   const pw = document.getElementById("pw");
   const pwVal = pw.value;
@@ -178,10 +149,10 @@ export const login = (event) => {
 //구글 로그인 활성화
 export const socialLogin = (event) => {
   // 구조분해
-  const {id} = event.target;
+  const { id } = event.target;
   console.log(id);
   let provider;
-  if (id === 'loginGoogle') {
+  if (id === "loginGoogle") {
     provider = new GoogleAuthProvider();
   }
   signInWithPopup(authService, provider)
@@ -190,7 +161,7 @@ export const socialLogin = (event) => {
     })
     .catch((error) => {
       // Handle Errors here.
-      console.log('error:', error);
+      console.log("error:", error);
       const errorCode = error.code;
       const errorMessage = error.message;
     });
