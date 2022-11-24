@@ -244,3 +244,9 @@ a {
 .ml10 {
   margin-left: 10px;
 }
+
+#newsFeed {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

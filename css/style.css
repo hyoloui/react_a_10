@@ -150,6 +150,11 @@ h4 {
   margin-right: 5px;
 }
 
+.whatitname_right button:hover{
+  transition: all .6s;
+  background-color: #111;
+  color: #fff;
+}
 .whatitname_right button {
   padding: 6px 25px;
   background-color: white;
@@ -194,7 +199,10 @@ i {
   height: 300px;
   margin: 0 10px 10px 0;
 }
-
+.card_img img:hover{
+  transform: scale(1.1);
+  transition: all .6s;
+}
 .card_img img {
   width: 100%;
   height: 130px;
@@ -206,8 +214,13 @@ i {
   height: 75px;
 }
 
+.card_content:hover {
+  transition: all .6s;
+  background-color: #eee;
+}
 .card_content > h4,
 .card_content > p {
+  cursor: pointer;
   text-align: center;
   margin: 3px;
 }
