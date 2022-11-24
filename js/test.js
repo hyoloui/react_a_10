@@ -5,11 +5,10 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  // 깃헙 소셜로그인 GithubAuthProvider,
+  GithubAuthProvider,
   signOut,
   updateProfile,
 } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
-
 // 각 아이디 선언
 export function handleConst() {
   const loginBtn = document.getElementById('loginBtn');
@@ -17,7 +16,6 @@ export function handleConst() {
   const memberWrap = document.getElementById('memberWrap');
   const loginWrap = document.getElementById('loginWrap');
 }
-
 // 로그인 버튼 클릭 함수
 export function handleLogin() {
   loginBtn.classList.add('click');
@@ -25,7 +23,6 @@ export function handleLogin() {
   memberWrap.classList.add('display');
   loginWrap.classList.remove('display');
 }
-
 // 회원가입 버튼 클릭 함수
 export function handleJoin() {
   joinBtn.classList.add('click');
@@ -33,20 +30,15 @@ export function handleJoin() {
   loginWrap.classList.add('display');
   memberWrap.classList.remove('display');
 }
-
 // 팬픽 함께하기 누르면 발생하는 함수
 export const registerNow = async (event) => {
   event.preventDefault();
   // 이벤트라는 객체가 가지고있는 메소드
   // 앵커태그 등을 클릭하면 자동으로 새로고침시켜주는 것을 막아줌
-
   const email = document.getElementById('email-new');
   const emailVal = email.value;
   const pw = document.getElementById('pw-new');
   const pwVal = pw.value;
-  const pwCheck = document.getElementById('pw-check');
-  const pwCheckVal = pwCheck.value;
-
   // 유효성 검사 진행
   if (!emailVal) {
     alert('이메일을 입력해 주세요');
@@ -58,10 +50,8 @@ export const registerNow = async (event) => {
     pw.focus();
     return;
   }
-
   // const matchedEmail = emailVal.match(emailRegex);
   // const matchedPw = pwVal.match(pwRegex);
-
   // if (matchedEmail === null) {
   //   alert("이메일 형식에 맞게 입력해 주세요");
   //   email.focus();
@@ -72,49 +62,38 @@ export const registerNow = async (event) => {
   //   pw.focus();
   //   return;
   // }
-
   // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
-
   // 회원가입 버튼 클릭의 경우
-  if (pwVal === pwCheckVal) {
-    await createUserWithEmailAndPassword(authService, emailVal, pwVal)
-      .then(() => {
-        // Signed in
-        console.log('회원가입 성공!');
-        alert('축하합니다. 회원이 되셨습니다.');
-
-        // 닉네임을 받아서 추가시켜줌
-        updateProfile(authService.currentUser, {
-          displayName: document.getElementById('name-new').value,
-        }).then(function () {
-          window.location.replace('');
-        });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log('errorMessage:', errorMessage);
-        if (errorMessage.includes('email-already-in-use')) {
-          alert('이미 가입된 이메일입니다.');
-        }
-      });
-  } else {
-    alert('비밀번호를 확인해주세요');
-  }
+  await createUserWithEmailAndPassword(authService, emailVal, pwVal)
+    .then(() => {
+      // Signed in
+      console.log('회원가입 성공!');
+      alert('축하합니다. 회원이 되셨습니다.');
+      console.log('displayName:', document.getElementById('name-new').value);
+      //회원가입 되면 자동으로 로그인처리를 해버림. 로그인처리가 되면 main.js화면의 window.location.replace('')가 먼저 읽혀서 79번줄에서 실행 되버림. 그래서 이 코드가 먹히지 않음.
+      // 닉네임을 받아서 추가시켜줌
+      updateProfile(authService.currentUser, {
+        displayName: document.getElementById('name-new').value,
+      }).then(function () {
+        window.location.replace('');
+      }); // then() => 성공을 하면.
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      console.log('errorMessage:', errorMessage);
+      if (errorMessage.includes('email-already-in-use')) {
+        alert('이미 가입된 이메일입니다.');
+      }
+    });
 };
-
 // update pofile -> 닉네임 바꾸기
 // async
-
 // 로그인 함수
-export const login = (event) => {
-  event.preventDefault();
-  console.log('로그인을 눌렀어요');
-
+export const login = () => {
   const email = document.getElementById('email');
   const emailVal = email.value;
   const pw = document.getElementById('pw');
   const pwVal = pw.value;
-
   // 유효성 검사 진행
   if (!emailVal) {
     alert('이메일을 입력해 주세요');
@@ -126,7 +105,6 @@ export const login = (event) => {
     pw.focus();
     return;
   }
-
   signInWithEmailAndPassword(authService, emailVal, pwVal)
     .then((userCredential) => {
       // Signed in
@@ -145,24 +123,20 @@ export const login = (event) => {
       }
     });
 };
-
-//구글 로그인 활성화
-export const socialLogin = (event) => {
-  // 구조분해
-  const {id} = event.target;
-  console.log(id);
-  let provider;
-  if (id === 'loginGoogle') {
-    provider = new GoogleAuthProvider();
-  }
-  signInWithPopup(authService, provider)
-    .then((result) => {
-      const user = result.user;
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      console.log('error:', error);
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-};
+// export const login = event;
+// signInWithEmailAndPassword(authService, emailVal, pwVal)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//     window.location.hash = '#fanLog';
+//   })
+//   .catch((error) => {
+//     const errorMessage = error.message;
+//     console.log('errorMessage:', errorMessage);
+//     if (errorMessage.includes('user-not-found')) {
+//       alert('가입되지 않은 회원입니다.');
+//       return;
+//     } else if (errorMessage.includes('wrong-password')) {
+//       alert('비밀번호가 잘못 되었습니다.');
+//     }
+//   });
