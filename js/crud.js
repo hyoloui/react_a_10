@@ -61,7 +61,7 @@ export async function getList(){
         console.log(doc.id)
     });
     const newsFeed = document.getElementById("newsFeed");
-    // newsFeed.innerHTML = ""; // 이부분 지우면 append가 안됨
+    newsFeed.innerHTML = ""; // 이부분 지우면 append가 안됨
     // const currentUid = authService.currentUser.uid;
 
     cmtObjList.forEach((fanPickList) => {
