@@ -1,5 +1,5 @@
-# react_a_10
-# S.A (팬PicK)
+# 🎈react_a_10 
+# S.A (팬PicK)📝
 
 # Project : 팬PicK
 
