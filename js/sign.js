@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  GithubAuthProvider,
+  // 깃헙 소셜로그인 GithubAuthProvider,
   signOut,
   updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
@@ -44,6 +44,8 @@ export const registerNow = async (event) => {
   const emailVal = email.value;
   const pw = document.getElementById("pw-new");
   const pwVal = pw.value;
+  const pwCheck = document.getElementById('pw-check');
+  const pwCheckVal = pwCheck.value;
 
   // 유효성 검사 진행
   if (!emailVal) {
@@ -74,6 +76,7 @@ export const registerNow = async (event) => {
   // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
 
   // 회원가입 버튼 클릭의 경우
+<<<<<<< HEAD
   await createUserWithEmailAndPassword(authService, emailVal, pwVal)
     .then(() => {
       // Signed in
@@ -95,14 +98,48 @@ export const registerNow = async (event) => {
         alert("이미 가입된 이메일입니다.");
       }
     });
+=======
+  if (pwVal === pwCheckVal) {
+    await createUserWithEmailAndPassword(authService, emailVal, pwVal)
+      .then(() => {
+        // Signed in
+        console.log('회원가입 성공!');
+        alert('축하합니다. 회원이 되셨습니다.');
+
+        // 닉네임을 받아서 추가시켜줌
+        updateProfile(authService.currentUser, {
+          displayName: document.getElementById('name-new').value,
+        }).then(function () {
+          window.location.replace('');
+        });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log('errorMessage:', errorMessage);
+        if (errorMessage.includes('email-already-in-use')) {
+          alert('이미 가입된 이메일입니다.');
+        }
+      });
+  } else {
+    alert('비밀번호를 확인해주세요');
+  }
+>>>>>>> afcce814d9374b62b5831ac52cee1967b4651afc
 };
 
 // update pofile -> 닉네임 바꾸기
 // async
 
 // 로그인 함수
+<<<<<<< HEAD
 export const login = () => {
   const email = document.getElementById("email");
+=======
+export const login = (event) => {
+  event.preventDefault();
+  console.log('로그인을 눌렀어요');
+
+  const email = document.getElementById('email');
+>>>>>>> afcce814d9374b62b5831ac52cee1967b4651afc
   const emailVal = email.value;
   const pw = document.getElementById("pw");
   const pwVal = pw.value;
@@ -138,20 +175,23 @@ export const login = () => {
     });
 };
 
-// export const login = event;
-// signInWithEmailAndPassword(authService, emailVal, pwVal)
-//   .then((userCredential) => {
-//     // Signed in
-//     const user = userCredential.user;
-//     window.location.hash = '#fanLog';
-//   })
-//   .catch((error) => {
-//     const errorMessage = error.message;
-//     console.log('errorMessage:', errorMessage);
-//     if (errorMessage.includes('user-not-found')) {
-//       alert('가입되지 않은 회원입니다.');
-//       return;
-//     } else if (errorMessage.includes('wrong-password')) {
-//       alert('비밀번호가 잘못 되었습니다.');
-//     }
-//   });
+//구글 로그인 활성화
+export const socialLogin = (event) => {
+  // 구조분해
+  const {id} = event.target;
+  console.log(id);
+  let provider;
+  if (id === 'loginGoogle') {
+    provider = new GoogleAuthProvider();
+  }
+  signInWithPopup(authService, provider)
+    .then((result) => {
+      const user = result.user;
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      console.log('error:', error);
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+};
