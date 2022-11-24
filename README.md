@@ -1,6 +1,7 @@
 # 🎈react_a_10 
 # S.A (팬PicK)📝
 
+
 # Project : 팬PicK
 
 - [x]  제목
@@ -9,6 +10,7 @@
 
 ### 22-11-18
 첫 번째 회의
+
 
 > 프로젝트 서비스 키워드 : 
 
@@ -26,6 +28,7 @@
 
 > 
 
+
 ### 제목
 
 > 프로젝트 네임 :
@@ -38,6 +41,7 @@
 🚩**팬Pick - fix**
 > 
 
+
 - 참조 레퍼런스
     
     [#팬픽 : 스타와 팬이 함께하는 공간](https://shopfanpick.com/)
@@ -47,9 +51,11 @@
     [velog](https://velog.io/)
     
 
+
 ### 와이어 프레임
 
 [10조 와이어프레임](https://xd.adobe.com/view/400da440-ac14-4f56-9d0c-c401c6708c34-155e/)
+
 
 ### 기능 분류
 
@@ -82,6 +88,7 @@
             - 참고
                 - [https://xo.dev/github-collaboration-guide/#코드-리뷰-하기](https://xo.dev/github-collaboration-guide/#%EC%BD%94%EB%93%9C-%EB%A6%AC%EB%B7%B0-%ED%95%98%EA%B8%B0)
 
+
 - 프로젝트 선택 기능 (우선순위)
     
     
@@ -100,6 +107,7 @@
         - 게시 글 마다 좋아요 기능 추가
         - 버튼 누르면 빨간색으로 변하여 좋아요 활성 상태 제공
     
+
 
 ## 프로젝트 일정
 
