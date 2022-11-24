@@ -19,23 +19,23 @@ import {
   updateProfile,
   signOut,
   updatePassword,
-} from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 export const changeProfile = async (event) => {
   event.preventDefault();
-  document.getElementById('profileBtn').disabled = true;
+  document.getElementById("profileBtn").disabled = true;
   const imgRef = ref(
     storageService,
     `${authService.currentUser.uid}/${uuidv4()}`
   );
 
-  const newNickname = document.getElementById('profileNickname').value;
+  const newNickname = document.getElementById("profileNickname").value;
   // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.
-  const imgDataUrl = localStorage.getItem('imgDataUrl');
+  const imgDataUrl = localStorage.getItem("imgDataUrl");
   let downloadUrl;
   if (imgDataUrl) {
-    const response = await uploadString(imgRef, imgDataUrl, 'data_url');
+    const response = await uploadString(imgRef, imgDataUrl, "data_url");
     downloadUrl = await getDownloadURL(response.ref);
   }
   await updateProfile(authService.currentUser, {
@@ -45,41 +45,40 @@ export const changeProfile = async (event) => {
     .then((result) => {
       console.log(result);
       console.log(authService.currentUser);
-      alert('저장완료');
+      alert("저장완료");
     })
     .catch((error) => {
-      console.log('error:', error);
+      console.log("error:", error);
     });
 
-  
   // 비밀번호 변경 기능 추가
   // const auth = getAuth(); authService = getAuth라서 다 불러올 필요 없음
-  const changePwCheck = document.getElementById('changePwCheck').value;
+  const changePwCheck = document.getElementById("changePwCheck").value;
 
   const user = authService.currentUser;
   const newPassword = changePwCheck;
 
   updatePassword(user, newPassword)
     .then(() => {
-      console.log('비밀번호 변경 완료');
+      console.log("비밀번호 변경 완료");
     })
     .catch((error) => {
       // An error ocurred
-      console.log('비밀번호 변경 실패');
+      console.log("비밀번호 변경 실패");
     });
-  
+
   // 파이어스토어에 인사말 저장
-  const hi = document.getElementById('hi');
+  const hi = document.getElementById("hi");
   try {
-    await addDoc(collection(dbService, 'hi'), {
+    await addDoc(collection(dbService, "hi"), {
       text: hi.value,
       id: authService.currentUser.uid,
     });
-    hi.value = '';
+    hi.value = "";
     getHiList();
     location.reload();
   } catch (error) {
-    console.log('error in addDoc:', error);
+    console.log("error in addDoc:", error);
   }
 };
 
@@ -106,6 +105,7 @@ export const logout = (event) => {
       // Sign-out successful.
       localStorage.clear();
       console.log("로그아웃 성공");
+      window.location.replace("");
     })
     .catch((error) => {
       // An error happened.

@@ -86,9 +86,14 @@ export const registerNow = async (event) => {
         // 닉네임을 받아서 추가시켜줌
         updateProfile(authService.currentUser, {
           displayName: document.getElementById("name-new").value,
-        }).then(function () {
-          window.location.replace("");
-        });
+        })
+          .then(function () {
+            window.location.replace("");
+            console.log("이거", authService.currentUser);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;

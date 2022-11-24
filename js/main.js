@@ -40,11 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
           menuDisplay.style.display = "none";
         }
       });
-
-      if (hash === "#changsun") {
-        // 해시값이 창순인지 확인(로그인화면), 만약 로그인화면이라면
-        window.location.replace(""); // home 화면으로 돌아가도록 함
-      }
     } else {
       // 유저라는 객체가 없다면 로그아웃 상태임.
       console.log("로그아웃상태");
@@ -68,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // 다른 영역 클릭 시 메뉴 없어짐
       document.addEventListener("click", function (event) {
         if (event.target != navProfileImg) {
-          console.log("다른영역");
           menuDisplayLogOut.style.display = "none";
         }
       });
