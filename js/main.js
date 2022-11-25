@@ -1,13 +1,14 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route, goToProfile } from "./router.js";
-import { 
+import {
   save_fanpick,
-  getList ,
+  getList,
   sendId,
-  modalOn ,
+  modalOn,
   modalOn2,
-  modalOff ,
-  modalOff2 ,
+  modalOff,
+  modalOff2,
+  delete_comment,
 } from "./crud.js";
 import { changeProfile, onFileChange, logout } from "./miyoung.js";
 import {
@@ -99,13 +100,14 @@ window.onsubmit = onsubmit;
 // window.save_comment = save_comment;
 // window.update_comment = update_comment;
 // window.onEditing = onEditing;
-// window.delete_comment = delete_comment;
+window.delete_comment = delete_comment;
 
 // CRUD
 window.save_fanpick = save_fanpick;
 window.getList = getList;
 window.sendId = sendId;
-// 모달창 
+
+// 모달창
 window.modalOn = modalOn;
 window.modalOn2 = modalOn2;
 window.modalOff = modalOff;
