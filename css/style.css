@@ -127,6 +127,7 @@ h4 {
   border-radius: 100px;
   margin: 3px 5px 0 0;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .whatitname_container {
@@ -150,8 +151,8 @@ h4 {
   margin-right: 5px;
 }
 
-.whatitname_right button:hover{
-  transition: all .6s;
+.whatitname_right button:hover {
+  transition: all 0.6s;
   background-color: #111;
   color: #fff;
 }
@@ -199,9 +200,9 @@ i {
   height: 300px;
   margin: 0 10px 10px 0;
 }
-.card_img img:hover{
+.card_img img:hover {
   transform: scale(1.1);
-  transition: all .6s;
+  transition: all 0.6s;
 }
 .card_img img {
   width: 100%;
@@ -212,10 +213,11 @@ i {
 .card_content {
   margin: 10px;
   height: 75px;
+  overflow: hidden;
 }
 
 .card_content:hover {
-  transition: all .6s;
+  transition: all 0.6s;
   background-color: #eee;
 }
 .card_content > h4,
@@ -223,6 +225,11 @@ i {
   cursor: pointer;
   text-align: center;
   margin: 3px;
+}
+
+.card_content > h4 {
+  overflow: hidden;
+  height: 27px;
 }
 
 .card_like {
@@ -254,4 +261,18 @@ i {
 .card_bottom span {
   font-size: 13px;
   color: gray;
+}
+
+.dp_none {
+  display: none;
+}
+
+span,
+i {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

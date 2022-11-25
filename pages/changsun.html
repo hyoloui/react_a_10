@@ -1,14 +1,86 @@
-<h1>강창순입니다</h1>
+<div class="wrap">
+  <div class="logWrap">
+    <div onclick="handleLogin()" id="loginBtn" class="loginBtn click">
+      로그인
+    </div>
+    <div onclick="handleJoin()" id="joinBtn" class="joinBtn">회원가입</div>
+  </div>
 
-<ul>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-    <li>강창순입니다</li>
-</ul>
+  <div class="loginWrap" id="loginWrap">
+    <form onsubmit="window.login(event)" class="loginWrap">
+      <div class="infoWrap">
+        <div>
+          <input
+            type="email"
+            class="info infoEmail"
+            placeholder="📧 | email"
+            id="email"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            class="info infoPassword"
+            placeholder="🔒 | password"
+            id="pw"
+          />
+        </div>
+      </div>
+
+      <div class="btnWrap">
+        <div><button type="submit" class="btn2" id="login">Login</button></div>
+        <div>
+          <button type="submit" class="btn2" id="###">Google Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="memberWrap display" id="memberWrap">
+    <form onsubmit="registerNow(event)" class="joinWrap">
+      <div>
+        <input
+          type="email"
+          class="join joinEmail"
+          placeholder="📧 | 아이디(이메일 형식)"
+          id="email-new"
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          class="join joinPassword"
+          placeholder="🔒 | 비밀번호"
+          id="pw-new"
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          class="join joinPasswordCheck"
+          placeholder="🔑 | 비밀번호 확인"
+          id="pw-check"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          class="join joinName"
+          placeholder="👤 | 닉네임"
+          id="name-new"
+        />
+      </div>
+
+      <div class="btnWrap">
+        <div>
+          <input
+            type="submit"
+            class="btn2"
+            id="registerOO"
+            value="팬픽 함께하기"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<!--미영 작업-->
+
+<div class="myPage-container">
+  <form id="profileForm" onsubmit="changeProfile(event)">
+    <!-- 이미지영역 -->
+    <div class="myPage-img">
+      <label id="imgLabel" for="imgInput">
+        <img src="../assets/mypageimg.png" id="profileView" />
+        <input
+          onchange="onFileChange(event)"
+          id="imgInput"
+          type="file"
+          accept="images/*"
+        />
+      </label>
+    </div>
+
+    <!-- 프로필영역 -->
+    <div class="myPage-profiles">
+      <div>
+        <ul>
+          <div class="flex">
+            <li>닉네임</li>
+            <input
+              type="text"
+              style="width: 170px; margin-right: 179px"
+              id="profileNickname"
+            />
+          </div>
+
+          <div class="flex">
+            <li>이메일</li>
+            <input type="text" id="profileEmail" disabled />
+          </div>
+
+          <div class="flex">
+            <li style="color: red">비밀번호 변경</li>
+            <input type="password" id="changePw" />
+          </div>
+
+          <div class="flex">
+            <li style="color: red">비밀번호 확인</li>
+            <span id="errorChangePw"></span>
+            <input type="password" id="changePwCheck" />
+          </div>
+
+          <div class="flex">
+            <li>인사말</li>
+            <textarea id="hi"></textarea>
+          </div>
+
+          <div class="flex">
+            <li>My Pick</li>
+            <div class="flex-greet">
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+              <a href="#miyoung" style="color: white" );>김미영</a>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <!--비번 에러 메세지 뜨는곳.-->
+    <div class="err_msg_div">
+      <p id="err_msg"></p>
+    </div>
+
+    <div class="myPage-save">
+      <input id="profileBtn" type="submit" value="저장하기" />
+    </div>
+  </form>
+</div>
