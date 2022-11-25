@@ -10,7 +10,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { dbService, authService } from "./firebase.js"
 
+// 로그인 사용자 가져오기
+// import {
+//     getAuth,
+//   } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+
 // const dbService = getStorage(app); // app은 Firebase 프로젝트 연결 객체
+const no_img = "../assets/mypageimg.png";
 
 // Create API
 // comments 라는 이름의 collection에 객체 형태의 Document를 신규 등록
@@ -18,15 +24,15 @@ export const save_fanpick = async (event) => {
     event.preventDefault();
     const title = document.querySelector(".title2");
     const content = document.querySelector(".content2");
-    // const { uid, photoURL, displayName } = authService.currentUser;
+    const { uid, photoURL, displayName } = authService.currentUser;
     try {
       await addDoc(collection(dbService, "fan-pick"), {
+        creatorId: uid,
+        프로필이미지: photoURL,
+        작성자: displayName,
         제목: title.value,
         내용: content.value,
         시간: Date.now(),
-        // creatorId: uid,
-        // profileImg: photoURL,
-        // nickname: displayName,
       });
       title.value = "";
       content.value = "";
@@ -43,11 +49,11 @@ export const save_fanpick = async (event) => {
 // id 받아적기
 let selectId = "";
 export async function getList(){
-    const cmtObjList = [];
+    const cardList = [];
     // query 를 db에서 받아와 q로 선언
     const q = query(
         collection(dbService, "fan-pick"),
-        // orderBy("제목", "desc")
+        orderBy("시간", "desc")
     );
     // query 조건에 맞는 documents 데이터를 배열로 받아오기
     const querySnapshot = await getDocs(q);
@@ -57,14 +63,14 @@ export async function getList(){
             id: doc.id,
             ...doc.data(),
         };
-        cmtObjList.push(fanPickList);
-        console.log(doc.id)
+        cardList.push(fanPickList);
     });
     const newsFeed = document.getElementById("newsFeed");
     newsFeed.innerHTML = ""; // 이부분 지우면 append가 안됨
     // const currentUid = authService.currentUser.uid;
+    // document.querySelector(".card_profile > img").src = no_img;
 
-    cmtObjList.forEach((fanPickList) => {
+    cardList.forEach((fanPickList) => {
         // const isOwner = currentUid === cmtObj.creatorId;
         const temp_html = `<div class="content_card_container" id="${fanPickList.id}" onclick="sendId(this.id)">
         <!--카드이미지-->
@@ -82,12 +88,11 @@ export async function getList(){
             </div>
             <div class="card_bottom">
                 <div class="card_profile">
-                    <img src=""
-                        alt="profileImg" />
+                <img src="${fanPickList.프로필이미지 ?? no_img} " alt="기본이미지">
                 </div>
-                <div class="card_name"><span> </span></div>
+                <div class="card_name"><span>${fanPickList.작성자}</span></div>
                 <div class="card_date"><span>
-                ${Date(fanPickList.작성시간)
+                ${Date(fanPickList.시간)
                     .toString()
                     .slice(0, 25)}</span></div>
             </div>
@@ -99,10 +104,8 @@ export async function getList(){
         div.innerHTML = temp_html;
 
         newsFeed.appendChild(div);
-        console.log(cmtObjList)
-        console.log(newsFeed)
+        console.log(cardList)
     });
-
 }
 
 // 특정 버튼을 누르면 모달창이 켜지게 하기
@@ -120,17 +123,23 @@ export async function modalOn() {
             };
             card.push(commentObj);
         }
+        console.log(card)
     });
-    console.log(card)
-
+    
     const feedModal = document.getElementById("modal_area");
-    const openModal = 
+    const currentUid = authService.currentUser.uid;
+
+    card.forEach((modalCard) => {
+        const isOwner = currentUid === modalCard.creatorId;
+        console.log(currentUid)
+        const openModal = 
         `<div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="headline1">
                 <div class="profile_wrap">
-                <div class="profile_img_box"></div>
-                <div class="profile_name">작성자</div>
+                <div class="profile_img_box"><img src="${modalCard.프로필이미지 ?? no_img}"
+                alt="profileImg" /></div>
+                <div class="profile_name">${modalCard.작성자 ?? "익명"}</div>
                 </div>
                 <button id="close-area" class="close-area" onclick="modalOff()">
                 <i class="fa-regular fa-x xBtn"></i>
@@ -138,12 +147,12 @@ export async function modalOn() {
             </div>
 
         <div class="headline2">
-            <p class="title">${card[0].제목}</p>
+            <p class="title">${modalCard.제목}</p>
         </div>
 
         <div class="headline3">
-            <button class="btn">수정</button>
-            <button class="btn ml10">삭제</button>
+            <button style="${isOwner ? "display:inline-block;" : "display:none" }" class="btn">수정</button>
+            <button style="${isOwner ? "display:inline-block;" : "display:none" }" class="btn ml10">삭제</button>
         </div>
 
         <div class="contents_area">
@@ -153,7 +162,7 @@ export async function modalOn() {
                 alt=""
             />
             </div>
-            <p class="content">${card[0].내용}</p>
+            <p class="content">${modalCard.내용}</p>
         </div>
 
         <div class="comments_area">
@@ -183,6 +192,7 @@ export async function modalOn() {
     div.classList.add("modal_inner");
     div.innerHTML = openModal;
     feedModal.appendChild(div);
+    });
 }
 
 // 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
@@ -256,3 +266,13 @@ export function modalOff2(){
 // deleteDoc(doc(dbService, "comments", id));
 
 
+// 현재 로그인 사용자 받아오기 > 로그인 했으면 해당 아이디와 동일한 게시글만 수정, 삭제 가능하도록
+// const auth = getAuth();
+//     const user = auth.currentUser;
+//     if (user !== null) {
+//     // The user object has basic properties such as display name, email, etc.
+//     const displayName = user;
+//     const email = user.email;
+//     const photoURL = user.photoURL;
+//     console.log(displayName,email,photoURL,)
+// }
