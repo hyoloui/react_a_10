@@ -1,6 +1,7 @@
-import {authService} from './firebase.js';
+import { authService } from './firebase.js';
 
-import { getList } from "./crud.js"
+import { getList } from './crud.js';
+import { getHiList } from './miyoung.js';
 
 export const route = (event) => {
   event.preventDefault();
@@ -36,7 +37,7 @@ export const handleLocation = async () => {
   const html = await fetch(route).then((data) => data.text());
   document.getElementById('main-page').innerHTML = html;
   // home 으로
-  if (path === "/"){
+  if (path === '/') {
     getList();
   }
 
@@ -45,7 +46,6 @@ export const handleLocation = async () => {
   //   // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
   //   // document.getElementById('nickname').textContent =
   //   //   authService.currentUser.displayName ?? '닉네임 없음';
-    
 
   //   getCommentList();
   // }
@@ -55,7 +55,7 @@ export const handleLocation = async () => {
     console.log('mypageauthService.currentUser:', authService.currentUser);
     document.getElementById('profileView').src =
       authService.currentUser?.photoURL ?? '../assets/mypageimg.png';
-    // authService = 어센티케이션 / 즉, 위 코드는 
+    // authService = 어센티케이션 / 즉, 위 코드는
     // 어센티케이션의 커렌트유저의 포토유알엘이 있으면 그걸 쓰고, 없으면 오른쪽 이미지를 써라. 라는 뜻임
     document.getElementById('profileNickname').placeholder =
       authService.currentUser?.displayName ?? '닉네임 없음';
@@ -65,13 +65,14 @@ export const handleLocation = async () => {
     // 브라우저 엔진,자바스크립트 엔진이 먼저 읽기 때문(비동기 실행되기 전)
     // 처음에는 authservice가 없고 불러오고나서 실행됨, 서버에서 불러오기 전에는 null값이라는거임.
     // ?를 붙혀주면 null일때 신경쓰지 말라는 뜻임.(데이터가 잇을때만 신경써라)
+
+    getHiList(); // mypage 의 인사말
   }
 };
 
 export const goToProfile = () => {
   window.location.hash = '#profile';
 };
-
 
 // hash url 변경 시 처리
 window.addEventListener('hashchange', handleLocation);

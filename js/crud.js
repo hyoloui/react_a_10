@@ -8,15 +8,44 @@ import {
   query,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-import { dbService, authService } from "./firebase.js";
-
-// 로그인 사용자 가져오기
-// import {
-//     getAuth,
-//   } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+import { dbService, authService, storageService } from "./firebase.js";
+import {
+  ref,
+  getDownloadURL,
+  uploadString,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 // const dbService = getStorage(app); // app은 Firebase 프로젝트 연결 객체
 const no_img = "../assets/mypageimg.png";
+export const save_img = async () => {
+  const imgRef = ref(
+    storageService,
+    `images/${authService.currentUser.uid}/${uuidv4()}`
+  );
+  const imgDataUrl2 = localStorage.getItem("imgDataUrl2");
+  console.log("imgdataurl2:", imgDataUrl2);
+  let downloadUrl;
+  if (imgDataUrl2) {
+    const response = await uploadString(imgRef, imgDataUrl2, "data_url");
+    console.log("response :", response);
+    downloadUrl = await getDownloadURL(response.ref);
+    console.log("다운로드URL in save_img:", downloadUrl);
+  }
+  return downloadUrl;
+};
+
+export const uploadImage = (event) => {
+  console.log(event.target.files);
+  const theFile = event.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(theFile);
+  reader.onloadend = (finishedEvent) => {
+    const imgDataUrl2 = finishedEvent.currentTarget.result;
+    console.log("이미지데이터URL2 in uploadImage :", imgDataUrl2);
+    localStorage.setItem("imgDataUrl2", imgDataUrl2);
+  };
+};
 
 // Create API
 // comments 라는 이름의 collection에 객체 형태의 Document를 신규 등록
@@ -24,7 +53,9 @@ export const save_fanpick = async (event) => {
   event.preventDefault();
   const title = document.querySelector(".title2");
   const content = document.querySelector(".content2");
-  const { uid, photoURL, displayName } = authService.currentUser;
+  let modalImage = await save_img();
+
+  // const { uid, photoURL, displayName } = authService.currentUser;
   try {
     await addDoc(collection(dbService, "fan-pick"), {
       creatorId: uid,
@@ -33,6 +64,7 @@ export const save_fanpick = async (event) => {
       제목: title.value,
       내용: content.value,
       시간: Date.now(),
+      이미지: modalImage,
     });
     title.value = "";
     content.value = "";
@@ -73,7 +105,7 @@ export async function getList() {
     }" onclick="sendId(this.id)">
         <!--카드이미지-->
         <div class="card_img">
-            <img onclick="modalOn()" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+            <img onclick="modalOn()" src="${fanPickList.이미지}"
                 alt="" />
             <!--글제목,내용 간단히-->
             <div class="card_content">
@@ -163,7 +195,7 @@ export async function modalOn() {
         <div class="contents_area">
             <div class="content_pic">
             <img
-                src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+                src="${card[0].이미지}"
                 alt=""
             />
             </div>
@@ -194,11 +226,11 @@ export async function modalOn() {
         </div>
     </div>`;
 
-    const div = document.createElement("div");
-    div.classList.add("modal_inner");
-    div.innerHTML = openModal;
-    feedModal.appendChild(div);
-  });
+  const div = document.createElement("div");
+  div.classList.add("modal_inner");
+  div.innerHTML = openModal;
+  feedModal.appendChild(div);
+});
 }
 
 // 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기

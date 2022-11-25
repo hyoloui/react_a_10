@@ -1,4 +1,3 @@
-
 .myPage-container {
   display: flex;
   flex-direction: column;
@@ -85,7 +84,7 @@
   font-weight: 700;
 }
 
-.profile-menu-login, 
+.profile-menu-login,
 .profile-menu-logout {
   width: 130px;
   font-size: 20px;
@@ -129,4 +128,11 @@
 .menu_display-logout {
   display: none;
   position: relative;
+}
+
+.err_msg_div {
+  width: 500px;
+  height: 20px;
+  text-align: right;
+  color: red;
 }

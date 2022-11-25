@@ -8,8 +8,10 @@ import {
   modalOn2,
   modalOff,
   modalOff2,
+  save_img,
+  uploadImage,
   delete_comment,
-} from "./crud.js";
+} from './crud.js';
 import { changeProfile, onFileChange, logout } from "./miyoung.js";
 import {
   handleLogin,
@@ -17,13 +19,13 @@ import {
   handleConst,
   registerNow,
   login,
-} from "./sign.js";
+} from './sign.js';
 
 // hash url 변경 시 처리
-window.addEventListener("hashchange", handleLocation);
+window.addEventListener('hashchange', handleLocation);
 
 // 첫 랜딩 또는 새로고침 시 처리
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // DOMContentLoaded -> html,css,js파일을 다 다운로드 받았으면
 
   authService.onAuthStateChanged((user) => {
@@ -35,45 +37,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (user) {
       // 유저라는 객체가 확인이 되면
-      console.log("로그인상태");
-      const topProfile = document.querySelector("#nav_profile");
-      const menuDisplay = document.querySelector("#menu_display");
-      const navProfileImg = document.querySelector("#nav_profile_img");
-      topProfile.addEventListener("click", function () {
-        menuDisplay.style.display = "block";
+      console.log('로그인상태');
+      const topProfile = document.querySelector('#nav_profile');
+      const menuDisplay = document.querySelector('#menu_display');
+      const navProfileImg = document.querySelector('#nav_profile_img');
+      topProfile.addEventListener('click', function () {
+        menuDisplay.style.display = 'block';
       });
-      document.getElementById("nav_profile_img").src =
-        authService.currentUser.photoURL ?? "../assets/mypageimg.png";
+      document.getElementById('nav_profile_img').src =
+        authService.currentUser.photoURL ?? '../assets/mypageimg.png';
       // 다른 영역 클릭 시 메뉴 없어짐
-      document.addEventListener("click", function (event) {
+      document.addEventListener('click', function (event) {
         if (event.target != navProfileImg) {
-          menuDisplay.style.display = "none";
+          menuDisplay.style.display = 'none';
         }
       });
     } else {
       // 유저라는 객체가 없다면 로그아웃 상태임.
-      console.log("로그아웃상태");
-      document.getElementById("nav_profile_img").src =
-        "../assets/mypageimg.png";
-      if (hash == "#mypage") {
+      console.log('로그아웃상태');
+      document.getElementById('nav_profile_img').src =
+        '../assets/mypageimg.png';
+      if (hash == '#mypage') {
         // 로그아웃 상태에서 로그인화면이 아니라면
-        window.location.replace("/"); // 로그인 화면으로 강제 이동
+        window.location.replace('/'); // 로그인 화면으로 강제 이동
       }
-      const topProfile = document.querySelector("#nav_profile");
-      const menuDisplay = document.querySelector("#menu_display");
-      const navProfileImg = document.querySelector("#nav_profile_img");
-      const logoutMenu = document.getElementById("profile-menu-logout");
-      const menuDisplayLogOut = document.getElementById("menu_display-logout");
-      menuDisplay.style.display = "none";
-      topProfile.addEventListener("click", function () {
-        console.log("menuDisplayLogOut", menuDisplayLogOut);
-        menuDisplayLogOut.style.display = "block";
+      const topProfile = document.querySelector('#nav_profile');
+      const menuDisplay = document.querySelector('#menu_display');
+      const navProfileImg = document.querySelector('#nav_profile_img');
+      const logoutMenu = document.getElementById('profile-menu-logout');
+      const menuDisplayLogOut = document.getElementById('menu_display-logout');
+      menuDisplay.style.display = 'none';
+      topProfile.addEventListener('click', function () {
+        console.log('menuDisplayLogOut', menuDisplayLogOut);
+        menuDisplayLogOut.style.display = 'block';
       });
 
       // 다른 영역 클릭 시 메뉴 없어짐
-      document.addEventListener("click", function (event) {
+      document.addEventListener('click', function (event) {
         if (event.target != navProfileImg) {
-          menuDisplayLogOut.style.display = "none";
+          menuDisplayLogOut.style.display = 'none';
         }
       });
     }
@@ -106,8 +108,7 @@ window.delete_comment = delete_comment;
 window.save_fanpick = save_fanpick;
 window.getList = getList;
 window.sendId = sendId;
-
-// 모달창
+// 모달창 
 window.modalOn = modalOn;
 window.modalOn2 = modalOn2;
 window.modalOff = modalOff;
@@ -123,3 +124,6 @@ window.handleJoin = handleJoin;
 window.handleConst = handleConst;
 window.registerNow = registerNow;
 window.login = login;
+window.save_img = save_img;
+window.uploadImage = uploadImage;
+window.getHiList = getHiList;
