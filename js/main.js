@@ -12,7 +12,7 @@ import {
   uploadImage,
   delete_comment,
 } from './crud.js';
-import { changeProfile, onFileChange, logout } from "./miyoung.js";
+import { changeProfile, onFileChange, logout , getHiList } from "./miyoung.js";
 import {
   handleLogin,
   handleJoin,
