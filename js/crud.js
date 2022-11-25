@@ -247,6 +247,7 @@ export const delete_comment = async (event) => {
     try {
       await deleteDoc(doc(dbService, "fan-pick", id));
       getList();
+      modalOff();
       //   cardList();
     } catch (error) {
       alert(error);
