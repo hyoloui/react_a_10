@@ -1,13 +1,15 @@
 import { authService } from "./firebase.js";
 import { handleLocation, route, goToProfile } from "./router.js";
-import { 
+import {
   save_fanpick,
-  getList ,
+  getList,
   sendId,
-  modalOn ,
+  modalOn,
   modalOn2,
-  modalOff ,
-  modalOff2 ,
+  modalOff,
+  modalOff2,
+  save_img,
+  uploadImage,
 } from "./crud.js";
 import { changeProfile, onFileChange, logout } from "./miyoung.js";
 import {
@@ -105,7 +107,7 @@ window.onsubmit = onsubmit;
 window.save_fanpick = save_fanpick;
 window.getList = getList;
 window.sendId = sendId;
-// 모달창 
+// 모달창
 window.modalOn = modalOn;
 window.modalOn2 = modalOn2;
 window.modalOff = modalOff;
@@ -121,3 +123,5 @@ window.handleJoin = handleJoin;
 window.handleConst = handleConst;
 window.registerNow = registerNow;
 window.login = login;
+window.save_img = save_img;
+window.uploadImage = uploadImage;

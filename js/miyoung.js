@@ -24,6 +24,13 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 export const changeProfile = async (event) => {
   event.preventDefault();
+  const changePw = document.getElementById("changePw").value;
+  const changePwCheck = document.getElementById("changePwCheck").value;
+  const errMsg = document.getElementById("err_msg");
+  if (changePw !== changePwCheck) {
+    errMsg.innerText = "변경할 비밀번호가 일치하지 않습니다.";
+    return;
+  }
   document.getElementById("profileBtn").disabled = true;
   const imgRef = ref(
     storageService,
@@ -53,7 +60,6 @@ export const changeProfile = async (event) => {
 
   // 비밀번호 변경 기능 추가
   // const auth = getAuth(); authService = getAuth라서 다 불러올 필요 없음
-  const changePwCheck = document.getElementById("changePwCheck").value;
 
   const user = authService.currentUser;
   const newPassword = changePwCheck;
@@ -136,4 +142,4 @@ export const getHiList = async () => {
   });
 };
 // 쿼리는 주문서
-// 어떤식으로 데이터를 달라고 할지?? (내림차순? 아이디 일치?)1
+// 어떤식으로 데이터를 달라고 할지?? (내림차순? 아이디 일치?)
