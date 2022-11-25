@@ -55,7 +55,7 @@ export const save_fanpick = async (event) => {
   const content = document.querySelector(".content2");
   let modalImage = await save_img();
 
-  // const { uid, photoURL, displayName } = authService.currentUser;
+  const { uid, photoURL, displayName } = authService.currentUser;
   try {
     await addDoc(collection(dbService, "fan-pick"), {
       creatorId: uid,
