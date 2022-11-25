@@ -8,6 +8,7 @@ import {
   modalOn2,
   modalOff,
   modalOff2,
+  delete_comment,
 } from "./crud.js";
 import {
   changeProfile,
@@ -105,7 +106,7 @@ window.onsubmit = onsubmit;
 // window.save_comment = save_comment;
 // window.update_comment = update_comment;
 // window.onEditing = onEditing;
-// window.delete_comment = delete_comment;
+window.delete_comment = delete_comment;
 
 // CRUD
 window.save_fanpick = save_fanpick;

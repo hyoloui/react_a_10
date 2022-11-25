@@ -155,7 +155,9 @@ export async function modalOn() {
             }" class="btn">수정</button>
             <button style="${
               isOwner ? "display:inline-block;" : "display:none"
-            }" class="btn ml10">삭제</button>
+            }" class="btn ml10" id="${
+      modalCard.id
+    }" onclick="delete_comment(event)">삭제</button>
         </div>
 
         <div class="contents_area">
@@ -179,6 +181,7 @@ export async function modalOn() {
                 <div class="comments_btn_wrap">
                     <button class="btn">수정</button>
                     <button class="btn ml10">삭제</button>
+
                 </div>
                 <div class="comments_content2">댓글내용</div>
                 <div class="comments_profile_wrap">
@@ -232,7 +235,25 @@ export function modalOff2() {
 
 // // Delete API
 // // comments collection 내에서 해당 id값을 가진 doc을 찾아서 삭제
-// deleteDoc(doc(dbService, "comments", id));
+
+export const delete_comment = async (event) => {
+  event.preventDefault();
+  //   const uid = authService.currentUser.uid;
+  // 이벤트가 발생한 타겟을 반환해줌
+  const id = event.target.id;
+  console.log("hello", event.target.id);
+  const ok = window.confirm("해당 글을 정말 삭제하시겠습니까?");
+  if (ok) {
+    try {
+      await deleteDoc(doc(dbService, "fan-pick", id));
+      getList();
+      modalOff();
+      //   cardList();
+    } catch (error) {
+      alert(error);
+    }
+  }
+};
 
 // 현재 로그인 사용자 받아오기 > 로그인 했으면 해당 아이디와 동일한 게시글만 수정, 삭제 가능하도록
 // const auth = getAuth();
