@@ -127,19 +127,20 @@ export const getHiList = async () => {
 
   let recentHiText = '';
 
-  querySnapshot.forEach((doc, index) => {
-    const { id, text } = doc.data();
-    if (currentUserId === id) recentHiText = text;
-  const q = query(collection(dbService, "hi"), orderBy("createdAt", "asc"));
-  const querySnapshot = await getDocs(q);
-  let recentHiText = "";
+  // querySnapshot.forEach((doc, index) => {
+  //   const { id, text } = doc.data();
+  //   if (currentUserId === id) recentHiText = text;
+  // const q = query(collection(dbService, "hi"), orderBy("createdAt", "asc"));
+  // const querySnapshot = await getDocs(q);
+  // let recentHiText = "";
   querySnapshot.forEach((doc, index) => {
     const { id, text } = doc.data();
     if (currentUserId === id) recentHiText = text;
   });
   const textAreaHi = document.querySelector("#hi");
   textAreaHi.value = recentHiText;
-});
+};
+
 // getHist를 비동기 형식으로 진행하기 위해 async를 사용한다
 // await 비동기 방식으로 authService.currentUser.uid로 선정하여 진행한다.
 //[async와 await는 자바스크립트의 비동기 처리 패턴 중 가장 최근에 나온 문법]
@@ -177,7 +178,7 @@ export const myPost = async (event) => {
   // let uid = await getDocs(q.uid);
   // console.log("uid !:", uid);
 
-  let recentHiText = '';
+  // let recentHiText = '';
 
   // doc.id는 DB가 자체적으로 생성하는 값으로, id도 함께 포함시키기 위해 객체 재구성
   querySnapshot.forEach((doc) => {
@@ -201,7 +202,7 @@ export const myPost = async (event) => {
     }" onclick="sendId(this.id)">
         <!--카드이미지-->
         <div class="card_img">
-            <img onclick="modalOn()" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+            <img onclick="modalOn()" src="${fanPickList.이미지}"
                 alt="" />
             <!--글제목,내용 간단히-->
             <div class="card_content">
