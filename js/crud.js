@@ -296,4 +296,4 @@ export const delete_comment = async (event) => {
 //     const email = user.email;
 //     const photoURL = user.photoURL;
 //     console.log(displayName,email,photoURL,)
-//
+// }

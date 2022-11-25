@@ -11,8 +11,14 @@ import {
   save_img,
   uploadImage,
   delete_comment,
-} from './crud.js';
-import { changeProfile, onFileChange, logout , getHiList } from "./miyoung.js";
+} from "./crud.js";
+import {
+  changeProfile,
+  onFileChange,
+  logout,
+  getHiList,
+  myPost,
+} from "./miyoung.js";
 import {
   handleLogin,
   handleJoin,
@@ -108,7 +114,7 @@ window.delete_comment = delete_comment;
 window.save_fanpick = save_fanpick;
 window.getList = getList;
 window.sendId = sendId;
-// 모달창 
+// 모달창
 window.modalOn = modalOn;
 window.modalOn2 = modalOn2;
 window.modalOff = modalOff;
@@ -127,3 +133,5 @@ window.login = login;
 window.save_img = save_img;
 window.uploadImage = uploadImage;
 window.getHiList = getHiList;
+window.getHiList = getHiList;
+window.myPost = myPost;
