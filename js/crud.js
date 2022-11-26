@@ -68,7 +68,7 @@ export const save_fanpick = async (event) => {
     });
     title.value = '';
     content.value = '';
-    photoURL.value = '';
+    modalImage = '';
     getList();
     modalOff2();
   } catch (error) {

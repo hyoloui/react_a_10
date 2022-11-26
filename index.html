@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  
   <div class="container">
     
       <!-- 오른쪽 메인-->
@@ -25,9 +26,9 @@
           </div>
           <div class="nav_profile" id='nav_profile'>
             <img src="./assets/mypageimg.png" alt="" id='nav_profile_img'>
-
             <div class='menu_display' id='menu_display'>
               <div class="profile-menu-login" id='profile-menu-login'>
+                <p class='colors_mode' onclick='darkMode()'>다크모드</p>
                 <a href="#mypage">마이페이지</a>
                 <a href="#mywriting" onclick="myPost(event)">내 글 보기</a>
                 <a href="" onclick='logout(event)'>로그아웃</a>
@@ -35,6 +36,7 @@
             </div>
             <div class='menu_display-logout' id='menu_display-logout'>
               <div class="profile-menu-logout" id='profile-menu-logout'>
+                <p class='colors_mode' onclick='darkMode()'>다크모드</p>
                 <a href="#changsun">로그인</a>
               </div>
             </div>

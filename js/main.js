@@ -1,6 +1,6 @@
 // index.html에서 이 자바스크립트 파일을 불러옴
 // 다른 자바스크립트 파일에서 이 함수들을 임포트 해서 가져옴
-
+import { darkMode } from "./darkmode.js";
 import { authService } from "./firebase.js";
 import { handleLocation, route, goToProfile } from "./router.js";
 import {
@@ -48,24 +48,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (user) {
       // 유저라는 객체가 확인이 되면
+      // 상단 오른쪽 프로필메뉴 hover기능 만들었어요.
       console.log('로그인상태');
       const topProfile = document.querySelector('#nav_profile');
       const menuDisplay = document.querySelector('#menu_display');
       const navProfileImg = document.querySelector('#nav_profile_img');
       const profileMenuLogin = document.querySelector('#profile-menu-login');
-
+      const menuDisplayLogOut = document.getElementById('menu_display-logout');
+      menuDisplayLogOut.style.display = 'none !important;';
       document.getElementById('nav_profile_img').src =
         authService.currentUser.photoURL ?? '../assets/mypageimg.png';
-      // 다른 영역 클릭 시 메뉴 없어짐
       topProfile.addEventListener('mouseenter', function (event) {
         menuDisplay.style.display = 'flex';
       });
       topProfile.addEventListener('mouseleave', function (event) {
         menuDisplay.style.display = 'none';
       });
-      profileMenuLogin.addEventListener('mouseenter', function (event) {
-        menuDisplay.style.display = 'block';
-      });
+
     } else {
       // 유저라는 객체가 없다면 로그아웃 상태임.
       console.log("로그아웃상태");
@@ -75,16 +74,25 @@ document.addEventListener("DOMContentLoaded", function () {
         // 로그아웃 상태에서 로그인화면이 아니라면
         window.location.replace("/"); // 로그인 화면으로 강제 이동
       }
+      // 로그아웃 상태에서 오른쪽 상단 프로필 hover하면 메뉴나오게 했어요.
       const topProfile = document.querySelector("#nav_profile");
       const menuDisplay = document.querySelector("#menu_display");
       const navProfileImg = document.querySelector("#nav_profile_img");
       const logoutMenu = document.getElementById("profile-menu-logout");
       const menuDisplayLogOut = document.getElementById("menu_display-logout");
       menuDisplay.style.display = "none";
-      topProfile.addEventListener("click", function () {
-        console.log("menuDisplayLogOut", menuDisplayLogOut);
-        menuDisplayLogOut.style.display = "block";
+      topProfile.addEventListener('mouseenter', function (event) {
+        menuDisplayLogOut.style.display = 'flex';
       });
+      topProfile.addEventListener('mouseleave', function (event) {
+        menuDisplayLogOut.style.display = 'none';
+      });
+
+
+      // topProfile.addEventListener("click", function () {
+      //   console.log("menuDisplayLogOut", menuDisplayLogOut);
+      //   menuDisplayLogOut.style.display = "block";
+      // });
 
       // 다른 영역 클릭 시 메뉴 없어짐
       document.addEventListener("click", function (event) {
@@ -96,8 +104,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const angleRight = document.querySelectorAll('.fa-angle-right');
-const angleDown = document.querySelectorAll('.fa-angle-down');
+
+
 
 // // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 // 모듈로 된 js 파일은 전역으로 쓸 수 없음. 지역적으로만 사용이 가능한데
@@ -146,3 +154,4 @@ window.uploadImage = uploadImage;
 window.getHiList = getHiList;
 window.getHiList = getHiList;
 window.myPost = myPost;
+window.darkMode = darkMode;

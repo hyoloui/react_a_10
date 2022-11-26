@@ -138,6 +138,7 @@ export const login = (event) => {
       console.log("로그인 성공! 로그인 정보", userCredential);
       const user = userCredential.user;
       window.location.hash = "";
+      location.reload(); // 로그인하면 프로필메뉴에 "로그인"이 자꾸 나와서 로그인 시 새로고침 한번 해줌-미영
     })
     .catch((error) => {
       const errorMessage = error.message;
