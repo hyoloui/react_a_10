@@ -11,6 +11,7 @@
   height: 250px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .myPage-img {

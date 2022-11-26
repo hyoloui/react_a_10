@@ -90,6 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+const angleRight = document.querySelectorAll('.fa-angle-right');
+const angleDown = document.querySelectorAll('.fa-angle-down');
+
+
+
+
 // // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 // 모듈로 된 js 파일은 전역으로 쓸 수 없음. 지역적으로만 사용이 가능한데
 // window라는 전역객체를 이용하여 강제로 window의 메서드 로서 다른데서 불러왔던 함수들을 할당시켜주는 역할을 한다.
