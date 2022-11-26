@@ -12,6 +12,7 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  border: 10px dotted black;
 }
 
 .myPage-img {
@@ -76,13 +77,19 @@
 }
 
 .myPage-save input {
-  border: none;
+  border: 2px solid black;
   border-radius: 30px;
   font-size: 18px;
   padding: 8px 15px 5px 15px;
   background-color: black;
   color: white;
   font-weight: 700;
+  cursor: pointer;
+}
+
+.myPage-save input:hover {
+  background-color: rgb(255, 255, 255);
+  color: black;
 }
 
 .profile-menu-login,

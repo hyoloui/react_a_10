@@ -1,5 +1,5 @@
-import { authService } from "./firebase.js";
-import { handleLocation, route, goToProfile } from "./router.js";
+import {authService} from './firebase.js';
+import {handleLocation, route, goToProfile} from './router.js';
 import {
   save_fanpick,
   getList,
@@ -13,14 +13,14 @@ import {
   delete_comment,
   edit_btn,
   update_content,
-} from "./crud.js";
+} from './crud.js';
 import {
   changeProfile,
   onFileChange,
   logout,
   getHiList,
   myPost,
-} from "./miyoung.js";
+} from './miyoung.js';
 import {
   handleLogin,
   handleJoin,
@@ -49,16 +49,19 @@ document.addEventListener('DOMContentLoaded', function () {
       const topProfile = document.querySelector('#nav_profile');
       const menuDisplay = document.querySelector('#menu_display');
       const navProfileImg = document.querySelector('#nav_profile_img');
-      topProfile.addEventListener('click', function () {
-        menuDisplay.style.display = 'block';
-      });
+      const profileMenuLogin = document.querySelector('#profile-menu-login');
+
       document.getElementById('nav_profile_img').src =
         authService.currentUser.photoURL ?? '../assets/mypageimg.png';
       // 다른 영역 클릭 시 메뉴 없어짐
-      document.addEventListener('click', function (event) {
-        if (event.target != navProfileImg) {
-          menuDisplay.style.display = 'none';
-        }
+      topProfile.addEventListener('mouseenter', function (event) {
+        menuDisplay.style.display = 'flex';
+      });
+      topProfile.addEventListener('mouseleave', function (event) {
+        menuDisplay.style.display = 'none';
+      });
+      profileMenuLogin.addEventListener('mouseenter', function (event) {
+        menuDisplay.style.display = 'block';
       });
     } else {
       // 유저라는 객체가 없다면 로그아웃 상태임.
@@ -92,9 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const angleRight = document.querySelectorAll('.fa-angle-right');
 const angleDown = document.querySelectorAll('.fa-angle-down');
-
-
-
 
 // // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 // 모듈로 된 js 파일은 전역으로 쓸 수 없음. 지역적으로만 사용이 가능한데
