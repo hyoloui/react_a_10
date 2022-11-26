@@ -226,11 +226,11 @@ export async function modalOn() {
         </div>
     </div>`;
 
-  const div = document.createElement("div");
-  div.classList.add("modal_inner");
-  div.innerHTML = openModal;
-  feedModal.appendChild(div);
-});
+    const div = document.createElement("div");
+    div.classList.add("modal_inner");
+    div.innerHTML = openModal;
+    feedModal.appendChild(div);
+  });
 }
 
 // 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
@@ -246,11 +246,25 @@ export function sendId(showId) {
   console.log(selectId);
 }
 
-// 팬픽 작성 모달창
 export function modalOn2() {
-  const modal_open = document.querySelector("#create_modal");
-  modal_open.style.display = "flex";
+  // const hash = window.location.hash;
+  let user = authService.currentUser;
+  console.log(user);
+  if (user) {
+    const modal_open = document.querySelector("#create_modal");
+    modal_open.style.display = "flex";
+  } else {
+    window.location.replace("#changsun");
+    alert("로그인을 해주세요.");
+  }
 }
+
+// 팬픽 작성 모달창
+// export function modalOn2() {
+//   const modal_open = document.querySelector("#create_modal");
+//   modal_open.style.display = "flex";
+// }
+
 export function modalOff2() {
   const modal_close = document.querySelector("#create_modal");
   modal_close.style.display = "none";
