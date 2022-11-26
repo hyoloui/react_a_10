@@ -105,8 +105,8 @@ export async function getList() {
     }" onclick="sendId(this.id)">
         <!--카드이미지-->
         <div class="card_img">
-            <img onclick="modalOn()" src="${fanPickList.이미지}"
-                alt="" />
+            <img onclick="modalOn()" src="${fanPickList.이미지 ?? no_img}"
+                alt="게시글 이미지" />
             <!--글제목,내용 간단히-->
             <div class="card_content">
                 <h4 id="title" onclick="modalOn()">${fanPickList.제목}</h4>
@@ -140,99 +140,105 @@ export async function getList() {
 
 // 특정 버튼을 누르면 모달창이 켜지게 하기
 export async function modalOn() {
-  const card = [];
-  const q = query(collection(dbService, "fan-pick"));
-  const querySnapshot = await getDocs(q);
-
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    if (doc.id === selectId) {
-      const commentObj = {
-        id: selectId,
-        ...doc.data(),
-      };
-      card.push(commentObj);
-    }
-    console.log(card);
-  });
-
-  const feedModal = document.getElementById("modal_area");
-  const currentUid = authService.currentUser.uid;
-
-  card.forEach((modalCard) => {
-    const isOwner = currentUid === modalCard.creatorId;
-    console.log(currentUid);
-    const openModal = `<div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="headline1">
-                <div class="profile_wrap">
-                <div class="profile_img_box"><img src="${
-                  modalCard.프로필이미지 ?? no_img
-                }"
-                alt="profileImg" /></div>
-                <div class="profile_name">${modalCard.작성자 ?? "익명"}</div>
-                </div>
-                <button id="close-area" class="close-area" onclick="modalOff()">
-                <i class="fa-regular fa-x xBtn"></i>
-                </button>
-            </div>
-
-        <div class="headline2">
-            <p class="title">${modalCard.제목}</p>
-        </div>
-
-        <div class="headline3">
-            <button onclick="edit_btn(event)" style="${
-              isOwner ? "display:inline-block;" : "display:none"
-            }" class="btn">수정</button>
-            <button onclick="update_content(event)" id="save_edit" style="display:none"
-            }" class="btn">완료</button>
-            <button style="${
-              isOwner ? "display:inline-block;" : "display:none"
-            }" class="btn ml10" id="${
-      modalCard.id
-    }" onclick="delete_comment(event)">삭제</button>
-        </div>
-
-        <div class="contents_area">
-            <div class="content_pic">
-            <img
-                src="${modalCard.이미지}"
-                alt=""
-            />
-            </div>
-            <p class="content">${modalCard.내용}</p>
-        </div>
-
-        <div class="comments_area">
-            <p class="comment">댓글쓰기</p>
-            <div class="form-commentInfo">
-                <textarea class="comment-input" placeholder="comment"></textarea>
-                <button class="submit">저장</button>
-            <!-- <div class="profile_img_box"></div> -->
-            </div>
-            <div class="comments_wrap">
-                <div class="comments_btn_wrap">
-                    <button class="btn">수정</button>
-                    <button class="btn ml10">삭제</button>
-
-                </div>
-                <div class="comments_content2">댓글내용</div>
-                <div class="comments_profile_wrap">
-                    <div class="profile_img_box"></div>
-                    <div class="profile_name">작성자</div>
-                    <div class="date">날짜</div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>`;
-
-    const div = document.createElement("div");
-    div.classList.add("modal_inner");
-    div.innerHTML = openModal;
-    feedModal.appendChild(div);
-  });
+  let user = authService.currentUser;
+  if (user) {
+    const card = [];
+    const q = query(collection(dbService, "fan-pick"));
+    const querySnapshot = await getDocs(q);
+  
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      if (doc.id === selectId) {
+        const commentObj = {
+          id: selectId,
+          ...doc.data(),
+        };
+        card.push(commentObj);
+      }
+      console.log(card);
+    });
+  
+    const feedModal = document.getElementById("modal_area");
+    const currentUid = authService.currentUser.uid;
+  
+    card.forEach((modalCard) => {
+      const isOwner = currentUid === modalCard.creatorId;
+      console.log(currentUid);
+      const openModal = `<div id="modal" class="modal-overlay">
+          <div class="modal-window">
+              <div class="headline1">
+                  <div class="profile_wrap">
+                  <div class="profile_img_box"><img src="${
+                    modalCard.프로필이미지 ?? no_img
+                  }"
+                  alt="profileImg" /></div>
+                  <div class="profile_name">${modalCard.작성자 ?? "익명"}</div>
+                  </div>
+                  <button id="close-area" class="close-area" onclick="modalOff()">
+                  <i class="fa-regular fa-x xBtn"></i>
+                  </button>
+              </div>
+  
+          <div class="headline2">
+              <p class="title">${modalCard.제목}</p>
+          </div>
+  
+          <div class="headline3">
+              <button onclick="edit_btn(event)" style="${
+                isOwner ? "display:inline-block;" : "display:none"
+              }" class="btn">수정</button>
+              <button onclick="update_content(event)" id="save_edit" style="display:none"
+              }" class="btn">완료</button>
+              <button style="${
+                isOwner ? "display:inline-block;" : "display:none"
+              }" class="btn ml10" id="${
+        modalCard.id
+      }" onclick="delete_comment(event)">삭제</button>
+          </div>
+  
+          <div class="contents_area">
+              <div class="content_pic">
+              <img
+                  src="${modalCard.이미지}"
+                  alt=""
+              />
+              </div>
+              <p class="content">${modalCard.내용}</p>
+          </div>
+  
+          <div class="comments_area">
+              <p class="comment">댓글쓰기</p>
+              <div class="form-commentInfo">
+                  <textarea class="comment-input" placeholder="comment"></textarea>
+                  <button class="submit">저장</button>
+              <!-- <div class="profile_img_box"></div> -->
+              </div>
+              <div class="comments_wrap">
+                  <div class="comments_btn_wrap">
+                      <button class="btn">수정</button>
+                      <button class="btn ml10">삭제</button>
+  
+                  </div>
+                  <div class="comments_content2">댓글내용</div>
+                  <div class="comments_profile_wrap">
+                      <div class="profile_img_box"></div>
+                      <div class="profile_name">작성자</div>
+                      <div class="date">날짜</div>
+                  </div>
+              </div>
+          </div>
+          </div>
+      </div>`;
+  
+      const div = document.createElement("div");
+      div.classList.add("modal_inner");
+      div.innerHTML = openModal;
+      feedModal.appendChild(div);
+    });
+  } else {
+    window.location.replace("#changsun");
+    alert("로그인을 해주세요.");
+  }
 }
 
 // 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
@@ -251,7 +257,6 @@ export function sendId(showId) {
 export function modalOn2() {
   // const hash = window.location.hash;
   let user = authService.currentUser;
-  console.log(user);
   if (user) {
     const modal_open = document.querySelector("#create_modal");
     modal_open.style.display = "flex";
