@@ -11,6 +11,8 @@ import {
   save_img,
   uploadImage,
   delete_comment,
+  edit_btn,
+  update_content,
 } from "./crud.js";
 import {
   changeProfile,
@@ -106,8 +108,8 @@ window.onsubmit = onsubmit;
 // window.onFileChange = onFileChange;
 // window.changeProfile = changeProfile;
 // window.save_comment = save_comment;
-// window.update_comment = update_comment;
-// window.onEditing = onEditing;
+window.update_content = update_content;
+window.edit_btn = edit_btn;
 window.delete_comment = delete_comment;
 
 // CRUD

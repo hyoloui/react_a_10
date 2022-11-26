@@ -124,7 +124,7 @@ export async function getList() {
                 </div>
                 <div class="card_name"><span>${fanPickList.작성자}</span></div>
                 <div class="card_date"><span>
-                ${Date(fanPickList.시간).toString().slice(0, 25)}</span></div>
+                ${new Date(fanPickList.시간).toString().slice(0, 25)}</span></div>
             </div>
         </div>
     </div>`;
@@ -182,9 +182,11 @@ export async function modalOn() {
         </div>
 
         <div class="headline3">
-            <button style="${
+            <button onclick="edit_btn(event)" style="${
               isOwner ? "display:inline-block;" : "display:none"
             }" class="btn">수정</button>
+            <button onclick="update_content(event)" id="save_edit" style="display:none"
+            }" class="btn">완료</button>
             <button style="${
               isOwner ? "display:inline-block;" : "display:none"
             }" class="btn ml10" id="${
@@ -195,7 +197,7 @@ export async function modalOn() {
         <div class="contents_area">
             <div class="content_pic">
             <img
-                src="${card[0].이미지}"
+                src="${modalCard.이미지}"
                 alt=""
             />
             </div>
@@ -250,6 +252,11 @@ export function sendId(showId) {
 export function modalOn2() {
   const modal_open = document.querySelector("#create_modal");
   modal_open.style.display = "flex";
+  const creator_name = document.querySelector(".profile_name");
+  const creator_img = document.querySelector(".profile_img_box");
+  // console.log(authService.currentUser.displayName)
+  creator_img.innerHTML = `<img src=${authService.currentUser.photoURL ?? no_img}  alt="프로필 이미지">`;
+  creator_name.innerHTML = authService.currentUser?.displayName;
 }
 export function modalOff2() {
   const modal_close = document.querySelector("#create_modal");
@@ -262,7 +269,42 @@ export function modalOff2() {
 
 // // Update API
 // // comments collection 내에서 해당 id값을 가진 doc을 찾아서 doc.text를 업데이트
-// const commentRef = doc(dbService, "comments", id);
+export const edit_btn = async (event) => {
+  event.preventDefault();
+  // 수정 버튼 삭제 => 완료 버튼 활성화
+  const edit_id = event.target
+  edit_id.style.display = "none"
+  const save_edit = document.querySelector("#save_edit")
+  save_edit.style.display = "inline-block"
+  // 제목, 내용 dom 가져오기
+  const title = document.querySelector("#modal .title");
+  const content = document.querySelector("#modal .content");
+  // 수정 전 텍스트 저장
+  const title_text = title.textContent;
+  const content_text = content.textContent;
+  console.log(title_text, content_text);
+  // 수정 버튼 클릭 시 제목, 내용 태그를 input과 textarea로 변경
+  title.innerHTML = `<textarea id="new_title" class="title" style="width:50vw; height: 40px;">${title_text}</textarea>`;
+  content.innerHTML = `<textarea id="new_content" class="title" style="width:50vw; height:10vh;">${content_text}</textarea>`;
+}
+export const update_content = async (event) => {
+  event.preventDefault();
+  const new_title = document.querySelector("#new_title").value;
+  const new_content = document.querySelector("#new_content").value;
+  const modalId = doc(dbService, "fan-pick", selectId);
+  try {
+    await updateDoc(modalId, { 
+      제목: new_title,
+      내용: new_content, 
+    });
+    // getCommentList();
+  } catch (error) {
+    alert(error);
+  }
+  getList();
+  modalOff();
+}
+
 // updateDoc(commentRef, { text: newComment });
 
 // // Delete API

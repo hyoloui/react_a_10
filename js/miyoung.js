@@ -76,7 +76,6 @@ export const changeProfile = async (event) => {
       text: hi.value,
       id: authService.currentUser.uid,
       createdAt: Date.now(),
-      createdAt: Date.now(),
     });
     hi.value = '';
     getHiList();
