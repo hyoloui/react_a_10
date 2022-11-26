@@ -7,30 +7,30 @@ import {
   orderBy,
   query,
   getDocs,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-import { dbService, authService, storageService } from "./firebase.js";
+} from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js';
+import {dbService, authService, storageService} from './firebase.js';
 import {
   ref,
   getDownloadURL,
   uploadString,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+} from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js';
+import {v4 as uuidv4} from 'https://jspm.dev/uuid';
 
 // const dbService = getStorage(app); // app은 Firebase 프로젝트 연결 객체
-const no_img = "../assets/mypageimg.png";
+const no_img = '../assets/mypageimg.png';
 export const save_img = async () => {
   const imgRef = ref(
     storageService,
     `images/${authService.currentUser.uid}/${uuidv4()}`
   );
-  const imgDataUrl2 = localStorage.getItem("imgDataUrl2");
-  console.log("imgdataurl2:", imgDataUrl2);
+  const imgDataUrl2 = localStorage.getItem('imgDataUrl2');
+  console.log('imgdataurl2:', imgDataUrl2);
   let downloadUrl;
   if (imgDataUrl2) {
-    const response = await uploadString(imgRef, imgDataUrl2, "data_url");
-    console.log("response :", response);
+    const response = await uploadString(imgRef, imgDataUrl2, 'data_url');
+    console.log('response :', response);
     downloadUrl = await getDownloadURL(response.ref);
-    console.log("다운로드URL in save_img:", downloadUrl);
+    console.log('다운로드URL in save_img:', downloadUrl);
   }
   return downloadUrl;
 };
@@ -42,8 +42,8 @@ export const uploadImage = (event) => {
   reader.readAsDataURL(theFile);
   reader.onloadend = (finishedEvent) => {
     const imgDataUrl2 = finishedEvent.currentTarget.result;
-    console.log("이미지데이터URL2 in uploadImage :", imgDataUrl2);
-    localStorage.setItem("imgDataUrl2", imgDataUrl2);
+    console.log('이미지데이터URL2 in uploadImage :', imgDataUrl2);
+    localStorage.setItem('imgDataUrl2', imgDataUrl2);
   };
 };
 
@@ -51,13 +51,13 @@ export const uploadImage = (event) => {
 // comments 라는 이름의 collection에 객체 형태의 Document를 신규 등록
 export const save_fanpick = async (event) => {
   event.preventDefault();
-  const title = document.querySelector(".title2");
-  const content = document.querySelector(".content2");
+  const title = document.querySelector('.title2');
+  const content = document.querySelector('.content2');
   let modalImage = await save_img();
 
-  const { uid, photoURL, displayName } = authService.currentUser;
+  const {uid, photoURL, displayName} = authService.currentUser;
   try {
-    await addDoc(collection(dbService, "fan-pick"), {
+    await addDoc(collection(dbService, 'fan-pick'), {
       creatorId: uid,
       프로필이미지: photoURL,
       작성자: displayName,
@@ -66,23 +66,23 @@ export const save_fanpick = async (event) => {
       시간: Date.now(),
       이미지: modalImage,
     });
-    title.value = "";
-    content.value = "";
+    title.value = '';
+    content.value = '';
     getList();
     modalOff2();
   } catch (error) {
     alert(error);
-    console.log("error in addDoc:", error);
+    console.log('error in addDoc:', error);
   }
 };
 
 // Read API
 // id 받아적기
-let selectId = "";
+let selectId = '';
 export async function getList() {
   const cardList = [];
   // query 를 db에서 받아와 q로 선언
-  const q = query(collection(dbService, "fan-pick"), orderBy("시간", "desc"));
+  const q = query(collection(dbService, 'fan-pick'), orderBy('시간', 'desc'));
   // query 조건에 맞는 documents 데이터를 배열로 받아오기
   const querySnapshot = await getDocs(q);
   // doc.id는 DB가 자체적으로 생성하는 값으로, id도 함께 포함시키기 위해 객체 재구성
@@ -93,8 +93,8 @@ export async function getList() {
     };
     cardList.push(fanPickList);
   });
-  const newsFeed = document.getElementById("newsFeed");
-  newsFeed.innerHTML = ""; // 이부분 지우면 append가 안됨
+  const newsFeed = document.getElementById('newsFeed');
+  newsFeed.innerHTML = ''; // 이부분 지우면 append가 안됨
   // const currentUid = authService.currentUser.uid;
   // document.querySelector(".card_profile > img").src = no_img;
 
@@ -124,13 +124,15 @@ export async function getList() {
                 </div>
                 <div class="card_name"><span>${fanPickList.작성자}</span></div>
                 <div class="card_date"><span>
-                ${new Date(fanPickList.시간).toString().slice(0, 25)}</span></div>
+                ${new Date(fanPickList.시간)
+                  .toString()
+                  .slice(0, 25)}</span></div>
             </div>
         </div>
     </div>`;
 
-    const div = document.createElement("div");
-    div.classList.add("mycards");
+    const div = document.createElement('div');
+    div.classList.add('mycards');
     div.innerHTML = temp_html;
 
     newsFeed.appendChild(div);
@@ -141,7 +143,7 @@ export async function getList() {
 // 특정 버튼을 누르면 모달창이 켜지게 하기
 export async function modalOn() {
   const card = [];
-  const q = query(collection(dbService, "fan-pick"));
+  const q = query(collection(dbService, 'fan-pick'));
   const querySnapshot = await getDocs(q);
 
   querySnapshot.forEach((doc) => {
@@ -156,7 +158,7 @@ export async function modalOn() {
     console.log(card);
   });
 
-  const feedModal = document.getElementById("modal_area");
+  const feedModal = document.getElementById('modal_area');
   const currentUid = authService.currentUser.uid;
 
   card.forEach((modalCard) => {
@@ -170,7 +172,7 @@ export async function modalOn() {
                   modalCard.프로필이미지 ?? no_img
                 }"
                 alt="profileImg" /></div>
-                <div class="profile_name">${modalCard.작성자 ?? "익명"}</div>
+                <div class="profile_name">${modalCard.작성자 ?? '익명'}</div>
                 </div>
                 <button id="close-area" class="close-area" onclick="modalOff()">
                 <i class="fa-regular fa-x xBtn"></i>
@@ -183,12 +185,12 @@ export async function modalOn() {
 
         <div class="headline3">
             <button onclick="edit_btn(event)" style="${
-              isOwner ? "display:inline-block;" : "display:none"
+              isOwner ? 'display:inline-block;' : 'display:none'
             }" class="btn">수정</button>
             <button onclick="update_content(event)" id="save_edit" style="display:none"
             }" class="btn">완료</button>
             <button style="${
-              isOwner ? "display:inline-block;" : "display:none"
+              isOwner ? 'display:inline-block;' : 'display:none'
             }" class="btn ml10" id="${
       modalCard.id
     }" onclick="delete_comment(event)">삭제</button>
@@ -228,39 +230,41 @@ export async function modalOn() {
         </div>
     </div>`;
 
-  const div = document.createElement("div");
-  div.classList.add("modal_inner");
-  div.innerHTML = openModal;
-  feedModal.appendChild(div);
-});
+    const div = document.createElement('div');
+    div.classList.add('modal_inner');
+    div.innerHTML = openModal;
+    feedModal.appendChild(div);
+  });
 }
 
 // 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
 export function modalOff() {
-  const modal_close = document.querySelector(".modal_inner");
+  const modal_close = document.querySelector('.modal_inner');
   modal_close.remove();
 }
 
 // 받아적은 id 하나만 가져오기
 export function sendId(showId) {
-  selectId = "";
+  selectId = '';
   selectId = showId;
   console.log(selectId);
 }
 
 // 팬픽 작성 모달창
 export function modalOn2() {
-  const modal_open = document.querySelector("#create_modal");
-  modal_open.style.display = "flex";
-  const creator_name = document.querySelector(".profile_name");
-  const creator_img = document.querySelector(".profile_img_box");
+  const modal_open = document.querySelector('#create_modal');
+  modal_open.style.display = 'flex';
+  const creator_name = document.querySelector('.profile_name');
+  const creator_img = document.querySelector('.profile_img_box');
   // console.log(authService.currentUser.displayName)
-  creator_img.innerHTML = `<img src=${authService.currentUser.photoURL ?? no_img}  alt="프로필 이미지">`;
+  creator_img.innerHTML = `<img src=${
+    authService.currentUser.photoURL ?? no_img
+  }  alt="프로필 이미지">`;
   creator_name.innerHTML = authService.currentUser?.displayName;
 }
 export function modalOff2() {
-  const modal_close = document.querySelector("#create_modal");
-  modal_close.style.display = "none";
+  const modal_close = document.querySelector('#create_modal');
+  modal_close.style.display = 'none';
 }
 
 // export async function getModal(){
@@ -272,30 +276,30 @@ export function modalOff2() {
 export const edit_btn = async (event) => {
   event.preventDefault();
   // 수정 버튼 삭제 => 완료 버튼 활성화
-  const edit_id = event.target
-  edit_id.style.display = "none"
-  const save_edit = document.querySelector("#save_edit")
-  save_edit.style.display = "inline-block"
+  const edit_id = event.target;
+  edit_id.style.display = 'none';
+  const save_edit = document.querySelector('#save_edit');
+  save_edit.style.display = 'inline-block';
   // 제목, 내용 dom 가져오기
-  const title = document.querySelector("#modal .title");
-  const content = document.querySelector("#modal .content");
+  const title = document.querySelector('#modal .title');
+  const content = document.querySelector('#modal .content');
   // 수정 전 텍스트 저장
   const title_text = title.textContent;
   const content_text = content.textContent;
   console.log(title_text, content_text);
   // 수정 버튼 클릭 시 제목, 내용 태그를 input과 textarea로 변경
-  title.innerHTML = `<textarea id="new_title" class="title" style="width:50vw; height: 40px;">${title_text}</textarea>`;
-  content.innerHTML = `<textarea id="new_content" class="title" style="width:50vw; height:10vh;">${content_text}</textarea>`;
-}
+  title.innerHTML = `<textarea id="new_title" class="title" style="width:50vw; height: 40px; max-width:880px; min-width:880px;" >${title_text}</textarea>`;
+  content.innerHTML = `<textarea id="new_content" class="title" style="width:50vw; height:10vh; max-width:880px; min-width:880px;">${content_text}</textarea>`;
+};
 export const update_content = async (event) => {
   event.preventDefault();
-  const new_title = document.querySelector("#new_title").value;
-  const new_content = document.querySelector("#new_content").value;
-  const modalId = doc(dbService, "fan-pick", selectId);
+  const new_title = document.querySelector('#new_title').value;
+  const new_content = document.querySelector('#new_content').value;
+  const modalId = doc(dbService, 'fan-pick', selectId);
   try {
-    await updateDoc(modalId, { 
+    await updateDoc(modalId, {
       제목: new_title,
-      내용: new_content, 
+      내용: new_content,
     });
     // getCommentList();
   } catch (error) {
@@ -303,7 +307,7 @@ export const update_content = async (event) => {
   }
   getList();
   modalOff();
-}
+};
 
 // updateDoc(commentRef, { text: newComment });
 
@@ -315,11 +319,11 @@ export const delete_comment = async (event) => {
   //   const uid = authService.currentUser.uid;
   // 이벤트가 발생한 타겟을 반환해줌
   const id = event.target.id;
-  console.log("hello", event.target.id);
-  const ok = window.confirm("해당 글을 정말 삭제하시겠습니까?");
+  console.log('hello', event.target.id);
+  const ok = window.confirm('해당 글을 정말 삭제하시겠습니까?');
   if (ok) {
     try {
-      await deleteDoc(doc(dbService, "fan-pick", id));
+      await deleteDoc(doc(dbService, 'fan-pick', id));
       getList();
       modalOff();
       //   cardList();
