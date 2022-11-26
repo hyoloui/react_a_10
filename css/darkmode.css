@@ -1,0 +1,53 @@
+*, i{
+  color: white !important;
+  border-color: rgb(198, 198, 198) !important;
+}
+
+.card_name span,
+.card_date span,
+.profile-menu-login a,
+.profile-menu-logout a,
+.modal-window,
+.close-area {
+  color:white !important;
+}
+
+body{
+  background-color: black;
+}
+.container,
+.contents_search_input,
+.whatitname_right .cursor,
+.profile-menu-login a,
+.profile-menu-logout a,
+.profile-menu-login p,
+.profile-menu-logout p,
+input,
+textarea,
+.modal-window,
+.close-area,
+button {
+  background-color: rgb(15, 15, 18) !important;
+  
+}
+.profile-menu-login a,
+.profile-menu-logout a,
+.profile-menu-login p,
+.profile-menu-logout p { 
+filter: drop-shadow(rgba(255, 255, 255, 0.174) 0px 0px 8px) !important;
+}
+
+#profileEmail {
+  background-color: black !important;
+}
+
+.myPage-save input:hover,
+.cursor:hover,
+.submit:hover,
+.btn:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+
+

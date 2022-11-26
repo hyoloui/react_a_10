@@ -63,8 +63,8 @@ body {
   height: 40px;
   margin-bottom: 4px;
   font-size: 20px;
-  background-color: #1c134e;
-  color: white;
+  background-color: #1c134e !important;
+  color: white !important;
   border: 0;
   border-radius: 10px;
 }

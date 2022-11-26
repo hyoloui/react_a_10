@@ -20,7 +20,8 @@ textarea {
   margin: 30px 70px;
   display: flex;
   width: 1400px;
-  min-width: 1400px;
+  max-width: 1400px;
+  /* min-width: 1200px; */
   justify-content: center;
   background-color: white;
   border: 1px solid lightgray;
@@ -286,4 +287,16 @@ i {
 a {
   text-decoration: none;
   color: black;
+}
+
+.color_mode {
+  position: absolute;
+  width: 80px;
+  bottom: 30%;
+  
+}
+
+.profile-menu-login p,
+.profile-menu-logout p {
+  cursor: pointer;
 }

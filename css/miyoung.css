@@ -12,7 +12,6 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-  border: 10px dotted black;
 }
 
 .myPage-img {
@@ -93,7 +92,7 @@
 }
 
 .profile-menu-login,
-.profile-menu-logout {
+.profile-menu-logout{
   width: 130px;
   font-size: 20px;
   display: flex;
@@ -106,18 +105,23 @@
 }
 
 .profile-menu-login a,
-.profile-menu-logout a {
+.profile-menu-logout a,
+.profile-menu-login p,
+.profile-menu-logout p {
   padding: 10px;
 }
 
-.profile-menu-login a:hover {
-  background-color: rgb(236, 236, 236);
-  color: blueviolet;
+.profile-menu-login a:hover,
+.profile-menu-logout a:hover,
+.profile-menu-login p:hover,
+.profile-menu-logout p:hover  {
+  background-color: rgb(236, 236, 236) !important;
+  color: blueviolet !important;
 }
 
 .profile-menu-logout a:hover {
-  background-color: rgb(236, 236, 236);
-  color: blueviolet;
+  background-color: rgb(236, 236, 236) !important;
+  color: blueviolet !important;
 }
 
 .displayblock {
