@@ -26,6 +26,14 @@ import { save_fanpick } from "./crud.js";
 
 export const changeProfile = async (event) => {
   event.preventDefault();
+  const changePwCheck = document.getElementById('changePwCheck').value;
+  const changePw = document.getElementById('changePw').value;  
+  const err_msg = document.getElementById('err_msg');
+  if (changePwCheck !== changePw) {
+    err_msg.innerText = '비밀번호가 일치하지 않습니다.';
+    return;
+  }
+
   document.getElementById('profileBtn').disabled = true;
   const imgRef = ref(
     storageService,
@@ -55,8 +63,7 @@ export const changeProfile = async (event) => {
 
   // 비밀번호 변경 기능 추가
   // const auth = getAuth(); authService = getAuth라서 다 불러올 필요 없음
-  const changePwCheck = document.getElementById('changePwCheck').value;
-
+  
   const user = authService.currentUser;
   const newPassword = changePwCheck;
 
