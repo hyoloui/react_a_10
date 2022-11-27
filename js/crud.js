@@ -64,11 +64,11 @@ export const save_fanpick = async (event) => {
       제목: title.value,
       내용: content.value,
       시간: Date.now(),
-      이미지: modalImage,
+      이미지: modalImage ? modalImage : "",
     });
     title.value = "";
     content.value = "";
-    modalImage = "";
+    localStorage.removeItem("imgDataUrl2");
     getList();
     modalOff2();
   } catch (error) {
