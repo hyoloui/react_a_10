@@ -64,11 +64,11 @@ export const save_fanpick = async (event) => {
       제목: title.value,
       내용: content.value,
       시간: Date.now(),
-      이미지: modalImage,
+      이미지: modalImage ? modalImage : "",
     });
     title.value = "";
     content.value = "";
-    modalImage = "";
+    localStorage.removeItem("imgDataUrl2");
     getList();
     modalOff2();
   } catch (error) {
@@ -120,10 +120,10 @@ export async function getList() {
       fanPickList.내용
     }</p>
             </div>
-            <!--좋아요-->
+            <!--좋아요
             <div class="card_like">
                 <span>162</span> <i class="fa-solid fa-heart"></i>
-            </div>
+            </div>-->
             <div class="card_bottom">
                 <div class="card_profile">
                 <img src="${
@@ -182,12 +182,12 @@ export async function modalOn(id) {
     const q = query(collection(dbService, "fan-pick"));
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((cmtObj) => {
+    querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      if (cmtObj.id === selectId) {
+      if (doc.id === selectId) {
         const commentObj = {
           id: selectId,
-          ...cmtObj.data(),
+          ...doc.data(),
         };
         card.push(commentObj);
       }

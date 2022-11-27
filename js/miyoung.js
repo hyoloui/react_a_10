@@ -1,9 +1,9 @@
-import { authService, storageService, dbService } from './firebase.js';
+import { authService, storageService, dbService } from "./firebase.js";
 import {
   ref,
   uploadString,
   getDownloadURL,
-} from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js';
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 import {
   // 보이지 않는 firesotre.js 안에 이런 함수들이 있다.
   doc,
@@ -26,26 +26,26 @@ import { save_fanpick } from "./crud.js";
 
 export const changeProfile = async (event) => {
   event.preventDefault();
-  const changePwCheck = document.getElementById('changePwCheck').value;
-  const changePw = document.getElementById('changePw').value;  
-  const err_msg = document.getElementById('err_msg');
+  const changePwCheck = document.getElementById("changePwCheck").value;
+  const changePw = document.getElementById("changePw").value;
+  const err_msg = document.getElementById("err_msg");
   if (changePwCheck !== changePw) {
-    err_msg.innerText = '비밀번호가 일치하지 않습니다.';
+    err_msg.innerText = "비밀번호가 일치하지 않습니다.";
     return;
   }
 
-  document.getElementById('profileBtn').disabled = true;
+  document.getElementById("profileBtn").disabled = true;
   const imgRef = ref(
     storageService,
     `${authService.currentUser.uid}/${uuidv4()}`
   );
 
-  const newNickname = document.getElementById('profileNickname').value;
+  const newNickname = document.getElementById("profileNickname").value;
   // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.
-  const imgDataUrl = localStorage.getItem('imgDataUrl');
+  const imgDataUrl = localStorage.getItem("imgDataUrl");
   let downloadUrl;
   if (imgDataUrl) {
-    const response = await uploadString(imgRef, imgDataUrl, 'data_url');
+    const response = await uploadString(imgRef, imgDataUrl, "data_url");
     downloadUrl = await getDownloadURL(response.ref);
   }
   await updateProfile(authService.currentUser, {
@@ -55,41 +55,41 @@ export const changeProfile = async (event) => {
     .then((result) => {
       console.log(result);
       console.log(authService.currentUser);
-      alert('저장완료');
+      alert("저장완료");
     })
     .catch((error) => {
-      console.log('error:', error);
+      console.log("error:", error);
     });
 
   // 비밀번호 변경 기능 추가
   // const auth = getAuth(); authService = getAuth라서 다 불러올 필요 없음
-  
+
   const user = authService.currentUser;
   const newPassword = changePwCheck;
 
   updatePassword(user, newPassword)
     .then(() => {
-      console.log('비밀번호 변경 완료');
+      console.log("비밀번호 변경 완료");
     })
     .catch((error) => {
       // An error ocurred
-      console.log('비밀번호 변경 실패');
+      console.log("비밀번호 변경 실패");
     });
 
   // 파이어스토어에 인사말 저장
-  const hi = document.getElementById('hi');
+  const hi = document.getElementById("hi");
   try {
-    await addDoc(collection(dbService, 'hi'), {
+    await addDoc(collection(dbService, "hi"), {
       text: hi.value,
       id: authService.currentUser.uid,
       createdAt: Date.now(),
     });
-    hi.value = '';
+    hi.value = "";
     getHiList();
     // location.reload();
     // location.reload();
   } catch (error) {
-    console.log('error in addDoc:', error);
+    console.log("error in addDoc:", error);
   }
 };
 
@@ -102,25 +102,25 @@ export const onFileChange = (event) => {
   reader.onloadend = (finishedEvent) => {
     // 파일리더가 파일객체를 data URL로 변환 작업을 끝났을 때
     const imgDataUrl = finishedEvent.currentTarget.result;
-    localStorage.setItem('imgDataUrl', imgDataUrl);
-    document.getElementById('profileView').src = imgDataUrl;
+    localStorage.setItem("imgDataUrl", imgDataUrl);
+    document.getElementById("profileView").src = imgDataUrl;
   };
 };
 
 //로그아웃 기능. singout을 import 해왔어야 했다.
 export const logout = (event) => {
   event.preventDefault(); // a태그가 가지고있는 새로고침하는 기본 이벤트를 없애줌
-  console.log('로그아웃클릭');
+  console.log("로그아웃클릭");
   signOut(authService)
     .then(() => {
       // Sign-out successful.
       localStorage.clear();
-      console.log('로그아웃 성공');
-      window.location.replace('');
+      console.log("로그아웃 성공");
+      window.location.replace("");
     })
     .catch((error) => {
       // An error happened.
-      console.log('error:', error);
+      console.log("error:", error);
     });
 };
 
@@ -128,10 +128,10 @@ export const logout = (event) => {
 export const getHiList = async () => {
   let currentUserId = await authService.currentUser.uid;
   // let currentUserId = authService.currentUser.uid;
-  const q = query(collection(dbService, 'hi'), orderBy('createdAt', 'asc'));
+  const q = query(collection(dbService, "hi"), orderBy("createdAt", "asc"));
   const querySnapshot = await getDocs(q);
 
-  let recentHiText = '';
+  let recentHiText = "";
 
   // querySnapshot.forEach((doc, index) => {
   //   const { id, text } = doc.data();
@@ -215,10 +215,10 @@ export const myPost = async (event) => {
                 <h4 id="title" onclick="modalOn()">${fanPickList.제목}</h4>
                 <p id="content" onclick="modalOn()">${fanPickList.내용}</p>
             </div>
-            <!--좋아요-->
+            <!--좋아요
             <div class="card_like">
                 <span>162</span> <i class="fa-solid fa-heart"></i>
-            </div>
+            </div>-->
             <div class="card_bottom">
                 <div class="card_profile">
                 <img src="${
