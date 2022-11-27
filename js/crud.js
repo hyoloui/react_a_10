@@ -369,16 +369,18 @@ export const delete_comment = async (event) => {
 // Search
 export const search_contents = (event) => {
   event.preventDefault();
-  const search_value = document.querySelector(".contents_search_input").value
-  const search_title = document.querySelectorAll(".card_content #title");
-  [...search_title].forEach(title => {
-    const mycards = title.parentNode.parentNode.parentNode.parentNode;
-    if (title.textContent.indexOf(search_value)) {
-      mycards.classList.add('disabled');
-    } else {
-      mycards.classList.remove('disabled');
-    }
-  })
+  if(event.keyCode == 13){
+    const search_value = document.querySelector(".contents_search_input").value
+    const search_title = document.querySelectorAll(".card_content #title");
+    [...search_title].forEach(title => {
+      const mycards = title.parentNode.parentNode.parentNode.parentNode;
+      if (title.textContent.indexOf(search_value)) {
+        mycards.classList.add('disabled');
+      } else {
+        mycards.classList.remove('disabled');
+      }
+    })
+  }
 }
 
 //댓글 DB불러와서

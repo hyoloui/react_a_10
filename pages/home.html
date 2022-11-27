@@ -2,7 +2,7 @@
   <!--최신순,좋아요-->
   <div class="whatitname_left">
     <span><i class="fa-regular fa-clock"></i>최신순</span>
-    <span><i class="fa-solid fa-heart"></i>좋아요순</span>
+    <!-- <span><i class="fa-solid fa-heart"></i>좋아요순</span> -->
   </div>
 
   <!--글쓰기, 검색버튼-->
@@ -14,6 +14,7 @@
       class="contents_search_input"
       type="text"
       placeholder="팬픽을 검색해 보세요"
+      onkeypress="search_contents(event)"
       />
       <button onclick="search_contents(event)" class="fa-solid fa-magnifying-glass"></button>
     </div>
