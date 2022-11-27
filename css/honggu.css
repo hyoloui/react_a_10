@@ -57,6 +57,7 @@ a {
 }
 
 .profile_img_box {
+  margin-bottom: 10px;
   width: 30px;
   height: 30px;
   border-radius: 70%;

@@ -153,19 +153,19 @@ export const Post_comment = async (event) => {
   const modalWrapper = event.target.closest(".ceo");
   console.log(modalWrapper);
   const comment = document.getElementById("comment");
-  const { uid, photoURL, displayName } = authService.currentUser;
+  const { photoURL, displayName } = authService.currentUser;
   console.log("event.target", event.target);
   try {
     await addDoc(collection(dbService, "comments"), {
       text: comment.value,
       createdAt: Date.now(),
-      creatorId: uid,
       profileImg: photoURL,
       nickname: displayName,
       postId: modalWrapper.id,
     });
     comment.value = "";
     getCommentList();
+    window.location.reload();
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
@@ -389,11 +389,11 @@ export const getCommentList = async () => {
     collection(dbService, "comments"),
     orderBy("createdAt", "desc")
   );
-
   const querySnapshot = await getDocs(q);
   let recentCommentList = [];
-
+  
   const modalWrapper = document.querySelector(".ceo");
+  const { photoURL } = authService.currentUser;
   querySnapshot.forEach((comment, index) => {
     const { postId, text, nickname, createdAt } = comment.data();
     if (modalWrapper.id === postId) {
@@ -401,6 +401,7 @@ export const getCommentList = async () => {
         text: text,
         nickname: nickname,
         createdAt: createdAt,
+        프로필이미지: photoURL,
       });
     }
   });
@@ -412,6 +413,7 @@ export const getCommentList = async () => {
     const temp_html = `
     <div class="comments_content2">${text}</div>
     <div class="comments_profile_wrap">
+        <img class="profile_img_box" src="${photoURL ?? no_img}">
         <div class="profile_name">${nickname ?? "닉네임 없음"}</div>
         <div class="date">${new Date(createdAt).toString().slice(0, 25)}</div>
     </div>`;
