@@ -69,6 +69,7 @@ export const save_fanpick = async (event) => {
     title.value = "";
     content.value = "";
     localStorage.removeItem("imgDataUrl2");
+    document.getElementById("modalUpImg").value = "";
     getList();
     modalOff2();
   } catch (error) {
@@ -302,6 +303,10 @@ export function modalOn2() {
 export function modalOff2() {
   const modal_close = document.querySelector("#create_modal");
   modal_close.style.display = "none";
+  document.querySelector(".title2").value = "";
+  document.querySelector(".content2").value = "";
+  localStorage.removeItem("imgDataUrl2");
+  document.getElementById("modalUpImg").value = "";
 }
 
 // Update API
@@ -367,19 +372,19 @@ export const delete_comment = async (event) => {
 // Search
 export const search_contents = (event) => {
   event.preventDefault();
-  if(event.keyCode == 13){
-    const search_value = document.querySelector(".contents_search_input").value
+  if (event.keyCode == 13) {
+    const search_value = document.querySelector(".contents_search_input").value;
     const search_title = document.querySelectorAll(".card_content #title");
-    [...search_title].forEach(title => {
+    [...search_title].forEach((title) => {
       const mycards = title.parentNode.parentNode.parentNode.parentNode;
       if (title.textContent.indexOf(search_value)) {
-        mycards.classList.add('disabled');
+        mycards.classList.add("disabled");
       } else {
-        mycards.classList.remove('disabled');
+        mycards.classList.remove("disabled");
       }
-    })
+    });
   }
-}
+};
 
 //댓글 DB불러와서
 export const getCommentList = async () => {
