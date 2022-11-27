@@ -275,6 +275,10 @@ i {
   color: gray;
 }
 
+.disabled {
+	display: none;
+}
+
 .dp_none {
   display: none;
 }

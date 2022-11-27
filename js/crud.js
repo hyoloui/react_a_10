@@ -277,22 +277,13 @@ export function modalOn2() {
 }
 
 // 팬픽 작성 모달창
-// export function modalOn2() {
-//   const modal_open = document.querySelector("#create_modal");
-//   modal_open.style.display = "flex";
-// }
-
 export function modalOff2() {
   const modal_close = document.querySelector('#create_modal');
   modal_close.style.display = 'none';
 }
 
-// export async function getModal(){
-
-// }
-
-// // Update API
-// // comments collection 내에서 해당 id값을 가진 doc을 찾아서 doc.text를 업데이트
+// Update API
+// comments collection 내에서 해당 id값을 가진 doc을 찾아서 doc.text를 업데이트
 export const edit_btn = async (event) => {
   event.preventDefault();
   // 수정 버튼 삭제 => 완료 버튼 활성화
@@ -329,8 +320,6 @@ export const update_content = async (event) => {
   modalOff();
 };
 
-// updateDoc(commentRef, { text: newComment });
-
 // // Delete API
 // // comments collection 내에서 해당 id값을 가진 doc을 찾아서 삭제
 
@@ -353,13 +342,29 @@ export const delete_comment = async (event) => {
   }
 };
 
-// 현재 로그인 사용자 받아오기 > 로그인 했으면 해당 아이디와 동일한 게시글만 수정, 삭제 가능하도록
-// const auth = getAuth();
-//     const user = auth.currentUser;
-//     if (user !== null) {
-//     // The user object has basic properties such as display name, email, etc.
-//     const displayName = user;
-//     const email = user.email;
-//     const photoURL = user.photoURL;
-//     console.log(displayName,email,photoURL,)
-// }
+// Search
+export const search_contents = (event) => {
+  event.preventDefault();
+  const search_value = document.querySelector(".contents_search_input").value
+  const search_title = document.querySelectorAll(".card_content #title");
+  [...search_title].forEach(title => {
+    const mycards = title.parentNode.parentNode.parentNode.parentNode;
+    if (title.textContent.indexOf(search_value)) {
+      mycards.classList.add('disabled');
+    } else {
+      mycards.classList.remove('disabled');
+    }
+  })
+}
+
+// const nowValue = event.currentTarget.value;
+//   const noteSubjects = document.querySelectorAll('.note__subject');
+//   [...noteSubjects].forEach(subject => {
+//     const noteWrapper = subject.parentNode;
+//     const note = noteWrapper.parentNode;
+//     if (subject.textContent.indexOf(nowValue)) {
+//       note.classList.add('disabled');
+//     } else {
+//       note.classList.remove('disabled');
+//     }
+//   })

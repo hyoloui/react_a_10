@@ -16,6 +16,7 @@ import {
   delete_comment,
   edit_btn,
   update_content,
+  search_contents,
 } from './crud.js';
 import {
   changeProfile,
@@ -133,6 +134,7 @@ window.delete_comment = delete_comment;
 window.save_fanpick = save_fanpick;
 window.getList = getList;
 window.sendId = sendId;
+window.search_contents = search_contents;
 // 모달창
 window.modalOn = modalOn;
 window.modalOn2 = modalOn2;
