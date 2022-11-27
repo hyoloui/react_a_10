@@ -3,7 +3,7 @@
 <div class="myPage-container">
   <form id="profileForm" onsubmit="changeProfile(event)">
     <!-- 이미지영역 -->
-    <div class="myPage-img">
+    <div class="myPage-img mb-40">
       <label id="imgLabel" for="imgInput">
         <img src="../assets/mypageimg.png" id="profileView" />
         <input
@@ -21,34 +21,39 @@
         <ul>
           <div class="flex">
             <li>닉네임</li>
-            <input
-              type="text"
-              style="width: 170px; margin-right: 179px"
-              id="profileNickname"
-            />
+            <input type="text" id="profileNickname" class="basic_" />
           </div>
 
           <div class="flex">
             <li>이메일</li>
-            <input type="text" id="profileEmail" disabled />
+            <input type="text" id="profileEmail" class="disabled_" disabled />
           </div>
 
           <div class="flex">
-            <li style="color: red !important;">비밀번호 변경</li>
-            <input type="password" id="changePw" placeholder='변경할 비밀번호를 입력해주세요.'/>
+            <li style="color: red !important">비밀번호 변경</li>
+            <input
+              type="password"
+              id="changePw"
+              placeholder="변경할 비밀번호를 입력해주세요."
+              class="basic_"
+            />
           </div>
 
           <div class="flex">
-            <li style="color: red !important;">비밀번호 확인</li>
+            <li style="color: red !important">비밀번호 확인</li>
             <span id="errorChangePw"></span>
-            <input type="password" id="changePwCheck" placeholder='다시한번 입력해주세요.' />
+            <input
+              type="password"
+              id="changePwCheck"
+              placeholder="다시한번 입력해주세요."
+              class="basic_ mb-20"
+            />
           </div>
 
           <div class="flex">
             <li>인사말</li>
-            <textarea id="hi"></textarea>
+            <textarea id="hi" class="t_a"></textarea>
           </div>
-
         </ul>
       </div>
     </div>

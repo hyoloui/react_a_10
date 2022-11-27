@@ -6,6 +6,49 @@
   text-align: center;
 }
 
+.basic_ {
+  width: 315px;
+  height: 22px;
+  border: none;
+  background-color: #ccb9ed;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.disabled_ {
+  width: 315px;
+  height: 22px;
+  border: none;
+  background-color: transparent;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.disabled_::placeholder {
+  color: #1c134e;
+  font-weight: bold;
+}
+
+.basic_::placeholder {
+  color: #1c134e;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.t_a {
+  width: 315px;
+  height: 100px;
+  border: none;
+  padding: 20px;
+  border-radius: 5px;
+}
+
 #profileView {
   width: 250px;
   height: 250px;
@@ -32,17 +75,6 @@
   justify-content: space-between;
   margin-bottom: 8px;
   align-items: center;
-}
-
-.flex input {
-  width: 350px;
-  height: 21px;
-}
-
-.flex textarea {
-  width: 350px;
-  height: 100px;
-  resize: none;
 }
 
 .flex li {
@@ -76,23 +108,25 @@
 }
 
 .myPage-save input {
-  border: 2px solid black;
+  width: 160px;
+  height: 50px;
   border-radius: 30px;
   font-size: 18px;
   padding: 8px 15px 5px 15px;
-  background-color: black;
+  background-color: #1c134e;
   color: white;
   font-weight: 700;
   cursor: pointer;
 }
 
 .myPage-save input:hover {
-  background-color: rgb(255, 255, 255);
-  color: black;
+  background-color: #ccb9ed;
+  color: #1c134e;
+  border: 1px solid #7065af;
 }
 
 .profile-menu-login,
-.profile-menu-logout{
+.profile-menu-logout {
   width: 130px;
   font-size: 20px;
   display: flex;
@@ -114,7 +148,7 @@
 .profile-menu-login a:hover,
 .profile-menu-logout a:hover,
 .profile-menu-login p:hover,
-.profile-menu-logout p:hover  {
+.profile-menu-logout p:hover {
   background-color: rgb(236, 236, 236) !important;
   color: blueviolet !important;
 }
