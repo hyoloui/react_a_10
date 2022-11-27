@@ -236,10 +236,9 @@ i {
   height: 130px;
   object-fit: cover;
 }
-
 .card_content {
   margin: 10px;
-  height: 100px;
+  min-height: 100px;
   overflow: hidden;
   border-bottom: 1px solid gray;
 }

@@ -106,20 +106,15 @@ export async function getList() {
     const temp_html = `<div class="content_card_container" id="${
       fanPickList.id
     }" onclick="sendId(this.id)">
+    <div onclick="modalOn(${fanPickList.id})">
         <!--카드이미지-->
         <div class="card_img">
-            <img onclick="modalOn(${fanPickList.id})" src="${
-      fanPickList.이미지 ?? no_img
-    }"
+            <img  src="${fanPickList.이미지 ?? no_img}"
                 alt="게시글 이미지" />
             <!--글제목,내용 간단히-->
             <div class="card_content">
-                <h4 id="title" onclick="modalOn(${fanPickList.id})">${
-      fanPickList.제목
-    }</h4>
-                <p id="content" onclick="modalOn(${fanPickList.id})">${
-      fanPickList.내용
-    }</p>
+                <h4 id="title">${fanPickList.제목}</h4>
+                <p id="content">${fanPickList.내용}</p>
             </div>
             <!--좋아요
             <div class="card_like">
@@ -137,6 +132,7 @@ export async function getList() {
                   .toString()
                   .slice(0, 25)}</span></div>
             </div>
+        </div>
         </div>
     </div>`;
 
