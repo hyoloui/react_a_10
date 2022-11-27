@@ -37,19 +37,16 @@
         </div>
 
         <div class="headline3">
-          <input type="file" id="modalUpImg" onchange="uploadImage(event)" class="btn">사진추가</input>
+          <input type="file" id="modalUpImg" onchange="uploadImage(event)" class="btn"></input>
         </div>
 
         <div class="contents_area">
-          <div id="modalImgVeiw" class="content_pic">사진 들어가는곳</div>
           <textarea class="content2" placeholder="여기에 내용을 입력해 주세요!"></textarea>
         </div>
-        <div class="comments_area">
-          <div class="form-commentInfo">
-            <button onclick="save_fanpick(event)" type="submit" class="submit" title="Title">작성</button>
+          <div class="save_fanpick_wrap">
+            <button onclick="save_fanpick(event)" id="save_fanpick_" type="submit" class="submit" title="Title">팬픽 작성하기!</button>
             <!-- <div class="profile_img_box"></div> -->
           </div>
-        </div>
       </div>
     </div>
   </div>

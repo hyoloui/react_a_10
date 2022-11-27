@@ -244,7 +244,6 @@ export async function modalOn(id) {
           </div>
   
           <div class="comments_area">
-              <p class="comment">댓글쓰기</p>
               <div class="form-commentInfo">
                   <textarea class="comment-input" placeholder="comment" id="comment"></textarea>
                   <button class="submit" onclick="Post_comment(event)">댓글 저장</button>
