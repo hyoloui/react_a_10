@@ -17,7 +17,7 @@ textarea {
   margin: 0 auto;
   display: flex;
   max-width: 1200px;
-  min-width: 650px;
+  /* min-width: 650px; */
   justify-content: center;
 }
 
@@ -132,14 +132,14 @@ h4 {
 .whatitname_container {
   display: flex;
   justify-content: space-between;
-  margin: 20px 36px;
+  margin: 20px 0;
   align-items: center;
-  width: 100%;
-  min-width: 1200px;
+  /* width: 100%; */
+  /* min-width: 1200px; */
 }
 
 .whatitname_right {
-  margin: 0 25px;
+  /* margin: 0 25px; */
   display: flex;
 }
 
@@ -158,19 +158,27 @@ h4 {
   color: #ffffff;
   border: 1px solid #1c134e;
 }
+.whatitname_right button:first-child {
+  padding: 0;
+  width: 210px;
+}
 .whatitname_right button {
   padding: 6px 25px;
   background-color: #1c134e;
   color: #ccb9ed;
   border: 1px solid #cdb4fb;
   border-radius: 5px;
+  font-size: medium;
 }
 
 .contents_search {
   border: 1px solid gray;
   margin: 0 10px;
   position: relative;
-  width: 170px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .whatitname_right i {
@@ -186,9 +194,10 @@ i {
 .contents_search_input {
   border: none;
   height: 25px;
-  width: 120px;
+  width: 100%;
   padding: 3px 10px;
   font-size: 15px;
+  background-color: transparent;
 }
 
 .main_contents {
@@ -200,9 +209,10 @@ i {
 .content_card_container {
   cursor: pointer;
   border: 1px solid gray;
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
   height: 300px;
-  margin: 0 10px 10px 0;
+  margin: 20px 10px;
   border-radius: 10px;
   box-shadow: 2px 2px 6px 0px #aebaf0;
   background-color: #fff;
@@ -279,6 +289,11 @@ i {
   font-size: 13px;
   color: gray;
 }
+.card_date span {
+  display: flex;
+  text-align: end;
+  padding-right: 8px;
+}
 
 .disabled {
 	display: none;
@@ -308,13 +323,20 @@ a {
 .profile-menu-logout p {
   cursor: pointer;
 }
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 950px) {
   .contents_search {
     height: 31px;
-    min-width: 167px;
+    width: 80%;
+    margin: 15px 0;
   }
   .contents_search_input {
     max-width: 70%;
+  }
+  .whatitname_right button:first-child{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .whatitname_right button {
     max-height: 33px;
@@ -327,6 +349,7 @@ a {
   .whatitname_right {
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
   }
   .whatitname_left {
     text-align: center;
