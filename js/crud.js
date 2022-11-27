@@ -172,7 +172,6 @@ export const Post_comment = async (event) => {
   }
 };
 
-
 // 특정 버튼을 누르면 모달창이 켜지게 하기
 export async function modalOn(id) {
   // await getCommentList();
@@ -246,9 +245,8 @@ export async function modalOn(id) {
           <div class="comments_area">
               <p class="comment">댓글쓰기</p>
               <div class="form-commentInfo">
-                  <textarea class="comment-input" placeholder="comment" id = "comment">
-                  ${doc.text}</textarea>
-                  <button class="submit" onclick="Post_comment(event)">저장</button>
+                  <textarea class="comment-input" placeholder="comment" id="comment"></textarea>
+                  <button class="submit" onclick="Post_comment(event)">댓글 저장</button>
               <!-- <div class="profile_img_box"></div> -->
               </div>
               <div class="comments_wrap" >
