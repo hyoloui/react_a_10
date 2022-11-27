@@ -16,14 +16,16 @@ import {
   delete_comment,
   edit_btn,
   update_content,
-} from './crud.js';
+  getCommentList,
+  Post_comment,
+} from "./crud.js";
 import {
   changeProfile,
   onFileChange,
   logout,
   getHiList,
   myPost,
-} from './miyoung.js';
+} from "./miyoung.js";
 import {
   handleLogin,
   handleJoin,
@@ -49,22 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if (user) {
       // 유저라는 객체가 확인이 되면
       // 상단 오른쪽 프로필메뉴 hover기능 만들었어요.
-      console.log('로그인상태');
-      const topProfile = document.querySelector('#nav_profile');
-      const menuDisplay = document.querySelector('#menu_display');
-      const navProfileImg = document.querySelector('#nav_profile_img');
-      const profileMenuLogin = document.querySelector('#profile-menu-login');
-      const menuDisplayLogOut = document.getElementById('menu_display-logout');
-      menuDisplayLogOut.style.display = 'none !important;';
-      document.getElementById('nav_profile_img').src =
-        authService.currentUser.photoURL ?? '../assets/mypageimg.png';
-      topProfile.addEventListener('mouseenter', function (event) {
-        menuDisplay.style.display = 'flex';
+      console.log("로그인상태");
+      const topProfile = document.querySelector("#nav_profile");
+      const menuDisplay = document.querySelector("#menu_display");
+      const navProfileImg = document.querySelector("#nav_profile_img");
+      const profileMenuLogin = document.querySelector("#profile-menu-login");
+      const menuDisplayLogOut = document.getElementById("menu_display-logout");
+      menuDisplayLogOut.style.display = "none !important;";
+      document.getElementById("nav_profile_img").src =
+        authService.currentUser.photoURL ?? "../assets/mypageimg.png";
+      topProfile.addEventListener("mouseenter", function (event) {
+        menuDisplay.style.display = "flex";
       });
-      topProfile.addEventListener('mouseleave', function (event) {
-        menuDisplay.style.display = 'none';
+      topProfile.addEventListener("mouseleave", function (event) {
+        menuDisplay.style.display = "none";
       });
-
     } else {
       // 유저라는 객체가 없다면 로그아웃 상태임.
       console.log("로그아웃상태");
@@ -81,13 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const logoutMenu = document.getElementById("profile-menu-logout");
       const menuDisplayLogOut = document.getElementById("menu_display-logout");
       menuDisplay.style.display = "none";
-      topProfile.addEventListener('mouseenter', function (event) {
-        menuDisplayLogOut.style.display = 'flex';
+      topProfile.addEventListener("mouseenter", function (event) {
+        menuDisplayLogOut.style.display = "flex";
       });
-      topProfile.addEventListener('mouseleave', function (event) {
-        menuDisplayLogOut.style.display = 'none';
+      topProfile.addEventListener("mouseleave", function (event) {
+        menuDisplayLogOut.style.display = "none";
       });
-
 
       // topProfile.addEventListener("click", function () {
       //   console.log("menuDisplayLogOut", menuDisplayLogOut);
@@ -103,9 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
-
 
 // // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 // 모듈로 된 js 파일은 전역으로 쓸 수 없음. 지역적으로만 사용이 가능한데
@@ -155,3 +152,5 @@ window.getHiList = getHiList;
 window.getHiList = getHiList;
 window.myPost = myPost;
 window.darkMode = darkMode;
+window.getCommentList = getCommentList;
+window.Post_comment = Post_comment;
