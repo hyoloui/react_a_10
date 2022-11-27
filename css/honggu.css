@@ -124,6 +124,7 @@ a {
   align-items: center;
   background-color: transparent;
   border: 0px solid #666666;
+  padding: 0;
 }
 #close-area > i {
   left: 0 !important;
