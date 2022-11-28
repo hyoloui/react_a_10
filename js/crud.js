@@ -308,7 +308,6 @@ export async function modalOn(id) {
     alert("로그인을 해주세요.");
   }
     getCommentList();
-    selectId = "";
 }
 // 모달창의 클로즈 / (x) 버튼을 누르면 모달창이 꺼지게 하기
 export function modalOff() {
@@ -378,7 +377,7 @@ export const update_content = async (event) => {
       제목: new_title,
       내용: new_content,
     });
-    // getCommentList();
+    getCommentList();
   } catch (error) {
     alert(error);
   }
