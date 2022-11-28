@@ -6,12 +6,12 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-s
 
 // 아래 데이터는 본인의 Firebase 프로젝트 설정에서 확인할 수 있습니다.
 const firebaseConfig = {
-  apiKey: "AIzaSyD69m0S9TB3ZJGa58FR1guR8k13JRn9eKU",
-  authDomain: "honggu-3d28a.firebaseapp.com",
-  projectId: "honggu-3d28a",
-  storageBucket: "honggu-3d28a.appspot.com",
-  messagingSenderId: "392939093965",
-  appId: "1:392939093965:web:e64023b9a06aec63cc4e84",
+  apiKey: "AIzaSyCxTOTcrmWxKStSQ4jALWcqQ2KOrSf44uk",
+  authDomain: "korea-a5fb6.firebaseapp.com",
+  projectId: "korea-a5fb6",
+  storageBucket: "korea-a5fb6.appspot.com",
+  messagingSenderId: "690071531082",
+  appId: "1:690071531082:web:1e79704afafba18653c0b3",
 };
 
 // Initialize Firebase
