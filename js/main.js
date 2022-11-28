@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (user) {
       // 유저라는 객체가 확인이 되면
-      // 상단 오른쪽 프로필메뉴 hover기능 만들었어요.
+      // 상단 오른쪽 프로필메뉴 hover기능 만들었어요. - 미영
       console.log("로그인상태");
       const topProfile = document.querySelector("#nav_profile");
       const menuDisplay = document.querySelector("#menu_display");
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 로그아웃 상태에서 로그인화면이 아니라면
         window.location.replace("/"); // 로그인 화면으로 강제 이동
       }
-      // 로그아웃 상태에서 오른쪽 상단 프로필 hover하면 메뉴나오게 했어요.
+      // 로그아웃 상태에서 오른쪽 상단 프로필 hover하면 메뉴나오게 했어요. - 미영
       const topProfile = document.querySelector("#nav_profile");
       const menuDisplay = document.querySelector("#menu_display");
       const navProfileImg = document.querySelector("#nav_profile_img");
@@ -89,11 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
       topProfile.addEventListener("mouseleave", function (event) {
         menuDisplayLogOut.style.display = "none";
       });
-
-      // topProfile.addEventListener("click", function () {
-      //   console.log("menuDisplayLogOut", menuDisplayLogOut);
-      //   menuDisplayLogOut.style.display = "block";
-      // });
 
       // 다른 영역 클릭 시 메뉴 없어짐
       document.addEventListener("click", function (event) {

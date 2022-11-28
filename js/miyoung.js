@@ -41,7 +41,7 @@ export const changeProfile = async (event) => {
   );
 
   const newNickname = document.getElementById("profileNickname").value;
-  // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.
+  // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장. - 미영
   const imgDataUrl = localStorage.getItem("imgDataUrl");
   let downloadUrl;
   if (imgDataUrl) {
@@ -61,7 +61,7 @@ export const changeProfile = async (event) => {
       console.log("error:", error);
     });
 
-  // 비밀번호 변경 기능 추가
+  // 비밀번호 변경 기능 추가 - 미영
   // const auth = getAuth(); authService = getAuth라서 다 불러올 필요 없음
 
   const user = authService.currentUser;
@@ -107,7 +107,7 @@ export const onFileChange = (event) => {
   };
 };
 
-//로그아웃 기능. singout을 import 해왔어야 했다.
+//로그아웃 기능. singout을 import 해왔어야 했다. - 미영
 export const logout = (event) => {
   event.preventDefault(); // a태그가 가지고있는 새로고침하는 기본 이벤트를 없애줌
   console.log("로그아웃클릭");

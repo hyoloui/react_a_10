@@ -1,4 +1,4 @@
-// 화면을 껐다 키면 다시 화이트모드로 바뀔 수 있게 세션스토리지에 데이터를 저장
+// 화면을 껐다 키면 다시 화이트모드로 바뀔 수 있게 세션스토리지에 데이터를 저장 - 미영
 
 export const darkMode = function () {
   sessionStorage.count += 1;
