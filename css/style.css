@@ -249,6 +249,7 @@ i {
 }
 .card_content > h4,
 .card_content > p {
+  max-height: 60px;
   cursor: pointer;
   text-align: center;
   margin: 3px;
