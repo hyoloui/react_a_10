@@ -393,15 +393,14 @@ export const getCommentList = async () => {
   let recentCommentList = [];
   
   const modalWrapper = document.querySelector(".ceo");
-  const { photoURL } = authService.currentUser;
   querySnapshot.forEach((comment, index) => {
-    const { postId, text, nickname, createdAt } = comment.data();
+    const { postId, text, nickname, createdAt, profileImg } = comment.data();
     if (modalWrapper.id === postId) {
       recentCommentList.push({
         text: text,
         nickname: nickname,
         createdAt: createdAt,
-        프로필이미지: photoURL,
+        profileImg: profileImg,
       });
     }
   });
@@ -409,11 +408,11 @@ export const getCommentList = async () => {
   const commentList = document.querySelector(".comments_wrap");
 
   recentCommentList.forEach((comment) => {
-    const { text, nickname, createdAt } = comment;
+    const { text, nickname, createdAt , profileImg} = comment;
     const temp_html = `
     <div class="comments_content2">${text}</div>
     <div class="comments_profile_wrap">
-        <img class="profile_img_box" src="${photoURL ?? no_img}">
+        <img class="profile_img_box" src="${profileImg ?? no_img}">
         <div class="profile_name">${nickname ?? "닉네임 없음"}</div>
         <div class="date">${new Date(createdAt).toString().slice(0, 25)}</div>
     </div>`;
