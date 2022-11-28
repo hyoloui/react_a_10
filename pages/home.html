@@ -2,25 +2,27 @@
   <!--최신순,좋아요-->
   <div class="whatitname_left">
     <span><i class="fa-regular fa-clock"></i>최신순</span>
-    <span><i class="fa-solid fa-heart"></i>좋아요순</span>
+    <!-- <span><i class="fa-solid fa-heart"></i>좋아요순</span> -->
   </div>
 
   <!--글쓰기, 검색버튼-->
   <div class="whatitname_right">
-    <button onclick="modalOn2()" class="cursor">팬pick 작성</button>
-    <!-- <div class="contents_search">
-      <input class="contents_search_input" />
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </div> -->
+    <button onclick="modalOn2()"  class="cursor">팬pick 작성</button>
+    <div class="contents_search">
+      <input
+      class="contents_search_input"
+      placeholder="팬픽을 검색해 보세요"
+      onkeypress="search_contents(event)"
+      />
+      <button type="button" onclick="search_contents(event)" class="fa-solid fa-magnifying-glass"></button>
+    </div>
 
     <!-- 글쓰기 모달창 -->
     <div id="create_modal" class="modal-overlay">
       <div class="modal-window">
         <div class="headline1">
           <div class="profile_wrap">
-            <div class="profile_img_box">
-              <img src="../assets/mypageimg.png" alt="기본이미지">
-            </div>
+            <div class="profile_img_box"></div>
             <div class="profile_name">작성자</div>
           </div>
           <button id="close-area" class="close-area" onclick="modalOff2()" title="Title">
@@ -33,19 +35,16 @@
         </div>
 
         <div class="headline3">
-          <input type="file" id="modalUpImg" onchange="uploadImage(event)" class="btn">사진추가</input>
+          <input type="file" id="modalUpImg" onchange="uploadImage(event)" class="btn"></input>
         </div>
 
         <div class="contents_area">
-          <div id="modalImgVeiw" class="content_pic">사진 들어가는곳</div>
           <textarea class="content2" placeholder="여기에 내용을 입력해 주세요!"></textarea>
         </div>
-        <div class="comments_area">
-          <div class="form-commentInfo">
-            <button onclick="save_fanpick(event)" type="submit" class="submit" title="Title">작성</button>
+          <div class="save_fanpick_wrap">
+            <button onclick="save_fanpick(event)" id="save_fanpick_" type="submit" class="submit" title="Title">팬픽 작성하기!</button>
             <!-- <div class="profile_img_box"></div> -->
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -55,19 +54,17 @@
 <article class="main_contents">
   <!--카드1개-->
   <div id="newsFeed">
-    <div class="content_card_container">
-      <!--카드이미지-->
+    <h1 style="margin: 100px;">로딩중입니다. 잠시만 기다려 주세요🙌</h1>
+    <!-- <div class="content_card_container">
       <div class="card_img">
         <img onclick="modalOn()" class="cursor"
-          src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_500.jpg?61e575e8653e5920470a38d1482d7312/melon/resize/416/quality/80/optimize"
+          src="../assets/whitebackground.png"
           alt="" />
       </div>
-      <!--글제목,내용 간단히-->
       <div class="card_content cursor" onclick="modalOn()">
         <h4>부드라미 도와줘요</h4>
         <p>abcdefghijklmnopqrstuvwxyz</p>
       </div>
-      <!--좋아요-->
       <div class="card_like">
         <span>162</span> <i class="fa-solid fa-heart"></i>
       </div>
@@ -80,7 +77,7 @@
         <div class="card_name"><span>아이유너무예뻐</span></div>
         <div class="card_date"><span>2022.11.18</span></div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- 빈 모달창 -->
