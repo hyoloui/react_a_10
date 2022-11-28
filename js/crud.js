@@ -182,6 +182,7 @@ export async function modalOn(id) {
 
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
+      // 해당 파이어베이스 문서 id값을 가져옴
       if (doc.id === selectId) {
         const commentObj = {
           id: selectId,
@@ -277,6 +278,8 @@ export function sendId(showId) {
   console.log(selectId);
 }
 
+// 글쓰기 모달창 열기
+// 로그인상태라면 모달창을 flex로 바꿔서 열고 이름, 프로필을 불러옴. 로그아웃 상태라면 로그인창으로 이동
 export function modalOn2() {
   // const hash = window.location.hash;
   let user = authService.currentUser;
@@ -296,7 +299,7 @@ export function modalOn2() {
   }
 }
 
-// 팬픽 작성 모달창
+// 모달창 닫기
 export function modalOff2() {
   const modal_close = document.querySelector("#create_modal");
   modal_close.style.display = "none";
@@ -346,20 +349,14 @@ export const update_content = async (event) => {
 
 // // Delete API
 // // comments collection 내에서 해당 id값을 가진 doc을 찾아서 삭제
-
 export const delete_comment = async (event) => {
-  event.preventDefault();
-  //   const uid = authService.currentUser.uid;
-  // 이벤트가 발생한 타겟을 반환해줌
   const id = event.target.id;
-  console.log("hello", event.target.id);
   const ok = window.confirm("해당 글을 정말 삭제하시겠습니까?");
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "fan-pick", id));
       getList();
       modalOff();
-      //   cardList();
     } catch (error) {
       alert(error);
     }

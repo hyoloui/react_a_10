@@ -11,7 +11,7 @@ const firebaseConfig = {
   projectId: "honggu-3d28a",
   storageBucket: "honggu-3d28a.appspot.com",
   messagingSenderId: "392939093965",
-  appId: "1:392939093965:web:e64023b9a06aec63cc4e84"
+  appId: "1:392939093965:web:e64023b9a06aec63cc4e84",
 };
 
 // Initialize Firebase
