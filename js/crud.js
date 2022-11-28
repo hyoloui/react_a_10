@@ -16,9 +16,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
-// const dbService = getStorage(app); // app은 Firebase 프로젝트 연결 객체
 const no_img = "../assets/mypageimg.png";
-
 
 
 // Create API
@@ -79,10 +77,41 @@ export const uploadImage = (event) => {
     localStorage.setItem("imgDataUrl2", imgDataUrl2);
   };
 };
+// 댓글 작성 / 어떤 data를 DB에 저장할지 진행 - 도원
+export const Post_comment = async (event) => {
+  event.preventDefault();
+  const modalWrapper = event.target.closest(".ceo");
+  console.log(modalWrapper);
+  const comment = document.getElementById("comment");
+  const { photoURL, displayName } = authService.currentUser;
+  console.log("event.target", event.target);
+  try {
+    await addDoc(collection(dbService, "comments"), {
+      text: comment.value,
+      createdAt: Date.now(),
+      profileImg: photoURL,
+      nickname: displayName,
+      postId: modalWrapper.id,
+    });
+    comment.value = "";
+    getCommentList();
+    window.location.reload();
+  } catch (error) {
+    alert(error);
+    console.log("error in addDoc:", error);
+  }
+};
 
 // Read API
 // id 받아적기
 let selectId = "";
+// 받아적은 id 하나만 가져오기
+export function sendId(showId) {
+  selectId = "";
+  selectId = showId;
+  console.log(selectId);
+}
+// 뉴스피드 업데이트 = 겟 리스트
 export async function getList() {
   const cardList = [];
   // query 를 db에서 받아와 q로 선언
@@ -146,34 +175,51 @@ export async function getList() {
     console.log(cardList);
   });
 }
-//어떤 data를 DB에 저장할지 진행
-export const Post_comment = async (event) => {
-  event.preventDefault();
-  const modalWrapper = event.target.closest(".ceo");
-  console.log(modalWrapper);
-  const comment = document.getElementById("comment");
-  const { photoURL, displayName } = authService.currentUser;
-  console.log("event.target", event.target);
-  try {
-    await addDoc(collection(dbService, "comments"), {
-      text: comment.value,
-      createdAt: Date.now(),
-      profileImg: photoURL,
-      nickname: displayName,
-      postId: modalWrapper.id,
-    });
-    comment.value = "";
-    getCommentList();
-    window.location.reload();
-  } catch (error) {
-    alert(error);
-    console.log("error in addDoc:", error);
-  }
-};
+//댓글 DB불러와서 화면창에 띄우기
+export const getCommentList = async () => {
+  // let currentUserId = await authService.currentUser.uid;
 
-// 특정 버튼을 누르면 모달창이 켜지게 하기
+  const q = query(
+    collection(dbService, "comments"),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(q);
+  let recentCommentList = [];
+  //DB에 어떤 DATA를 화면에 표출할지 선택
+  const modalWrapper = document.querySelector(".ceo");
+  querySnapshot.forEach((comment, index) => {
+    const { postId, text, nickname, createdAt, profileImg } = comment.data();
+    if (modalWrapper.id === postId) {
+      recentCommentList.push({
+        text: text,
+        nickname: nickname,
+        createdAt: createdAt,
+        profileImg: profileImg,
+      });
+    }
+  });
+
+  const commentList = document.querySelector(".comments_wrap");
+  //저장된 DB에서 화면으로 표출하기
+  recentCommentList.forEach((comment) => {
+    const { text, nickname, createdAt, profileImg } = comment;
+    const temp_html = `
+    <div class="comments_content2">${text}</div>
+    <div class="comments_profile_wrap">
+        <img class="profile_img_box" src="${profileImg ?? no_img}">
+        <div class="profile_name">${nickname ?? "닉네임 없음"}</div>
+        <div class="date">${new Date(createdAt).toString().slice(0, 25)}</div>
+    </div>`;
+
+    const tempDiv = document.createElement(`div`);
+    tempDiv.innerHTML = temp_html;
+    tempDiv.classList.add("comment");
+
+    commentList.appendChild(tempDiv);
+  });
+};
+// 모달 / 해당 게시글 누르면 모달창이 켜지게 하기
 export async function modalOn(id) {
-  // await getCommentList();
   let user = authService.currentUser;
   if (user) {
     const card = [];
@@ -261,21 +307,13 @@ export async function modalOn(id) {
     window.location.replace("#changsun");
     alert("로그인을 해주세요.");
   }
-
-  getCommentList();
+    getCommentList();
+    selectId = "";
 }
-
-// 모달창의 클로즈(x) 버튼을 누르면 모달창이 꺼지게 하기
+// 모달창의 클로즈 / (x) 버튼을 누르면 모달창이 꺼지게 하기
 export function modalOff() {
   const modal_close = document.querySelector(".modal_inner");
   modal_close.remove();
-}
-
-// 받아적은 id 하나만 가져오기
-export function sendId(showId) {
-  selectId = "";
-  selectId = showId;
-  console.log(selectId);
 }
 
 // 글쓰기 모달창 열기
@@ -298,8 +336,7 @@ export function modalOn2() {
     alert("로그인을 해주세요.");
   }
 }
-
-// 모달창 닫기
+// 글쓰기 모달창 닫기
 export function modalOff2() {
   const modal_close = document.querySelector("#create_modal");
   modal_close.style.display = "none";
@@ -309,8 +346,9 @@ export function modalOff2() {
   document.getElementById("modalUpImg").value = "";
 }
 
+
 // Update API
-// comments collection 내에서 해당 id값을 가진 doc을 찾아서 doc.text를 업데이트
+// 수정 버튼 / 클릭시 돔 요소 전환
 export const edit_btn = async (event) => {
   event.preventDefault();
   // 수정 버튼 삭제 => 완료 버튼 활성화
@@ -326,9 +364,10 @@ export const edit_btn = async (event) => {
   const content_text = content.textContent;
   console.log(title_text, content_text);
   // 수정 버튼 클릭 시 제목, 내용 태그를 input과 textarea로 변경
-  title.innerHTML = `<textarea id="new_title" class="title" style="width:50vw; height: 40px; max-width:880px; min-width:880px;" >${title_text}</textarea>`;
-  content.innerHTML = `<textarea id="new_content" class="title" style="width:50vw; height:10vh; max-width:880px; min-width:880px;">${content_text}</textarea>`;
+  title.innerHTML = `<textarea id="new_title" class="title" style="width:50vw; height: 40px; max-width:880px; min-width:880px; font-size:20px;" >${title_text}</textarea>`;
+  content.innerHTML = `<textarea id="new_content" class="title" style="width:50vw; height:10vh; max-width:880px; min-width:880px; font-size:18px;">${content_text}</textarea>`;
 };
+// fan-pick collection 내에서 해당 id값을 가진 doc을 찾아서 doc.text를 업데이트
 export const update_content = async (event) => {
   event.preventDefault();
   const new_title = document.querySelector("#new_title").value;
@@ -363,6 +402,7 @@ export const delete_comment = async (event) => {
   }
 };
 
+
 // Search
 export const search_contents = (event) => {
   event.preventDefault();
@@ -378,48 +418,4 @@ export const search_contents = (event) => {
       }
     });
   }
-};
-
-//댓글 DB불러와서 화면창에 띄우기
-export const getCommentList = async () => {
-  // let currentUserId = await authService.currentUser.uid;
-
-  const q = query(
-    collection(dbService, "comments"),
-    orderBy("createdAt", "desc")
-  );
-  const querySnapshot = await getDocs(q);
-  let recentCommentList = [];
-  //DB에 어떤 DATA를 화면에 표출할지 선택
-  const modalWrapper = document.querySelector(".ceo");
-  querySnapshot.forEach((comment, index) => {
-    const { postId, text, nickname, createdAt, profileImg } = comment.data();
-    if (modalWrapper.id === postId) {
-      recentCommentList.push({
-        text: text,
-        nickname: nickname,
-        createdAt: createdAt,
-        profileImg: profileImg,
-      });
-    }
-  });
-
-  const commentList = document.querySelector(".comments_wrap");
-  //저장된 DB에서 화면으로 표출하기
-  recentCommentList.forEach((comment) => {
-    const { text, nickname, createdAt, profileImg } = comment;
-    const temp_html = `
-    <div class="comments_content2">${text}</div>
-    <div class="comments_profile_wrap">
-        <img class="profile_img_box" src="${profileImg ?? no_img}">
-        <div class="profile_name">${nickname ?? "닉네임 없음"}</div>
-        <div class="date">${new Date(createdAt).toString().slice(0, 25)}</div>
-    </div>`;
-
-    const tempDiv = document.createElement(`div`);
-    tempDiv.innerHTML = temp_html;
-    tempDiv.classList.add("comment");
-
-    commentList.appendChild(tempDiv);
-  });
 };

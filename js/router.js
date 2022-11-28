@@ -12,10 +12,6 @@ const routes = {
   404: "/pages/404.html",
   "/": "/pages/home.html",
   changsun: "/pages/changsun.html",
-  dowon: "/pages/dowon.html",
-  miyoung: "/pages/miyoung.html",
-  seunghyo: "/pages/seunghyo.html",
-  hongu: "/pages/hongu.html",
   mypage: "/pages/mypage.html",
   mywriting: "/pages/mywriting.html",
 };
