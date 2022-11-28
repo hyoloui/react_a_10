@@ -2,16 +2,21 @@
     <!--최신순,좋아요-->
     <div class="whatitname_left">
       <span><i class="fa-regular fa-clock"></i>최신순</span>
-      <span><i class="fa-solid fa-heart"></i>좋아요순</span>
     </div>
   
     <!--글쓰기, 검색버튼-->
-    <div class="whatitname_right">
-      <button onclick="modalOn2()" class="cursor">팬pick 작성</button>
-      <div class="contents_search">
-        <input aria-labelledby="" class="contents_search_input" />
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
+  <div class="whatitname_right">
+    <button onclick="modalOn2()"  class="cursor">팬pick 작성</button>
+    <div class="contents_search">
+      <input
+      aria-labelledby=""
+      class="contents_search_input"
+      type="text"
+      placeholder="팬픽을 검색해 보세요"
+      onkeypress="search_contents(event)"
+      />
+      <button onclick="search_contents(event)" class="fa-solid fa-magnifying-glass"></button>
+    </div>
   
       <!-- 글쓰기 모달창 -->
       <div id="create_modal" class="modal-overlay">

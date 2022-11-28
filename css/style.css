@@ -117,9 +117,8 @@ h4 {
 
 .nav_logo img {
   height: 50px;
-  padding : 10px 0;
+  padding: 10px 0;
   object-fit: cover;
-  
 }
 
 .nav_profile img {
@@ -237,10 +236,9 @@ i {
   height: 130px;
   object-fit: cover;
 }
-
 .card_content {
   margin: 10px;
-  height: 100px;
+  min-height: 100px;
   overflow: hidden;
   border-bottom: 1px solid gray;
 }
@@ -298,7 +296,7 @@ i {
 }
 
 .disabled {
-	display: none;
+  display: none;
 }
 
 .dp_none {
@@ -334,7 +332,7 @@ a {
   .contents_search_input {
     max-width: 70%;
   }
-  .whatitname_right button:first-child{
+  .whatitname_right button:first-child {
     padding: 20px;
     display: flex;
     align-items: center;

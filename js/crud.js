@@ -69,6 +69,7 @@ export const save_fanpick = async (event) => {
     title.value = "";
     content.value = "";
     localStorage.removeItem("imgDataUrl2");
+    document.getElementById("modalUpImg").value = "";
     getList();
     modalOff2();
   } catch (error) {
@@ -105,20 +106,15 @@ export async function getList() {
     const temp_html = `<div class="content_card_container" id="${
       fanPickList.id
     }" onclick="sendId(this.id)">
+    <div onclick="modalOn(${fanPickList.id})">
         <!--카드이미지-->
         <div class="card_img">
-            <img onclick="modalOn(${fanPickList.id})" src="${
-      fanPickList.이미지 ?? no_img
-    }"
+            <img  src="${fanPickList.이미지 ?? no_img}"
                 alt="게시글 이미지" />
             <!--글제목,내용 간단히-->
             <div class="card_content">
-                <h4 id="title" onclick="modalOn(${fanPickList.id})">${
-      fanPickList.제목
-    }</h4>
-                <p id="content" onclick="modalOn(${fanPickList.id})">${
-      fanPickList.내용
-    }</p>
+                <h4 id="title">${fanPickList.제목}</h4>
+                <p id="content">${fanPickList.내용}</p>
             </div>
             <!--좋아요
             <div class="card_like">
@@ -136,6 +132,7 @@ export async function getList() {
                   .toString()
                   .slice(0, 25)}</span></div>
             </div>
+        </div>
         </div>
     </div>`;
 
@@ -243,7 +240,6 @@ export async function modalOn(id) {
           </div>
   
           <div class="comments_area">
-              <p class="comment">댓글쓰기</p>
               <div class="form-commentInfo">
                   <textarea class="comment-input" placeholder="comment" id="comment"></textarea>
                   <button class="submit" onclick="Post_comment(event)">댓글 저장</button>
@@ -302,6 +298,10 @@ export function modalOn2() {
 export function modalOff2() {
   const modal_close = document.querySelector("#create_modal");
   modal_close.style.display = "none";
+  document.querySelector(".title2").value = "";
+  document.querySelector(".content2").value = "";
+  localStorage.removeItem("imgDataUrl2");
+  document.getElementById("modalUpImg").value = "";
 }
 
 // Update API
@@ -367,19 +367,19 @@ export const delete_comment = async (event) => {
 // Search
 export const search_contents = (event) => {
   event.preventDefault();
-  if(event.keyCode == 13){
-    const search_value = document.querySelector(".contents_search_input").value
+  if (event.keyCode == 13) {
+    const search_value = document.querySelector(".contents_search_input").value;
     const search_title = document.querySelectorAll(".card_content #title");
-    [...search_title].forEach(title => {
+    [...search_title].forEach((title) => {
       const mycards = title.parentNode.parentNode.parentNode.parentNode;
       if (title.textContent.indexOf(search_value)) {
-        mycards.classList.add('disabled');
+        mycards.classList.add("disabled");
       } else {
-        mycards.classList.remove('disabled');
+        mycards.classList.remove("disabled");
       }
-    })
+    });
   }
-}
+};
 
 //댓글 DB불러와서
 export const getCommentList = async () => {
