@@ -144,7 +144,7 @@ export async function getList() {
     console.log(cardList);
   });
 }
-//안동훈 튜터님 교육
+//어떤 data를 DB에 저장할지 진행
 export const Post_comment = async (event) => {
   event.preventDefault();
   const modalWrapper = event.target.closest(".ceo");
@@ -189,7 +189,7 @@ export async function modalOn(id) {
       }
       console.log(card);
     });
-
+    //해당 페이지에 id값 부여
     const feedModal = document.getElementById("modal_area");
     const currentUid = authService.currentUser.uid;
     console.log("id", id);
@@ -381,7 +381,7 @@ export const search_contents = (event) => {
   }
 };
 
-//댓글 DB불러와서
+//댓글 DB불러와서 화면창에 띄우기
 export const getCommentList = async () => {
   // let currentUserId = await authService.currentUser.uid;
 
@@ -391,7 +391,7 @@ export const getCommentList = async () => {
   );
   const querySnapshot = await getDocs(q);
   let recentCommentList = [];
-  
+  //DB에 어떤 DATA를 화면에 표출할지 선택
   const modalWrapper = document.querySelector(".ceo");
   querySnapshot.forEach((comment, index) => {
     const { postId, text, nickname, createdAt, profileImg } = comment.data();
@@ -406,9 +406,9 @@ export const getCommentList = async () => {
   });
 
   const commentList = document.querySelector(".comments_wrap");
-
+  //저장된 DB에서 화면으로 표출하기
   recentCommentList.forEach((comment) => {
-    const { text, nickname, createdAt , profileImg} = comment;
+    const { text, nickname, createdAt, profileImg } = comment;
     const temp_html = `
     <div class="comments_content2">${text}</div>
     <div class="comments_profile_wrap">
