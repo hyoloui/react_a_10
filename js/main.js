@@ -33,6 +33,7 @@ import {
   handleConst,
   registerNow,
   login,
+  socialLogin,
 } from "./sign.js";
 
 // hash url 변경 시 처리
@@ -106,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // window는 날라다니는 애라 아무데서나 사용할 수 있다는 것이당.
 // 근데 이렇게 끌고와서 window의 메서드로 사용하려면 맨 위 import를 해와야 한당.
 
+window.socil
 window.route = route;
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 window.onclick = onclick;
@@ -134,7 +136,7 @@ window.modalOff = modalOff;
 window.modalOff2 = modalOff2;
 // window.handleAuth = handleAuth;
 window.goToProfile = goToProfile;
-// window.socialLogin = socialLogin;
+window.socialLogin = socialLogin;
 window.logout = logout;
 window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
