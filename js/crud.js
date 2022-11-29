@@ -103,7 +103,7 @@ export const Post_comment = async (event) => {
 };
 
 // Read API
-// id 받아적기
+// 클릭한 카드의 id 받아적기
 let selectId = "";
 // 받아적은 id 하나만 가져오기
 export function sendId(showId) {
